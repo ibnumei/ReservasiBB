@@ -1,0 +1,765 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<script src="~/Content/bower_components/jquery/dist/jquery.min.js"></script>
+
+
+@*<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>*@
+
+
+<section class="content-header">
+    <h1>
+        Monitor Order
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li>Monitor Order</li>
+        <li class="active">Index</li>
+    </ol>
+    <br />
+
+</section>
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <!--  --------------------- Task Header --------------------------- -->
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title"></h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <form asp-action="Create">
+                        <div class="row form-border">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+
+                                <input id="datepicker" type="text">
+
+                                <div class="col-sm-6">
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <b>Kondisi Order</b>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <select class="form-control">
+                                                <option value="Semua">Semua</option>
+                                                <option value="Normal">Normal</option>
+                                                <option value="Keep">Keep</option>
+                                                <option value="Tolak">Tolak</option>
+                                                <option value="Batal">Batal</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    @*<span asp-validation-for="Item1.TaskCode" class="text-danger"></span>*@
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <b>No Order</b>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="text" asp-for="SiteName" class="form-control" />
+                                        </div>
+                                    </div>
+                                    @*<span asp-validation-for="Item1.TaskCode" class="text-danger"></span>*@
+                                    <br />
+
+                                </div>
+
+                                <div class="col-sm-6">
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <b>Perusahaan</b>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="text" asp-for="SiteName" class="form-control" />
+                                        </div>
+                                    </div>
+                                    @*<span asp-validation-for="Item1.TaskCode" class="text-danger"></span>*@
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <b>Pemesan</b>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="text" asp-for="SiteName" class="form-control" />
+                                        </div>
+                                    </div>
+                                    @*<span asp-validation-for="Item1.TaskCode" class="text-danger"></span>*@
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <button type="button" class="btn btn-primary btn-md">Cari</button>&nbsp;
+                                            <button type="button" class="btn btn-danger btn-md">Clear</button>
+                                        </div>
+                                    </div>
+                                    @*<span asp-validation-for="Item1.TaskCode" class="text-danger"></span>*@
+                                    <br />
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+            <!-- ---------------------- Task Lines --------------------------- -->
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title"></h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No Item</th>
+                                    <th>No Order</th>
+                                    <th>STS</th>
+                                    <th>DISC</th>
+                                    <th>Jenis</th>
+                                    <th>POOL</th>
+                                    <th>KEL TUJUAN</th>
+                                    <th>ALAMAT JEMPUT</th>
+                                    <th>TGL JEMPUT</th>
+                                    <th>JAM JEMPUT</th>
+                                    <th>TGL SELESAI</th>
+                                    <th>JAM SELESAI</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            1
+                                        </a>
+                                    </td>
+                                    <td>Order1</td>
+                                    <td>NM</td>
+                                    <td></td>
+                                    <td>A44</td>
+                                    <td>CP</td>
+                                    <td>CH</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td>Order2</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>DST</td>
+                                    <td>CJ</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td>Order2</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>DST</td>
+                                    <td>CJ</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td>Order2</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>DST</td>
+                                    <td>CJ</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td>Order2</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>DST</td>
+                                    <td>CJ</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td>Order2</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>DST</td>
+                                    <td>CJ</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td>Order2</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>DST</td>
+                                    <td>CJ</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td>Order2</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>DST</td>
+                                    <td>CJ</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td>Order2</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>DST</td>
+                                    <td>CJ</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td>Order2</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>DST</td>
+                                    <td>CJ</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td>Order2</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>DST</td>
+                                    <td>CJ</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td>Order2</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>DST</td>
+                                    <td>CJ</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td>Order2</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>DST</td>
+                                    <td>CJ</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td>Order2</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>DST</td>
+                                    <td>CJ</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td>Order2</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>DST</td>
+                                    <td>CJ</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td>Order2</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>DST</td>
+                                    <td>CJ</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td>Order2</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>DST</td>
+                                    <td>CJ</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td>Order2</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>DST</td>
+                                    <td>CJ</td>
+                                    <td>DST</td>
+                                    <td></td>
+                                    <td>8/4/2019</td>
+                                    <td>24 JAM</td>
+                                    <td>9/4/2019</td>
+                                    <td>24 JAM</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- L A R G E  M O D A L -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Pembayaran</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <form asp-action="CreateTaskLine">
+                    <div class="row form-border">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+
+                            <div class="col-sm-12">
+
+
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <b>Jenis Pembayaran</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>Tarif Bus</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <b>Lebih Bayar</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>% Diskon</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <b>Biaya Pembatalan</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>RP Diskon</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>Total Pembayaran</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>Sudah Dibayar</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>Sisa Pembayaran</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>PPH 23</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-4">
+                                        @*<button type="submit" class="btn btn-success btn-lg">
+                                                Simpan
+                                            </button>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <button type="submit" class="btn btn-danger btn-lg">
+                                                Batal
+                                            </button>*@
+                                    </div>
+                                </div>
+                                <br />
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary btn-lg">Simpan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="container-fluid">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-center">Create Task Line</h4>
+                <hr>
+            </div>
+
+            <div class="modal-body">
+
+                <form asp-action="CreateTaskLine">
+                    <div class="row form-border">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+
+                            @*<div class="col-lg-4">
+
+                                </div>*@
+
+                            <div class="col-lg-12">
+
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <b>Task Code</b>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        @*<input asp-for="Item1.TaskCode" class="form-control" autocomplete="off" />*@
+                                        <input type="text" class="form-control" readonly="readonly" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <b>Task Name</b>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <input asp-for="TaskName" class="form-control" autocomplete="off" />
+                                    </div>
+                                </div>
+                                <span asp-validation-for="TaskName" class="text-danger"></span>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <b>Select Task Type</b>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" readonly="readonly" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-lg-4">
+
+                                    </div>
+                                    <div class="col-lg-8">
+                                        @*<button type="submit" class="btn btn-default">
+                                                <i class="far fa-save"></i>&nbsp;&nbsp;Create Data
+                                            </button>*@
+                                    </div>
+                                </div><br />
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary btn-lg">Save changes</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('#example1').DataTable()
+        $('#example2').DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+        })
+    })
+</script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
+    });
+</script>
+
