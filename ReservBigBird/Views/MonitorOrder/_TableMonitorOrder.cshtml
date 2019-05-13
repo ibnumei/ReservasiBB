@@ -1,0 +1,262 @@
+﻿@model IEnumerable<ReservBigBird.API_Model.MonitorOrder>
+
+
+@if (Model != null)
+{
+    <h3 class="box-title">Hasil Pencarian</h3>
+    <br/>
+    <div class="table-responsive">
+
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>No Item</th>
+                    <th>No Order</th>
+                    <th>STS</th>
+                    <th>DISC</th>
+                    <th>Jenis</th>
+                    <th>POOL</th>
+                    <th>KEL TUJUAN</th>
+                    <th>ALAMAT JEMPUT</th>
+                    <th>TGL JEMPUT</th>
+                    <th>JAM JEMPUT</th>
+                    <th>TGL SELESAI</th>
+                    <th>JAM SELESAI</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg3">
+                                @Html.DisplayFor(modelItem => item.NoItem)
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NoOrder)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sts)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Disc)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Jenis)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Pool)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.KelTujuan)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AlamatJemput)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TglJemput)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JamJemput)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TglSelesei)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JamSelesei)
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+}
+
+    <div class="modal fade bd-example-modal-lg3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Pembayaran</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form asp-action="CreateTaskLine">
+                        <div class="row form-border">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+
+                                <div class="col-sm-12">
+
+
+
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <b>Jenis Pembayaran</b>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" asp-for="TaskCode">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <b>Tarif Bus</b>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" asp-for="TaskCode">
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <b>Lebih Bayar</b>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" asp-for="TaskCode">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <b>% Diskon</b>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" asp-for="TaskCode">
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <b>Biaya Pembatalan</b>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" asp-for="TaskCode">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <b>RP Diskon</b>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" asp-for="TaskCode">
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-sm-2">
+
+                                        </div>
+                                        <div class="col-sm-4">
+
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <b>Total Pembayaran</b>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" asp-for="TaskCode">
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-sm-2">
+
+                                        </div>
+                                        <div class="col-sm-4">
+
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <b>Sudah Dibayar</b>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" asp-for="TaskCode">
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-sm-2">
+
+                                        </div>
+                                        <div class="col-sm-4">
+
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <b>Sisa Pembayaran</b>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" asp-for="TaskCode">
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-sm-2">
+
+                                        </div>
+                                        <div class="col-sm-4">
+
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <b>PPH 23</b>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" asp-for="TaskCode">
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-sm-2">
+
+                                        </div>
+                                        <div class="col-sm-4">
+
+                                        </div>
+                                        <div class="col-sm-2">
+
+                                        </div>
+                                        <div class="col-sm-4">
+                                            @*<button type="submit" class="btn btn-success btn-lg">
+                                                Simpan
+                                            </button>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <button type="submit" class="btn btn-danger btn-lg">
+                                                Batal
+                                            </button>*@
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary btn-lg">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    $(function () {
+        $('#example1').DataTable({
+            'paging': true,
+            'lengthChange': true,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': true
+        })
+    })
+</script>
+

@@ -37,7 +37,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form asp-action="Create">
+                    <form id="Form1">
                         <div class="row form-border">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
@@ -49,7 +49,7 @@
                                             <b>No Order</b>
                                         </div>
                                         <div class="col-sm-8">
-                                            <input type="text" asp-for="SiteName" class="form-control" />
+                                            <input type="text" name="NoOrder" class="form-control" />
                                         </div>
                                     </div>
                                     @*<span asp-validation-for="Item1.TaskCode" class="text-danger"></span>*@
@@ -60,7 +60,7 @@
                                             <b>Nama Pemakai</b>
                                         </div>
                                         <div class="col-sm-8">
-                                            <input type="text" asp-for="SiteName" class="form-control" />
+                                            <input type="text" name="NamaPemakai" class="form-control" />
                                         </div>
                                     </div>
                                     @*<span asp-validation-for="Item1.TaskCode" class="text-danger"></span>*@
@@ -69,14 +69,14 @@
 
                                 <div class="col-sm-6">
 
-                                   
+
 
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <b>Nama Pemesan</b>
                                         </div>
                                         <div class="col-sm-8">
-                                            <input type="text" asp-for="SiteName" class="form-control" />
+                                            <input type="text" name="NamaPemesan" class="form-control" />
                                         </div>
                                     </div>
                                     @*<span asp-validation-for="Item1.TaskCode" class="text-danger"></span>*@
@@ -87,7 +87,7 @@
                                             <b>POOL</b>
                                         </div>
                                         <div class="col-sm-8">
-                                            <input type="text" asp-for="SiteName" class="form-control" />
+                                            <input type="text" name="Pool" class="form-control" />
                                         </div>
                                     </div>
                                     @*<span asp-validation-for="Item1.TaskCode" class="text-danger"></span>*@
@@ -98,7 +98,8 @@
 
                                         </div>
                                         <div class="col-sm-8">
-                                            <button type="button" class="btn btn-primary btn-md">Cari</button>&nbsp;
+                                            @*<button type="button" class="btn btn-primary btn-md">Cari</button>&nbsp;*@
+                                            <input type="button" class="btn btn-primary btn-md" value="CARI" id="submit" />&nbsp;
                                             <button type="button" class="btn btn-danger btn-md">Clear</button>
                                         </div>
                                     </div>
@@ -114,56 +115,13 @@
             </div>
 
             <!-- ---------------------- Task Lines --------------------------- -->
-            <div class="box">
+            <div id="renderTable" class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Data Table With Full Features</h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="table-responsive">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No Detail</th>
-                                    <th>No Order</th>
-                                    <th>Tgl Pakai</th>
-                                    <th>Jam Jemput</th>
-                                    <th>BUS</th>
-                                    <th>NIP1</th>
-                                    <th>HP</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            1
-                                        </a>
-                                    </td>
-                                    <td>Order1</td>
-                                    <td>8/4/2019</td>
-                                    <td>12:25 AM</td>
-                                    <td>BUS 1</td>
-                                    <td>Agus</td>
-                                    <td>082112213454</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>9/4/2019</td>
-                                    <td>13:25 AM</td>
-                                    <td>BUS 2</td>
-                                    <td>Jani</td>
-                                    <td>182112213454</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                     
+                </div>
+
+                <div class="box-body">
+                    @Html.Partial("_TableDisplayPlanning")
                 </div>
 
             </div>
@@ -177,7 +135,7 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h3 class="modal-title" >Display Planning Order</h3>
+                <h3 class="modal-title">Display Planning Order</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -370,12 +328,12 @@
 
                                         <div class="col-sm-4">
                                             @*<button type="submit" class="btn btn-success btn-lg">
-                                                Simpan
-                                            </button>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <button type="submit" class="btn btn-danger btn-lg">
-                                                Batal
-                                            </button>*@
+                                                    Simpan
+                                                </button>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <button type="submit" class="btn btn-danger btn-lg">
+                                                    Batal
+                                                </button>*@
                                         </div>
 
                                     </div>
@@ -416,3 +374,20 @@
         })
     })
 </script>
+<script>
+
+    $(document).ready(function () {
+        $('#submit').on('click', function () {
+            var tesnu = $('#Form1').serialize();
+            console.log(tesnu);
+            $('#renderTable').load("_TableDisplayPlanning", $('#Form1').serialize());
+        });
+    });
+
+</script>
+
+<style>
+    #renderTable {
+        background-color: white;
+    }
+</style>

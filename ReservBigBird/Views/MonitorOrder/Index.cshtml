@@ -39,12 +39,12 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form asp-action="Create">
+                    <form id="Form1" >
                         <div class="row form-border">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
 
-                                <input id="datepicker" type="text">
+                                
 
                                 <div class="col-sm-6">
 
@@ -53,7 +53,7 @@
                                             <b>Kondisi Order</b>
                                         </div>
                                         <div class="col-sm-8">
-                                            <select class="form-control">
+                                            <select name="KondisiOrder" class="form-control">
                                                 <option value="Semua">Semua</option>
                                                 <option value="Normal">Normal</option>
                                                 <option value="Keep">Keep</option>
@@ -70,7 +70,7 @@
                                             <b>No Order</b>
                                         </div>
                                         <div class="col-sm-8">
-                                            <input type="text" asp-for="SiteName" class="form-control" />
+                                            <input type="text" name="NoOrder" class="form-control" />
                                         </div>
                                     </div>
                                     @*<span asp-validation-for="Item1.TaskCode" class="text-danger"></span>*@
@@ -85,7 +85,7 @@
                                             <b>Perusahaan</b>
                                         </div>
                                         <div class="col-sm-8">
-                                            <input type="text" asp-for="SiteName" class="form-control" />
+                                            <input type="text" name="Perusahaan" class="form-control" />
                                         </div>
                                     </div>
                                     @*<span asp-validation-for="Item1.TaskCode" class="text-danger"></span>*@
@@ -96,7 +96,7 @@
                                             <b>Pemesan</b>
                                         </div>
                                         <div class="col-sm-8">
-                                            <input type="text" asp-for="SiteName" class="form-control" />
+                                            <input type="text" name="Pemesan" class="form-control" />
                                         </div>
                                     </div>
                                     @*<span asp-validation-for="Item1.TaskCode" class="text-danger"></span>*@
@@ -107,7 +107,8 @@
 
                                         </div>
                                         <div class="col-sm-8">
-                                            <button type="button" class="btn btn-primary btn-md">Cari</button>&nbsp;
+                                            @*<button type="button" class="btn btn-primary btn-md">Cari</button>&nbsp;*@
+                                            <input type="button" class="btn btn-primary btn-md" value="CARI" id="submit" />&nbsp;
                                             <button type="button" class="btn btn-danger btn-md">Clear</button>
                                         </div>
                                     </div>
@@ -123,363 +124,17 @@
             </div>
 
             <!-- ---------------------- Task Lines --------------------------- -->
-            <div class="box">
+            <div id="renderTable" class="box">
                 <div class="box-header">
-                    <h3 class="box-title"></h3>
+                    
                 </div>
-                <!-- /.box-header -->
+
                 <div class="box-body">
-                    <div class="table-responsive">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No Item</th>
-                                    <th>No Order</th>
-                                    <th>STS</th>
-                                    <th>DISC</th>
-                                    <th>Jenis</th>
-                                    <th>POOL</th>
-                                    <th>KEL TUJUAN</th>
-                                    <th>ALAMAT JEMPUT</th>
-                                    <th>TGL JEMPUT</th>
-                                    <th>JAM JEMPUT</th>
-                                    <th>TGL SELESAI</th>
-                                    <th>JAM SELESAI</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            1
-                                        </a>
-                                    </td>
-                                    <td>Order1</td>
-                                    <td>NM</td>
-                                    <td></td>
-                                    <td>A44</td>
-                                    <td>CP</td>
-                                    <td>CH</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>DST</td>
-                                    <td>CJ</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>DST</td>
-                                    <td>CJ</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>DST</td>
-                                    <td>CJ</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>DST</td>
-                                    <td>CJ</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>DST</td>
-                                    <td>CJ</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>DST</td>
-                                    <td>CJ</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>DST</td>
-                                    <td>CJ</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>DST</td>
-                                    <td>CJ</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>DST</td>
-                                    <td>CJ</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>DST</td>
-                                    <td>CJ</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>DST</td>
-                                    <td>CJ</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>DST</td>
-                                    <td>CJ</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>DST</td>
-                                    <td>CJ</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>DST</td>
-                                    <td>CJ</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>DST</td>
-                                    <td>CJ</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>DST</td>
-                                    <td>CJ</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            2
-                                        </a>
-                                    </td>
-                                    <td>Order2</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>DST</td>
-                                    <td>CJ</td>
-                                    <td>DST</td>
-                                    <td></td>
-                                    <td>8/4/2019</td>
-                                    <td>24 JAM</td>
-                                    <td>9/4/2019</td>
-                                    <td>24 JAM</td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-
+                    @Html.Partial("_TableMonitorOrder")
                 </div>
-
+                
             </div>
+
         </div>
     </div>
 </section>
@@ -744,22 +399,26 @@
     </div>
 </div>
 
-<script>
-    $(function () {
-        $('#example1').DataTable()
-        $('#example2').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': false,
-            'ordering': true,
-            'info': true,
-            'autoWidth': false
-        })
-    })
-</script>
+
 <script>
     $(function () {
         $("#datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
     });
 </script>
+<script>
 
+    $(document).ready(function () {
+        $('#submit').on('click', function () {
+            var tesnu = $('#Form1').serialize();
+            console.log(tesnu);
+            $('#renderTable').load("_TableMonitorOrder", $('#Form1').serialize());
+        });
+    });
+
+</script>
+
+<style>
+    #renderTable {
+        background-color: white;
+    }
+</style>
