@@ -33,9 +33,8 @@ namespace ReservBigBird.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 try
                 {
-                    //http://localhost/BBWS/Api/Orders?ordid=BC015181&ordnpt=&ordnpm=
-                    HttpResponseMessage message = client.GetAsync("http://192.168.25.123/BBWS/Api/Plans").Result;
-                   
+                    HttpResponseMessage message = client.GetAsync("http://10.0.19.165/BBWS/Api/Plans?popordid=" + paramPlanning.NoOrder + "&popnpk=" + paramPlanning.NamaPemakai + "&popnpm=" + paramPlanning.NamaPemesan + "&popid=&poppolid=" + paramPlanning.Pool + "&popdaow=").Result;
+
                     if (message.IsSuccessStatusCode)
                     {
                         var serializer = new DataContractJsonSerializer(typeof(List<DisplayPlanning>));
@@ -44,14 +43,7 @@ namespace ReservBigBird.Controllers
                         MemoryStream stream = new MemoryStream(byteArray);
                         List<DisplayPlanning> resultData = serializer.ReadObject(stream) as List<DisplayPlanning>;
                         ViewBag.data = resultData.ToList();
-                        //for (int i = 0; i < resultData.Count; i++)
-                        //{
-                        //    var bb = resultData[i].username;
 
-                        //    ViewBag.hasil = "Sukses mendapatkan data";
-
-                        //    return View();
-                        //}
 
                         return PartialView("_TableDisplayPlanning", resultData.ToList());
                         //====================================================================================

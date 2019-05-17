@@ -4,14 +4,14 @@
 @if (Model != null)
 {
     <h3 class="box-title">Hasil Pencarian</h3>
-    <br/>
+    <br />
     <div class="table-responsive">
 
-        <table id="example1" class="table table-bordered table-striped">
+        <table id="example3" class="table table-striped">
             <thead>
                 <tr>
-                    <th>No Item</th>
                     <th>No Order</th>
+                    <th>No Item</th>
                     <th>STS</th>
                     <th>DISC</th>
                     <th>Jenis</th>
@@ -29,12 +29,10 @@
                 {
                     <tr>
                         <td>
-                            <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg3">
-                                @Html.DisplayFor(modelItem => item.NoItem)
-                            </a>
+                            <a class="btn btn-sm btn-default" onclick="get('@Html.DisplayFor(modelItem => item.NoOrder)')" id="aidi"><i class="fas fa-trash-alt"></i>  @Html.DisplayFor(modelItem => item.NoOrder) </a>
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.NoOrder)
+                            @Html.DisplayFor(modelItem => item.NoItem)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Sts)
@@ -74,189 +72,236 @@
     </div>
 }
 
-    <div class="modal fade bd-example-modal-lg3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Pembayaran</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+<div id="myModalPopup" class="modal fade bd-example-modal-lg3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Pembayaran</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
-                <div class="modal-body">
+            <div class="modal-body">
 
-                    <form asp-action="CreateTaskLine">
-                        <div class="row form-border">
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="form-group">
+                <form asp-action="CreateTaskLine">
+                    <div class="row form-border">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
 
-                                <div class="col-sm-12">
+                            <div class="col-sm-12">
 
-
-
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <b>Jenis Pembayaran</b>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" asp-for="TaskCode">
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <b>Tarif Bus</b>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" asp-for="TaskCode">
-                                        </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <b>Jenis Pembayaran</b>
                                     </div>
-                                    <br />
-
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <b>Lebih Bayar</b>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" asp-for="TaskCode">
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <b>% Diskon</b>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" asp-for="TaskCode">
-                                        </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="JenisPemby" readonly="readonly">
                                     </div>
-                                    <br />
-
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <b>Biaya Pembatalan</b>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" asp-for="TaskCode">
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <b>RP Diskon</b>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" asp-for="TaskCode">
-                                        </div>
+                                    <div class="col-sm-2">
+                                        <b>Tarif Bus</b>
                                     </div>
-                                    <br />
-
-                                    <div class="row">
-                                        <div class="col-sm-2">
-
-                                        </div>
-                                        <div class="col-sm-4">
-
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <b>Total Pembayaran</b>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" asp-for="TaskCode">
-                                        </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="TarifBus"  readonly="readonly">
                                     </div>
-                                    <br />
-
-                                    <div class="row">
-                                        <div class="col-sm-2">
-
-                                        </div>
-                                        <div class="col-sm-4">
-
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <b>Sudah Dibayar</b>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" asp-for="TaskCode">
-                                        </div>
-                                    </div>
-                                    <br />
-
-                                    <div class="row">
-                                        <div class="col-sm-2">
-
-                                        </div>
-                                        <div class="col-sm-4">
-
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <b>Sisa Pembayaran</b>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" asp-for="TaskCode">
-                                        </div>
-                                    </div>
-                                    <br />
-
-                                    <div class="row">
-                                        <div class="col-sm-2">
-
-                                        </div>
-                                        <div class="col-sm-4">
-
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <b>PPH 23</b>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" asp-for="TaskCode">
-                                        </div>
-                                    </div>
-                                    <br />
-
-                                    <div class="row">
-                                        <div class="col-sm-2">
-
-                                        </div>
-                                        <div class="col-sm-4">
-
-                                        </div>
-                                        <div class="col-sm-2">
-
-                                        </div>
-                                        <div class="col-sm-4">
-                                            @*<button type="submit" class="btn btn-success btn-lg">
-                                                Simpan
-                                            </button>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <button type="submit" class="btn btn-danger btn-lg">
-                                                Batal
-                                            </button>*@
-                                        </div>
-                                    </div>
-                                    <br />
-
                                 </div>
+                                <br />
 
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <b>Lebih Bayar</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="LbhBayar"  readonly="readonly">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>% Diskon</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="Diskon"  readonly="readonly">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <b>Biaya Pembatalan</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="BiayaPembatalan"  readonly="readonly">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>RP Diskon</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="RpDiskon"  readonly="readonly">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>Total Pembayaran</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="TotalPembayaran"  readonly="readonly">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>Sudah Dibayar</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="SdhDibayar"  readonly="readonly">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>Sisa Pembayaran</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="SisaPembyran"  readonly="readonly">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>PPH 23</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="pph23"  readonly="readonly">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-4">
+                                    </div>
+                                </div>
+                                <br />
 
                             </div>
+
+
                         </div>
-                    </form>
+                    </div>
+                </form>
 
 
-                </div>
+            </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-primary btn-lg">Simpan</button>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 
 <script>
     $(function () {
-        $('#example1').DataTable({
+        $('#example3').DataTable({
             'paging': true,
             'lengthChange': true,
-            'searching': true,
+            'searching': false,
             'ordering': true,
             'info': true,
             'autoWidth': true
         })
     })
+</script>
+<script>
+    function get(NoOrder1) {
+
+        var a = $.trim(NoOrder1);
+
+        $.ajax({
+            type: "GET",
+            url: "http://10.0.19.165/BBWS/Api/Orders?ordid=" + a + "&ordnpt=&ordnpm=&kondisi=",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                $.each(data, function (i, item) {
+
+                    if (item.JenisPembayaran == null) { document.getElementById("JenisPemby").value = ""; }
+                    else { document.getElementById("JenisPemby").value = item.JenisPembayaran; }
+
+                    if (item.LebihBayar == null) { document.getElementById("LbhBayar").value = ""; }
+                    else { document.getElementById("LbhBayar").value = item.LebihBayar; }
+
+                    if (item.BiayaBatal == null) { document.getElementById("BiayaPembatalan").value = ""; }
+                    else { document.getElementById("BiayaPembatalan").value = item.BiayaBatal; }
+
+                    if (item.TarifBus == null) { document.getElementById("TarifBus").value = ""; }
+                    else { document.getElementById("TarifBus").value = item.TarifBus; }
+
+                    if (item.Disc == null) { document.getElementById("Diskon").value = ""; }
+                    else { document.getElementById("Diskon").value = item.Disc; }
+
+                    if (item.RpDiskon == null) { document.getElementById("RpDiskon").value = ""; }
+                    else { document.getElementById("RpDiskon").value = item.RpDiskon; }
+
+                    if (item.TotalBayar == null) { document.getElementById("TotalPembayaran").value = ""; }
+                    else { document.getElementById("TotalPembayaran").value = item.TotalBayar; }
+
+                    if (item.SudahDibayar == null) { document.getElementById("SdhDibayar").value = ""; }
+                    else { document.getElementById("SdhDibayar").value = item.SudahDibayar; }
+
+                    if (item.SisaPembayaran == null) { document.getElementById("SisaPembyran").value = ""; }
+                    else { document.getElementById("SisaPembyran").value = item.SisaPembayaran; }
+
+                    if (item.Pph23 == null) { document.getElementById("pph23").value = ""; }
+                    else { document.getElementById("pph23").value = item.Pph23; }
+
+
+
+                });
+
+
+                $('#myModalPopup').modal('toggle');
+            },
+            error: function (data) {
+                //alert("erorr");
+                swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error")
+            }, //
+        });
+    }
 </script>
 

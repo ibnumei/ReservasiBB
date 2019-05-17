@@ -35,7 +35,7 @@ namespace ReservBigBird.API_Model
 
     public class DisplayPlanning
     {
-        public string NoDetail { get; set; }
+        public int NoDetail { get; set; }
         public string NoOrder { get; set; }
         public string TglPakai { get; set; }
         public string JamJemput { get; set; }
@@ -43,8 +43,10 @@ namespace ReservBigBird.API_Model
         public string Nip1 { get; set; }
         public string Hp { get; set; }
         public string Popnpk { get; set; }
+        public int Popid { get; set; }
         public string Popnpm { get; set; }
         public string Poppolid { get; set; }
+        public string popdaow { get; set; }
     }
 
     public class ParamPlanning
