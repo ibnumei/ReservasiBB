@@ -18,6 +18,7 @@ namespace ReservBigBird.Controllers
         // GET: MonitorOrder
         public ActionResult Index()
         {
+            ViewBag.Current = "2";
             return View();
         }
 

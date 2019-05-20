@@ -11,6 +11,7 @@ namespace ReservBigBird.Controllers
         // GET: TerimaOrder
         public ActionResult Index()
         {
+            ViewBag.Current = "1";
             return View();
         }
     }

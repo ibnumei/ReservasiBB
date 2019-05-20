@@ -18,6 +18,7 @@ namespace ReservBigBird.Controllers
         // GET: DisplayPlanning
         public ActionResult Index()
         {
+            ViewBag.Current = "3";
             return View();
         }
 
