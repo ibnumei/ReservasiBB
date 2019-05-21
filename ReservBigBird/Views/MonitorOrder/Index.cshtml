@@ -116,14 +116,18 @@
 
             <!-- ---------------------- Task Lines --------------------------- -->
             <div id="renderTable" class="box box-success">
+
+                @*untuk loader halaman*@
+                <div id="divLoader" style="display:none;text-align:center"> <img src="~/Content/dist/img/ajax-loader.gif" alt="Loader" /> </div>
+
                 <div class="box-header">
-                    
+
                 </div>
 
                 <div class="box-body">
                     @Html.Partial("_TableMonitorOrder")
                 </div>
-                
+
             </div>
 
         </div>
@@ -136,6 +140,7 @@
 
     $(document).ready(function () {
         $('#submit').on('click', function () {
+            $("#divLoader").show(); 
             var tesnu = $('#Form1').serialize();
 
             var count = 0;
