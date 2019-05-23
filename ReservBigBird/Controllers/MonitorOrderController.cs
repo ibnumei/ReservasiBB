@@ -10,6 +10,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Configuration;
 
 namespace ReservBigBird.Controllers
 {
@@ -19,11 +20,18 @@ namespace ReservBigBird.Controllers
         public ActionResult Index()
         {
             ViewBag.Current = "2";
+
+            
             return View();
         }
 
         public ActionResult _TableMonitorOrder(ParamMonitorOrder paramMonitor)
         {
+
+            //Ambil link url di web config
+            String url = ConfigurationManager.AppSettings["UrlApi"].ToString();
+
+            //Method untuk consume api
             String response = "";
             var credentials = new NetworkCredential("ac", "123");
             var handler = new HttpClientHandler { Credentials = credentials }; // for validation
@@ -34,7 +42,7 @@ namespace ReservBigBird.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 try
                 {
-                    HttpResponseMessage message = client.GetAsync("http://10.0.19.165/BBWS/Api/Orders?ordid=" + paramMonitor.NoOrder + "&ordnpt=" + paramMonitor.Perusahaan + "&ordnpm=" + paramMonitor.Pemesan + "&kondisi=" + paramMonitor.KondisiOrder).Result;
+                    HttpResponseMessage message = client.GetAsync(url+"/Api/Orders?ordid=" + paramMonitor.NoOrder + "&ordnpt=" + paramMonitor.Perusahaan + "&ordnpm=" + paramMonitor.Pemesan + "&kondisi=" + paramMonitor.KondisiOrder).Result;
 
                     if (message.IsSuccessStatusCode)
                     {
@@ -59,6 +67,7 @@ namespace ReservBigBird.Controllers
                     }
                     else
                     {
+                        ViewBag.error = "Tidak Dapat Respon dari Server";
                         return PartialView("_TableMonitorOrder");
                     }
                     //if(message.)
@@ -67,6 +76,7 @@ namespace ReservBigBird.Controllers
                 }
                 catch (Exception ex)
                 {
+                    ViewBag.error = "Tidak Dapat Respon dari Server";
                     var error = ex.ToString();
                     return PartialView("_TableMonitorOrder");
                 }

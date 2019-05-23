@@ -1,5 +1,12 @@
 ﻿@model IEnumerable<ReservBigBird.API_Model.DisplayPlanning>
 
+@if (Model == null && ViewBag.error == "Tidak Dapat Respon dari Server")
+{
+    <script>
+        swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error");
+        $("#divLoader").hide();
+    </script>
+}
 @if (Model != null)
 {
     <h3 class="box-title">Hasil Pencarian</h3>
@@ -7,7 +14,7 @@
     <div class="table-responsive">
         <table id="example3" class="table  table-striped">
             <thead>
-                <tr>
+                <tr style="background-color:#808080;color:#ffffff;">
                     <th>No Detail</th>
                     <th>No Order</th>
                     <th>Tgl Pakai</th>
@@ -25,7 +32,7 @@
                 {
                     <tr>
                         <td>
-                            <a class="btn btn-sm btn-default" onclick="get('@Html.DisplayFor(modelItem => item.Poppolid)','@Html.DisplayFor(modelItem => item.Popid)',' @Html.DisplayFor(modelItem => item.popdaow)')" id="aidi"><i class="fas fa-trash-alt"></i>  @Html.DisplayFor(modelItem => item.NoDetail) </a>
+                            <a  style="background-color: #e4e4e4; color: #444; border-color: #888484; cursor: pointer;"  class="btn btn-sm btn-default" onclick="get('@Html.DisplayFor(modelItem => item.Poppolid)','@Html.DisplayFor(modelItem => item.Popid)',' @Html.DisplayFor(modelItem => item.popdaow)')" id="aidi"><i class="fas fa-trash-alt"></i>  @Html.DisplayFor(modelItem => item.NoDetail) </a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.NoOrder)
@@ -70,10 +77,11 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h3 class="modal-title">Display Planning Order</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+                <h3 class="modal-title">Display Planning Order</h3>
+
             </div>
 
             <div class="modal-body">
@@ -294,7 +302,7 @@
     $(function () {
         $('#example3').DataTable({
             'paging': true,
-            'lengthChange': true,
+            'lengthChange': false,
             'searching': false,
             'ordering': false,
             'info': true,
@@ -303,5 +311,5 @@
     })
 </script>
 <script>
-    function get(Poppolid1, Popid1, popdaow1) { var a = $.trim(Poppolid1); var b = $.trim(Popid1); var c = $.trim(popdaow1); $.ajax({ type: "GET", url: "http://10.0.19.165/BBWS/Api/Plans?popordid=&popnpk=&popnpm=&popid=" + b + "&poppolid=" + a + "&popdaow=" + c, dataType: "json", success: function (data) { console.log(data); $.each(data, function (i, item) { if (item.NoOrder == null) { document.getElementById("ModalNoOrder").value = "" } else { document.getElementById("ModalNoOrder").value = item.NoOrder } if (item.Popnpm == null) { document.getElementById("ModalNamaPemesan").value = "" } else { document.getElementById("ModalNamaPemesan").value = item.Popnpm } if (item.NoDetail == null) { document.getElementById("ModalNoDetail").value = "" } else { document.getElementById("ModalNoDetail").value = item.NoDetail } if (item.NoOrder == null) { document.getElementById("ModalNoOrder").value = "" } else { document.getElementById("ModalNoOrder").value = item.NoOrder } if (item.Poppolid == null) { document.getElementById("POOL").value = "" } else { document.getElementById("POOL").value = item.Poppolid } if (item.TglPakai == null) { document.getElementById("ModalTglPakai").value = "" } else { document.getElementById("ModalTglPakai").value = item.TglPakai } if (item.JamJemput == null) { document.getElementById("ModalJamJemput").value = "" } else { document.getElementById("ModalJamJemput").value = item.JamJemput } if (item.KelTujuan == null) { document.getElementById("ModalKelTujuan").value = "" } else { document.getElementById("ModalKelTujuan").value = item.KelTujuan } if (item.Tujuan == null) { document.getElementById("ModalTujuan").value = "" } else { document.getElementById("ModalTujuan").value = item.Tujuan } if (item.Alamat == null) { document.getElementById("ModalAlamat").value = "" } else { document.getElementById("ModalAlamat").value = item.Alamat } if (item.JenisBus == null) { document.getElementById("ModalJenisBus").value = "" } else { document.getElementById("ModalJenisBus").value = item.JenisBus } if (item.NoBody == null) { document.getElementById("ModalNoBody").value = "" } else { document.getElementById("ModalNoBody").value = item.NoBody } if (item.NoPol == null) { document.getElementById("ModalNoPol").value = "" } else { document.getElementById("ModalNoPol").value = item.NoPol } if (item.Nip1Nama == null) { document.getElementById("ModalNamaNip1").value = "" } else { document.getElementById("ModalNamaNip1").value = item.Nip1Nama } if (item.Hp == null) { document.getElementById("ModalHpNip1").value = "" } else { document.getElementById("ModalHpNip1").value = item.Hp } if (item.Nip2Nama == null) { document.getElementById("ModalNamaNip2").value = "" } else { document.getElementById("ModalNamaNip2").value = item.Nip2Nama } if (item.Nip2Hp == null) { document.getElementById("ModalHpNip2").value = "" } else { document.getElementById("ModalHpNip2").value = item.Nip2Hp } }); $('#myModalPopup').modal('toggle') }, error: function (data) { swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error") }, }) }
+    function get(Poppolid1, Popid1, popdaow1) { var a = $.trim(Poppolid1); var b = $.trim(Popid1); var c = $.trim(popdaow1); $.ajax({ type: "GET", url: "http://localhost:57276/Api/Plans?popordid=&popnpk=&popnpm=&popid=" + b + "&poppolid=" + a + "&popdaow=" + c, dataType: "json", success: function (data) { console.log(data); $.each(data, function (i, item) { if (item.NoOrder == null) { document.getElementById("ModalNoOrder").value = "" } else { document.getElementById("ModalNoOrder").value = item.NoOrder } if (item.Popnpm == null) { document.getElementById("ModalNamaPemesan").value = "" } else { document.getElementById("ModalNamaPemesan").value = item.Popnpm } if (item.NoDetail == null) { document.getElementById("ModalNoDetail").value = "" } else { document.getElementById("ModalNoDetail").value = item.NoDetail } if (item.NoOrder == null) { document.getElementById("ModalNoOrder").value = "" } else { document.getElementById("ModalNoOrder").value = item.NoOrder } if (item.Poppolid == null) { document.getElementById("POOL").value = "" } else { document.getElementById("POOL").value = item.Poppolid } if (item.TglPakai == null) { document.getElementById("ModalTglPakai").value = "" } else { document.getElementById("ModalTglPakai").value = item.TglPakai } if (item.JamJemput == null) { document.getElementById("ModalJamJemput").value = "" } else { document.getElementById("ModalJamJemput").value = item.JamJemput } if (item.KelTujuan == null) { document.getElementById("ModalKelTujuan").value = "" } else { document.getElementById("ModalKelTujuan").value = item.KelTujuan } if (item.Tujuan == null) { document.getElementById("ModalTujuan").value = "" } else { document.getElementById("ModalTujuan").value = item.Tujuan } if (item.Alamat == null) { document.getElementById("ModalAlamat").value = "" } else { document.getElementById("ModalAlamat").value = item.Alamat } if (item.JenisBus == null) { document.getElementById("ModalJenisBus").value = "" } else { document.getElementById("ModalJenisBus").value = item.JenisBus } if (item.NoBody == null) { document.getElementById("ModalNoBody").value = "" } else { document.getElementById("ModalNoBody").value = item.NoBody } if (item.NoPol == null) { document.getElementById("ModalNoPol").value = "" } else { document.getElementById("ModalNoPol").value = item.NoPol } if (item.Nip1Nama == null) { document.getElementById("ModalNamaNip1").value = "" } else { document.getElementById("ModalNamaNip1").value = item.Nip1Nama } if (item.Hp == null) { document.getElementById("ModalHpNip1").value = "" } else { document.getElementById("ModalHpNip1").value = item.Hp } if (item.Nip2Nama == null) { document.getElementById("ModalNamaNip2").value = "" } else { document.getElementById("ModalNamaNip2").value = item.Nip2Nama } if (item.Nip2Hp == null) { document.getElementById("ModalHpNip2").value = "" } else { document.getElementById("ModalHpNip2").value = item.Nip2Hp } }); $('#myModalPopup').modal('toggle') }, error: function (data) { swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error") }, }) }
 </script>
