@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ReservBigBird.API_Model.TerimaOrder>
+
+@if (Model == null && ViewBag.error == "Tidak Dapat Respon dari Server")
+{
+    <script>
+        swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error");
+        $("#divLoader").hide();
+    </script>
+}
+
+@if (ViewBag.tgl != null && Model != null)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>@ViewBag.bus</th>
+                @for (int i = 0; i < ViewBag.tgl.Count; i++)
+                {
+                    <th>@ViewBag.tgl[i]</th>
+                }
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var aa in Model)
+            {
+                <tr>
+                    <td>@aa.poolName</td>
+
+                    @foreach (var bb in aa.listJml)
+                    {
+                        <td>@bb.jml</td>
+                    }
+
+                    <td>@aa.stc</td>
+                </tr>
+            }
+
+
+            @*@foreach (var aa in ViewBag.tes1)
+                {
+                    <tr>
+                        <td>@aa.poolName</td>
+                        @foreach (var bb in aa.listJml)
+                        {
+                            <td>@bb.jml</td>
+                        }
+
+                        @foreach(var bb in aa.data)
+                        {
+                            <td>@bb.poolName</td>
+                            foreach(var cc in bb.listJml)
+                            {
+                                <td>@cc.jml</td>
+                            }
+                        }
+
+                    </tr>
+                }*@
+
+        </tbody>
+    </table>
+
+    <script>
+        $("#divLoader").hide();
+    </script>
+}
+
+

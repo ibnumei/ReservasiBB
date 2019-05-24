@@ -56,4 +56,31 @@ namespace ReservBigBird.API_Model
         public String NamaPemesan { get; set; }
         public String Pool { get; set; }
     }
+
+    public class PenerimaOrder
+    {
+        public String JenisBus { get; set; }
+        public String Pool { get; set; }
+        public String tglawalpilih { get; set; }
+        public String hariawalpilih { get; set; }
+        public String jamawalpilih { get; set; }
+        public String KelTujuan { get; set; }
+        public String tglakhirpilih { get; set; }
+        public String hariakhirpilih { get; set; }
+        public String jamakhirpilih { get; set; }
+        public int JumlahBus { get; set; }
+        public String Pemesan { get; set; }
+    }
+
+    public class ListJml
+    {
+        public int jml { get; set; }
+    }
+
+    public class TerimaOrder
+    {
+        public string poolName { get; set; }
+        public int stc { get; set; }
+        public IList<ListJml> listJml { get; set; }
+    }
 }

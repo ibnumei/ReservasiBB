@@ -87,14 +87,16 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+
+                <div id="divLoader2" style="display:none;text-align:center"> <img src="~/Content/dist/img/ajax-loader-blue.gif" alt="Loader" /> </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h3 class="modal-title">Pembayaran</h3>
+                <h3 id="JudulModal" class="modal-title" style="text-align:center">Pembayaran</h3>
 
             </div>
 
-            <div class="modal-body">
+            <div class="modal-body" id="BodyModal">
 
                 <form asp-action="CreateTaskLine">
                     <div class="row form-border">
@@ -240,7 +242,7 @@
 
             </div>
 
-            <div class="modal-footer">
+            <div id="ButtonModal" class="modal-footer">
                 <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -260,17 +262,27 @@
     })
 </script>
 
-<script>
+<script type="text/javascript">
     function get(NoOrder1) {
+
+      
+        var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["UrlApi"]';
+        //alert(apiUrl);
 
         var a = $.trim(NoOrder1);
 
+        $("#divLoader2").show();
+        $("#BodyModal").hide(); $("#JudulModal").hide(); $("#ButtonModal").hide(); 
+        $('#myModalPopup').modal('toggle');
+
         $.ajax({
             type: "GET",
-            url: "http://localhost:57276/Api/Orders?ordid=" + a + "&ordnpt=&ordnpm=&kondisi=",
+            url: apiUrl+"/Api/Orders?ordid=" + a + "&ordnpt=&ordnpm=&kondisi=",
             dataType: "json",
+
             success: function (data) {
                 console.log(data);
+                $("#divLoader2").hide();
                 $.each(data, function (i, item) {
 
                     if (item.JenisPembayaran == null) { document.getElementById("JenisPemby").value = ""; }
@@ -307,11 +319,12 @@
 
                 });
 
-
-                $('#myModalPopup').modal('toggle');
+                $("#BodyModal").show(); $("#JudulModal").show(); $("#ButtonModal").show(); 
+                //$('#myModalPopup').modal('toggle');
             },
             error: function (data) {
                 //alert("erorr");
+                $('#myModalPopup').modal('hide');
                 swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error")
             }, //
         });
