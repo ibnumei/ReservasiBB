@@ -51,6 +51,10 @@ namespace ReservBigBird.Controllers
 
 
             //untuk Consume API
+
+            String ParamTglAwal = penerimaOrder.tglawalpilih.Substring(6, 4) + penerimaOrder.tglawalpilih.Substring(3, 2) + penerimaOrder.tglawalpilih.Substring(0, 2);
+            String ParamTglAkhir = penerimaOrder.tglakhirpilih.Substring(6, 4) + penerimaOrder.tglakhirpilih.Substring(3, 2) + penerimaOrder.tglakhirpilih.Substring(0, 2);
+
             String response = "";
             var credentials = new NetworkCredential("ac", "123");
             var handler = new HttpClientHandler { Credentials = credentials }; // for validation
@@ -62,7 +66,7 @@ namespace ReservBigBird.Controllers
                 try
                 {
                     //HttpResponseMessage message = client.GetAsync("https://jsonblob.com/api/3d30a209-7c3c-11e9-8e48-3b0225e23be5").Result;
-                    HttpResponseMessage message = client.GetAsync("http://10.0.19.122/BBWS/Api/GetStock?jenisbus=A54&pool=&jnbac=&tglawal=20190119&jamawal=&tglakhir=20190122&jamakhir=").Result;
+                    HttpResponseMessage message = client.GetAsync(url+"/Api/GetStock?jenisbus="+penerimaOrder.JenisBus+"&pool=&jnbac=&tglawal="+ParamTglAwal+"&jamawal=&tglakhir="+ParamTglAkhir+"&jamakhir=").Result;
 
                     if (message.IsSuccessStatusCode)
                     {

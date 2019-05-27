@@ -44,11 +44,22 @@
                                     </div>
                                     <div class="col-lg-2">
                                         <select name="JenisBus" class="form-control">
-                                            <option value="A44H">A 44 H</option>
-                                            <option value="A44">A 44</option>
-                                            <option value="A54C">A 54 c</option>
-                                            <option value="B25D">B 25 D</option>
-                                            <option value="B27">B 27</option>
+                                            <option value="A12">A12</option>
+                                            <option value="A37">A37</option>
+                                            <option value="A37H">A37H</option>
+                                            <option value="A44">A44</option>
+                                            <option value="A44H">A44H</option>
+                                            <option value="A54">A54</option>
+                                            <option value="A54H">A54H</option>
+                                            <option value="A59">A59</option>
+                                            <option value="B">B</option>
+                                            <option value="B12">B12</option>
+                                            <option value="B16">B16</option>
+                                            <option value="B25">B25</option>
+                                            <option value="B27">B27</option>
+                                            <option value="C14">C14</option>
+                                            <option value="D">D</option>
+                                            <option value="DL">DL</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-4">
@@ -185,18 +196,20 @@
             </div>
         </div>
 
-        <div class="box box-success">
 
-            <div class="box-header">
-                @*untuk loader halaman*@
-                <div id="divLoader" style="display:none;text-align:center"> <img src="~/Content/dist/img/ajax-loader-blue.gif" alt="Loader" /> </div>
-            </div>
+    </div>
 
-            <div id="renderTable" class="box-body">
-                @Html.Partial("_TableDate")
-            </div>
+    <div class="box box-success">
 
+        <div class="box-header">
+            @*untuk loader halaman*@
+            <div id="divLoader" style="display:none;text-align:center"> <img src="~/Content/dist/img/ajax-loader-blue.gif" alt="Loader" /> </div>
         </div>
+
+        <div id="renderTable" class="box-body">
+            @Html.Partial("_TableDate")
+        </div>
+
     </div>
 
 
@@ -213,9 +226,10 @@
                 </button>
             </div>
 
-            <div class="modal-body">
+            <form asp-action="CreateTaskLine">
+                <div class="modal-body">
 
-                <form asp-action="CreateTaskLine">
+
                     <div class="row form-border">
                         <div class="form-group">
 
@@ -380,18 +394,21 @@
                                     <div class="col-sm-3">
                                         <b>Tgl Jemput</b>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <input type="text" id="tgljemputmodal" class="form-control" />
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-1">
                                         <b>Jam</b>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <div class="input-group clockpicker">
-                                            <input type="text" id="jamjemputmodal" class="form-control" value="18:00">
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-time"></span>
-                                            </span>
+                                    <div class="col-sm-4">
+                                        @*<div class="input-group clockpicker">
+                                        <input type="text" id="jamjemputmodal" class="form-control" value="18:00">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>*@
+                                        <div class="clockpicker">
+                                            <input type="text" id="jamjemputmodal" name="jamjemputmodal" class="form-control" placeholder="Pilih Jam">
                                         </div>
                                     </div>
                                 </div>
@@ -401,53 +418,68 @@
                                     <div class="col-sm-3">
                                         <b>Tgl Selesai</b>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <input type="text" id="tglselesaimodal" class="form-control" />
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-1">
                                         <b>Jam</b>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <div class="input-group clockpicker">
+                                    <div class="col-sm-4">
+                                        @*<div class="input-group clockpicker">
+                                        <input type="text" id="jamslsaimodal" class="form-control">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>*@
+                                        <div class="clockpicker">
                                             <input type="text" id="jamslsaimodal" class="form-control">
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-time"></span>
-                                            </span>
                                         </div>
                                     </div>
                                 </div>
                                 <br />
 
 
-                                <div class="row">
-                                    <div class="col-sm-3">
+                                @*<div class="row">
+                                    <div class="col-sm-6">
 
                                     </div>
-                                    <div class="col-sm-9">
-                                        @*<input type="submit" value="Create" class="btn  btn-default" />*@
-                                        <button type="submit" class="btn btn-success btn-lg">
+                                    <div class="col-sm-3">
+                                        <button type="submit" style="float:right" class="btn btn-primary btn-md form-control">
+                                            <span class="glyphicon glyphicon-floppy-save"></span>
                                             Simpan
                                         </button>
-                                        <button type="submit" class="btn btn-danger btn-lg">
+
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <button type="submit" style="float:right" class="btn btn-warning btn-md form-control">
+                                            <span class="glyphicon glyphicon-floppy-save"></span>
                                             Batal
                                         </button>
                                     </div>
-                                </div><br />
+                                </div>*@<br />
 
                             </div>
 
 
                         </div>
                     </div>
-                </form>
 
 
-            </div>
 
-            <div class="modal-footer">
-                @*<button type="button" class="btn btn-primary" onclick="myFunction()" data-dismiss="modal">Applied</button>*@
-                @*<button type="button" class="btn btn-danger" data-dismiss="modal">Closed</button>*@
-            </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-trash"></span> 
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary"> 
+                        <span class="glyphicon glyphicon-floppy-save"></span> 
+                        Save changes
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -565,7 +597,7 @@
 @*Javascript Kalender*@
 <script>
     $(function () {
-        $("#tglawalpilih,#tglakhirpilih").datepicker({ dateFormat: 'dd-mm-yy' });
+        $("#tglawalpilih,#tglakhirpilih,#tgljemputmodal,#tglselesaimodal").datepicker({ dateFormat: 'dd-mm-yy' });
     });
 </script>
 
@@ -574,6 +606,7 @@
 
     $(document).ready(function () {
         $('#submit').on('click', function () {
+            $("#divLoader").show();
             var tesnu = $('#Form1').serialize();
             console.log(tesnu);
             $('#renderTable').load("_TableDate", $('#Form1').serialize());
