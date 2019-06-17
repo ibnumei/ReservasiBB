@@ -11,6 +11,8 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Configuration;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace ReservBigBird.Controllers
 {
@@ -48,7 +50,14 @@ namespace ReservBigBird.Controllers
 
             ViewBag.bus = penerimaOrder.JenisBus;
             ViewBag.tgl = allDates.ToList();
-
+            ViewBag.JmlBus = penerimaOrder.JumlahBus;
+            //===========================================
+            ViewBag.TglAwal = penerimaOrder.tglawalpilih;
+            ViewBag.JamAwal = penerimaOrder.jamawalpilih;
+            ViewBag.TglAkhir = penerimaOrder.tglakhirpilih;
+            ViewBag.JamAkhir = penerimaOrder.jamakhirpilih;
+            ViewBag.KelTujuan = penerimaOrder.KelTujuan;
+            //===========================================
 
             //untuk Consume API
 
@@ -109,5 +118,107 @@ namespace ReservBigBird.Controllers
 
             //return PartialView("_TableDate", allDates.ToList());
         }
+
+        //method with no return
+        public void _TableHasilInputReal(ListPostTerimaOrder listPostTerimaOrder)
+        {
+            //Ambil link url di web config
+            String url = ConfigurationManager.AppSettings["UrlApi"].ToString();
+
+            DateTime now = DateTime.Now;
+
+            listPostTerimaOrder.User = "Administrator";
+            var datenow = now.ToString("dd/MM/yyyy");
+            var timenow = now.ToString("HH:mm");
+            listPostTerimaOrder.TglTrans = datenow;
+            listPostTerimaOrder.JamTrans = timenow;
+
+            ParamPostTerimaOrder postTerimaOrder = new ParamPostTerimaOrder()
+            {
+                userid = listPostTerimaOrder.User,
+                jenis = listPostTerimaOrder.ModalJenis,
+                pool = listPostTerimaOrder.ModalNmPool,
+                tglawal = listPostTerimaOrder.ModalTglAwal,
+                jamawal = listPostTerimaOrder.ModalJamAwal,
+                tglakhir = listPostTerimaOrder.ModalTglAkhir,
+                jamakhir = listPostTerimaOrder.ModalJamAkhir,
+                jumlah = listPostTerimaOrder.ModalJmlBus,
+                tgltrans = listPostTerimaOrder.TglTrans,
+                jamtrans = listPostTerimaOrder.JamTrans,
+                keltujuan = listPostTerimaOrder.ModalKelTujuan
+            };
+
+            var json2 = new JavaScriptSerializer().Serialize(postTerimaOrder);
+            var stringPayload = JsonConvert.SerializeObject(postTerimaOrder);
+            //String response = "";
+            var credentials = new NetworkCredential("username", "password");
+            var handler = new HttpClientHandler { Credentials = credentials };
+            var httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
+            using (var client = new HttpClient(handler))
+            {
+                try
+                {
+                    HttpResponseMessage message = client.PostAsync(url + "/api/GetStock", httpContent).Result;
+                    if (message.IsSuccessStatusCode)
+                    {
+                        //Action jika mendapat balasan sukses dari post api, panggil method GetDataAfterPost
+                        //GetDataAfterPost(listPostTerimaOrder);
+                    }
+
+                }
+                catch
+                {
+
+                }
+            }
+
+
+        }
+
+        //public ActionResult GetDataAfterPost(ListPostTerimaOrder listPostTerimaOrder)
+        public ActionResult _TableHasilInput(ListPostTerimaOrder listPostTerimaOrder)
+        {
+            String response = "";
+            var credentials = new NetworkCredential("ac", "123");
+            var handler = new HttpClientHandler { Credentials = credentials }; // for validation
+                                                                               //    handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };// allow domain checker
+            using (var client = new HttpClient(handler))
+            {
+                // Make your request...
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                try
+                {
+                    HttpResponseMessage message = client.GetAsync("https://jsonblob.com/api/bbc8a463-8d8b-11e9-b697-81618876d80b").Result;
+
+                    if (message.IsSuccessStatusCode)
+                    {
+                        var serializer = new DataContractJsonSerializer(typeof(List<AfterPostTerimaOrder>));
+                        var result = message.Content.ReadAsStringAsync().Result;
+                        byte[] byteArray = Encoding.UTF8.GetBytes(result);
+                        MemoryStream stream = new MemoryStream(byteArray);
+                        List<AfterPostTerimaOrder> resultData = serializer.ReadObject(stream) as List<AfterPostTerimaOrder>;
+
+                        ViewBag.ResulData = resultData;
+                        return PartialView("_TableHasilInput");
+                        //====================================================================================
+
+                    }
+                    else
+                    {
+                        ViewBag.error = "Tidak Dapat Respon dari Server";
+                        return PartialView("_TableHasilInput");
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.error = "Tidak Dapat Respon dari Server";
+                    var error = ex.ToString();
+                    return PartialView("_TableHasilInput");
+                }
+            }
+
+        }
+
     }
 }

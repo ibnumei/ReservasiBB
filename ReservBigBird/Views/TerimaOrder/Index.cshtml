@@ -105,14 +105,14 @@
                                     </div>
                                     <div class="col-lg-2">
                                         <select name="KelTujuan" class="form-control">
-                                            <option value="A44H">0A</option>
-                                            <option value="A44">0C</option>
-                                            <option value="A54C">4A</option>
-                                            <option value="B25D">4B</option>
-                                            <option value="B27">1A</option>
-                                            <option value="B27">1B</option>
-                                            <option value="B27">2A</option>
-                                            <option value="B27">2B</option>
+                                            <option value="0A">0A</option>
+                                            <option value="0C">0C</option>
+                                            <option value="4A">4A</option>
+                                            <option value="4B">4B</option>
+                                            <option value="1A">1A</option>
+                                            <option value="1B">1B</option>
+                                            <option value="2A">2A</option>
+                                            <option value="2B">2B</option>
                                         </select>
                                     </div>
                                 </div>
@@ -212,6 +212,15 @@
 
     </div>
 
+    <div class="box box-success">
+        <div class="box-header">
+
+        </div>
+
+        <div id="renderTable2" class="box-body">
+            @Html.Partial("_TableHasilInput")
+        </div>
+    </div>
 
 </section>
 <!-- /.content -->
@@ -402,11 +411,11 @@
                                     </div>
                                     <div class="col-sm-4">
                                         @*<div class="input-group clockpicker">
-                                        <input type="text" id="jamjemputmodal" class="form-control" value="18:00">
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-time"></span>
-                                        </span>
-                                    </div>*@
+                                                <input type="text" id="jamjemputmodal" class="form-control" value="18:00">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-time"></span>
+                                                </span>
+                                            </div>*@
                                         <div class="clockpicker">
                                             <input type="text" id="jamjemputmodal" name="jamjemputmodal" class="form-control" placeholder="Pilih Jam">
                                         </div>
@@ -426,11 +435,11 @@
                                     </div>
                                     <div class="col-sm-4">
                                         @*<div class="input-group clockpicker">
-                                        <input type="text" id="jamslsaimodal" class="form-control">
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-time"></span>
-                                        </span>
-                                    </div>*@
+                                                <input type="text" id="jamslsaimodal" class="form-control">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-time"></span>
+                                                </span>
+                                            </div>*@
                                         <div class="clockpicker">
                                             <input type="text" id="jamslsaimodal" class="form-control">
                                         </div>
@@ -440,24 +449,24 @@
 
 
                                 @*<div class="row">
-                                    <div class="col-sm-6">
+                                        <div class="col-sm-6">
 
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <button type="submit" style="float:right" class="btn btn-primary btn-md form-control">
-                                            <span class="glyphicon glyphicon-floppy-save"></span>
-                                            Simpan
-                                        </button>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button type="submit" style="float:right" class="btn btn-primary btn-md form-control">
+                                                <span class="glyphicon glyphicon-floppy-save"></span>
+                                                Simpan
+                                            </button>
 
-                                    </div>
+                                        </div>
 
-                                    <div class="col-sm-3">
-                                        <button type="submit" style="float:right" class="btn btn-warning btn-md form-control">
-                                            <span class="glyphicon glyphicon-floppy-save"></span>
-                                            Batal
-                                        </button>
-                                    </div>
-                                </div>*@<br />
+                                        <div class="col-sm-3">
+                                            <button type="submit" style="float:right" class="btn btn-warning btn-md form-control">
+                                                <span class="glyphicon glyphicon-floppy-save"></span>
+                                                Batal
+                                            </button>
+                                        </div>
+                                    </div>*@<br />
 
                             </div>
 
@@ -471,11 +480,11 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">
-                        <span class="glyphicon glyphicon-trash"></span> 
+                        <span class="glyphicon glyphicon-trash"></span>
                         Close
                     </button>
-                    <button type="button" class="btn btn-primary"> 
-                        <span class="glyphicon glyphicon-floppy-save"></span> 
+                    <button type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-floppy-save"></span>
                         Save changes
                     </button>
                 </div>
@@ -536,7 +545,7 @@
         //HITUNG BRAPA JARAK JUMLAH HARI DARI TGL1 KE TGL2
         var diff = Date.parse(d) - Date.parse(a);
         var hasil_jarak = Math.floor(diff / 86400000);
-        console.log("hasil jarak ="+hasil_jarak);
+        console.log("hasil jarak =" + hasil_jarak);
 
         if (b == n) {
 

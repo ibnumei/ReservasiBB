@@ -7092,6 +7092,7 @@
     <Content Include="Views\MonitorOrder\_TableMonitorOrder.cshtml" />
     <Content Include="Views\DisplayPlanning\_TableDisplayPlanning.cshtml" />
     <Content Include="Views\TerimaOrder\_TableDate.cshtml" />
+    <Content Include="Views\TerimaOrder\_TableHasilInput.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

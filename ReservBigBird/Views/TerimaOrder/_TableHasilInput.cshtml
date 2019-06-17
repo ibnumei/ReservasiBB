@@ -1,0 +1,46 @@
+﻿@*@model IEnumerable<ReservBigBird.API_Model.AfterPostTerimaOrder>*@
+@using ReservBigBird.API_Model;
+@if (ViewBag.ResulData != null)
+{
+    <table class="table table-bordered table-striped" id="table1">
+        <thead>
+            <tr>
+                <th>Jenis</th>
+                <th>AC</th>
+                <th>Pool</th>
+                <th>Tgl Awal</th>
+                <th>Jam Awal</th>
+                <th>Tgl Akhir</th>
+                <th>Jam Akhir</th>
+                <th>Jmlh</th>
+                <th>CB</th>
+                <th>CS</th>
+                <th>CT</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (AfterPostTerimaOrder afterPostTerimaOrder in ViewBag.ResulData)
+            {
+                <tr>
+                    <td>@afterPostTerimaOrder.Jenis</td>
+                    <td>@afterPostTerimaOrder.AC</td>
+                    <td>@afterPostTerimaOrder.Pool</td>
+                    <td>@afterPostTerimaOrder.TglAwal</td>
+                    <td>@afterPostTerimaOrder.JamAwal</td>
+                    <td>@afterPostTerimaOrder.TglAkhir</td>
+                    <td>@afterPostTerimaOrder.JamAkhir</td>
+                    <td>@afterPostTerimaOrder.Jumlah</td>
+                    <td>@afterPostTerimaOrder.CB</td>
+                    <td>@afterPostTerimaOrder.CS</td>
+                    <td>@afterPostTerimaOrder.CT</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script>
+        $('#ModalSmall').modal('hide');
+    </script>
+}
+
