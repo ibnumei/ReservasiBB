@@ -121,6 +121,7 @@ namespace ReservBigBird.Controllers
 
         //method with no return
         public void _TableHasilInputReal(ListPostTerimaOrder listPostTerimaOrder)
+        //public void _TableHasilInput(ListPostTerimaOrder listPostTerimaOrder)
         {
             //Ambil link url di web config
             String url = ConfigurationManager.AppSettings["UrlApi"].ToString();
@@ -188,7 +189,7 @@ namespace ReservBigBird.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 try
                 {
-                    HttpResponseMessage message = client.GetAsync("https://jsonblob.com/api/bbc8a463-8d8b-11e9-b697-81618876d80b").Result;
+                    HttpResponseMessage message = client.GetAsync("https://jsonblob.com/api/b67aac55-90af-11e9-959d-b527025f20cc").Result;
 
                     if (message.IsSuccessStatusCode)
                     {
@@ -220,5 +221,43 @@ namespace ReservBigBird.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult Delete(DeleteTerimaOrder deleteTerima)
+        {
+            //DeleteTerimaOrder deleteTerimaOrder = new DeleteTerimaOrder()
+            //{
+            //    Jenis = deleteTerima.Jenis
+            //};
+
+            //var json2 = new JavaScriptSerializer().Serialize(deleteTerimaOrder);
+            //var stringPayload = JsonConvert.SerializeObject(deleteTerimaOrder);
+            ////String response = "";
+            //var credentials = new NetworkCredential("username", "password");
+            //var handler = new HttpClientHandler { Credentials = credentials };
+            //var httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
+            //using (var client = new HttpClient(handler))
+            //{
+            //    try
+            //    {
+            //        HttpResponseMessage message = client.DeleteAsync("http://localhost:55300/api/ApiLoginNew/" + deleteTerima.Jenis).Result;
+            //        if (message.IsSuccessStatusCode)
+            //        {
+            //            //Action jika mendapat balasan sukses dari post api, panggil method GetDataAfterPost
+            //            //GetDataAfterPost(listPostTerimaOrder);
+            //            var a = 10;
+            //            var b = a;
+            //        }
+
+
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        var aa = ex.ToString();
+            //        var bb = aa;
+            //    }
+            //}
+
+            return Json(new { success = true });
+        }
     }
 }

@@ -1,0 +1,306 @@
+﻿@model IEnumerable<ReservBigBird.API_Model.TerimaOrder>
+
+@if (Model == null && ViewBag.error == "Tidak Dapat Respon dari Server")
+{
+    <script>
+        swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error");
+        $("#divLoader").hide();
+    </script>
+}
+
+@if (ViewBag.tgl != null && Model != null)
+{
+    <div>
+        <iframe style="display:none" onload="countdown()"></iframe>
+        <!-- <button onclick="countdown()">Try it</button> -->
+        Time Left ::
+        <input id="minutes" type="text" style="width: 10px;
+             border: none; font-size: 16px;
+            font-weight: bold; color: black;"><font size="5">
+            :
+        </font>
+        <input id="seconds" type="text" style="width: 20px;
+                        border: none; font-size: 16px;
+                        font-weight: bold; color: black;">
+    </div>
+
+    <table class="table table-bordered table-striped" id="table1">
+        <thead>
+            <tr>
+                <th>@ViewBag.bus</th>
+                <th hidden>Jenis Bus</th>
+                <th hidden>Jml Submit Bus</th>
+                <th hidden>Max</th>
+                <th hidden>Min</th>
+                <th hidden>Stock</th>
+                <th hidden>TglAwal</th>
+                <th hidden>JamAwal</th>
+                <th hidden>TglAkhir</th>
+                <th hidden>JamAkhir</th>
+                <th hidden>KelTujuan</th>
+
+                @for (int i = 0; i < ViewBag.tgl.Count; i++)
+                {
+                    <th>@ViewBag.tgl[i]</th>
+                }
+
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var aa in Model)
+            {
+                //untuk membuat list sementara u/ mencari nilai max & min
+                var listTemp = new List<int>();
+                foreach (var tes in aa.listJml)
+                {
+                    listTemp.Add(tes.jml);
+                }
+
+                <tr>
+                    <td class="NamaPool">
+                        @if (listTemp.Min() < ViewBag.JmlBus)
+                        {
+                            <a class="btn" disabled>@aa.poolName</a>
+                        }
+                        else
+                        {
+                            <a onclick="getStatus()" class="btn">@aa.poolName</a>
+                        }
+                    </td>
+
+                    <td class="Jenis" hidden>@ViewBag.bus</td>
+                    <td class="JmlBus" hidden>@ViewBag.JmlBus</td>
+                    <td hidden>@listTemp.Max()</td>
+                    <td hidden>@listTemp.Min()</td>
+                    <td hidden>@aa.stc</td>
+                    <td class="TglAwal" hidden>@ViewBag.TglAwal</td>
+                    <td class="JamAwal" hidden>@ViewBag.JamAwal</td>
+                    <td class="TglAkhir" hidden>@ViewBag.TglAkhir</td>
+                    <td class="JamAkhir" hidden>@ViewBag.JamAkhir</td>
+                    <td class="KelTujuan" hidden>@ViewBag.KelTujuan</td>
+
+                    @foreach (var bb in aa.listJml)
+                    {
+                        <td>@bb.jml</td>
+                    }
+
+
+                </tr>
+            }
+
+
+            @*@foreach (var aa in ViewBag.tes1)
+                {
+                    <tr>
+                        <td>@aa.poolName</td>
+                        @foreach (var bb in aa.listJml)
+                        {
+                            <td>@bb.jml</td>
+                        }
+
+                        @foreach(var bb in aa.data)
+                        {
+                            <td>@bb.poolName</td>
+                            foreach(var cc in bb.listJml)
+                            {
+                                <td>@cc.jml</td>
+                            }
+                        }
+
+                    </tr>
+                }*@
+
+        </tbody>
+    </table>
+
+    <script>
+        $("#divLoader").hide();
+    </script>
+}
+
+
+
+<div id="ModalSmall" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3>Pilih Data Berikut</h3>
+            </div>
+
+            <div class="modal-body">
+
+                <form id="FormPopup">
+                    @*Input Tes : <input type="text" id="testestestes" name="testestestes" />*@
+
+                    <input type="text" id="ModalNmPool" name="ModalNmPool" hidden/>
+                    <input type="text" id="ModalJenis" name="ModalJenis" hidden/>
+                    <input type="text" id="ModalJmlBus" name="ModalJmlBus" hidden/>
+
+                    <input type="text" id="ModalTglAwal" name="ModalTglAwal" hidden/>
+                    <input type="text" id="ModalJamAwal" name="ModalJamAwal" hidden/>
+                    <input type="text" id="ModalTglAkhir" name="ModalTglAkhir" hidden/>
+                    Mo<input type="text" id="ModalJamAkhir" name="ModalJamAkhir" hidden/>
+                    <input type="text" id="ModalKelTujuan" name="ModalKelTujuan" hidden/>
+
+                    <input type="button" class="btn btn-primary btn-md" value="Pilih" id="submit2" />
+                </form>
+
+
+            </div>
+
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+    //set minutes
+    var mins = 0.12;
+    var trigger = 0;
+    //calculate the seconds
+    var secs = 5;
+
+    //countdown function is evoked when page is loaded
+    function countdown() {
+        setTimeout('Decrement()', 60);
+    }
+
+    //Decrement function decrement the value.
+    function Decrement() {
+        if (document.getElementById) {
+            minutes = document.getElementById("minutes");
+            seconds = document.getElementById("seconds");
+            tombol = document.getElementById("tombol");
+
+            //if less than a minute remaining
+            //Display only seconds value.
+            if (seconds < 59) {
+                seconds.value = secs;
+            }
+
+            //Display both minutes and seconds
+            //getminutes and getseconds is used to
+            //get minutes and seconds
+            else {
+                minutes.value = getminutes();
+                seconds.value = getseconds();
+            }
+            //when less than a minute remaining
+            //colour of the minutes and seconds
+            //changes to red
+            if (mins < 1) {
+                minutes.style.color = "red";
+                seconds.style.color = "red";
+            }
+            //if seconds becomes zero,
+            //then page alert time up
+            if (mins < 0) {
+
+                //alert('time up');
+                minutes.value = 0;
+                seconds.value = 0;
+                //tombol.disabled = true;
+                //$('#tbodyID').find('a').prop('disabled', true);
+                trigger = 1;
+            }
+            //if seconds > 0 then seconds is decremented
+            else {
+
+                trigger = 0;
+                secs--;
+                setTimeout('Decrement()', 1000);
+            }
+        }
+    }
+
+    function getminutes() {
+        //minutes is seconds divided by 60, rounded down
+        mins = Math.floor(secs / 60);
+        return mins;
+    }
+
+    function getseconds() {
+        //take minutes remaining (as seconds) away
+        //from total seconds remaining
+        return secs - Math.round(mins * 60);
+    }
+
+    function getStatus() {
+        if (trigger == 1) {
+            swal("Warning", "Batas Waktu Telah Habis, Lakukan Pencarian Ulang..!", "warning");
+        }
+        else {
+            $('#ModalSmall').modal('toggle');
+        }
+    }
+
+    $(document).ready(function () {
+        $('#submit2').on('click', function () {
+
+            if (trigger == 1) {
+                swal("Warning", "Batas Waktu Telah Habis, Lakukan Pencarian Ulang..!", "warning");
+                $('#ModalSmall').modal('hide');
+            }
+            else {
+                var tesnu3 = $('#FormPopup').serialize();
+                console.log(tesnu3);
+                $('#renderTable2').load("_TableHasilInput", $('#FormPopup').serialize());
+            }
+
+
+        });
+    });
+
+</script>
+
+<style>
+    #renderTable2 {
+        background-color: white;
+    }
+</style>
+<script>
+    $('#table1 tbody').on('click', '.btn', function () {
+        var currow = $(this).closest('tr');
+        console.log(currow);
+
+        var a = $.trim(currow.find('.NamaPool').text());
+        document.getElementById("ModalNmPool").value = a;
+
+        var a1 = $.trim(currow.find('.Jenis').text());
+        document.getElementById("ModalJenis").value = a1;
+
+        var a2 = $.trim(currow.find('.JmlBus').text());
+        document.getElementById("ModalJmlBus").value = a2;
+
+        var a3 = $.trim(currow.find('.TglAwal').text());
+        document.getElementById("ModalTglAwal").value = a3;
+
+        var a4 = $.trim(currow.find('.JamAwal').text());
+        document.getElementById("ModalJamAwal").value = a4;
+
+        var a5 = $.trim(currow.find('.TglAkhir').text());
+        document.getElementById("ModalTglAkhir").value = a5;
+
+        var a6 = $.trim(currow.find('.JamAkhir').text());
+        document.getElementById("ModalJamAkhir").value = a6;
+
+        var a7 = $.trim(currow.find('.KelTujuan').text());
+        document.getElementById("ModalKelTujuan").value = a7;
+
+
+        alert(aa);
+    })
+</script>
+
+
+

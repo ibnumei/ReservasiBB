@@ -1,0 +1,399 @@
+﻿
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+}
+
+<script src="~/Content/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="~/Content/js/sweetalert.min.js"></script>
+
+<section class="content-header">
+    <h1>
+        Display Planning
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li>Display Planning</li>
+        <li class="active">Index</li>
+    </ol>
+    <br />
+
+</section>
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <!--  --------------------- Task Header --------------------------- -->
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title"></h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <form id="Form1">
+                        <div class="row form-border">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+
+                                <div class="col-sm-6">
+
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <b>No Order</b>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="NoOrder" id="NoOrder" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <b>Nama Pemakai</b>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="NamaPemakai" id="NamaPemakai" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <br />
+                                </div>
+
+                                <div class="col-sm-6">
+
+
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <b>Nama Pemesan</b>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="NamaPemesan" id="NamaPemesan" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <b>POOL</b>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="Pool" id="Pool" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+
+                                        </div>
+                                        <div class="col-sm-8">
+
+                                            <input type="button" class="btn btn-primary btn-md" value="Search" id="submit" />&nbsp;
+                                            <button type="button" class="btn btn-danger btn-md" id="Hapus">Clear</button>
+                                        </div>
+                                    </div>
+
+                                    <br />
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+            <!-- ---------------------- Task Lines --------------------------- -->
+            <div class="box box-success">
+
+                <div class="box-header">
+                    @*untuk loader halaman*@
+                    <div id="divLoader" style="display:none;text-align:center"> <img src="~/Content/dist/img/ajax-loader-blue.gif" alt="Loader" /> </div>
+                </div>
+
+                <div id="renderTable" class="box-body">
+                    @Html.Partial("_TableDisplayPlanning")
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- L A R G E  M O D A L -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h3 class="modal-title">Display Planning Order</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <form asp-action="CreateTaskLine">
+                    <div class="row form-border">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+
+                            <div class="col-sm-12">
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <b>No Order</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>Nama Pemesan</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <b>No Detail</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>POOL</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <b>Tgl Pakai</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <b>Jam Jemput</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <b>Kel Tujuan</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                    </div>
+
+                                </div>
+                                <br />
+
+                                <div class="row">
+
+                                    <div class="col-sm-2">
+                                        <b>Tujuan</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <b>Alamat</b>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <textarea asp-for="Address" class="form-control" rows="2"></textarea>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <b>Bus</b>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" asp-for="TaskCode" placeholder="Jenis Bus">
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" asp-for="TaskCode" placeholder="No Body">
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" asp-for="TaskCode" placeholder="No Pol">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <b>NIP 1</b>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" asp-for="TaskCode" placeholder="Nama">
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" asp-for="TaskCode" placeholder="HP">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <b>NIP 1</b>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" asp-for="TaskCode" placeholder="Nama">
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" asp-for="TaskCode" placeholder="HP">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+
+                                        </div>
+
+                                        <div class="col-sm-4">
+
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            @*<button type="submit" class="btn btn-success btn-lg">
+                                                    Simpan
+                                                </button>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <button type="submit" class="btn btn-danger btn-lg">
+                                                    Batal
+                                                </button>*@
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <br />
+
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary btn-lg">Simpan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*Untuk Table Partial View*@
+<script>
+
+    $(document).ready(function () {
+        $('#submit').on('click', function () {
+            $("#divLoader").show();
+            var tesnu = $('#Form1').serialize();
+
+            var count = 0;
+
+            if (document.getElementById("NoOrder").value == "") { count = count + 1 }
+            if (document.getElementById("NamaPemakai").value == "") { count = count + 1 }
+            if (document.getElementById("NamaPemesan").value == "") { count = count + 1 }
+            if (document.getElementById("Pool").value == "") { count = count + 1 }
+            console.log(count);
+
+            console.log(tesnu);
+            if (count < 4) {
+                $('#renderTable').load("_TableDisplayPlanning", $('#Form1').serialize());
+            }
+            else {
+                swal("Perhatikan Kolom", "Silahkan Isi Salah Satu Kolom di Form Tersebut", "warning");
+            }
+
+        });
+    });
+
+</script>
+
+@*Untuk Button Clear*@
+<script>
+    $(document).ready(function () {
+        $('#Hapus').on('click', function () {
+            
+            document.getElementById("NoOrder").value = "";
+            document.getElementById("NamaPemakai").value = "";
+            document.getElementById("NamaPemesan").value = "";
+            document.getElementById("Pool").value = "";
+
+        });
+    });
+</script>

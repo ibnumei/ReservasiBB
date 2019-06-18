@@ -1,0 +1,628 @@
+﻿
+@{
+    ViewBag.Title = "Penerimaan Order";
+}
+
+<script src="~/Content/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="~/Content/bower_components/clockpicker/bootstrap-clockpicker.min.js"></script>
+<script src="~/Content/js/sweetalert.min.js"></script>
+
+<section class="content-header">
+    <h1>
+        Penerimaan Order
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li>Penerimaan Order</li>
+        <li class="active">Index</li>
+    </ol>
+    <br />
+
+</section>
+<!-- Content Header (Page header) -->
+<!-- Main content -->
+<section class="content container-fluid">
+
+    <div class="box box-primary">
+
+        <div class="box-header">
+            <h3 class="box-title">Form Penerimaan Order</h3>
+        </div>
+
+
+        <div class="box-body">
+            <div class="col-sm-12">
+                <form id="Form1">
+                    <div class="row form-border">
+                        <div class="form-group">
+
+                            <div class="col-lg-12">
+
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <b>Jenis Bus</b>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <select name="JenisBus" class="form-control">
+                                            <option value="A12">A12</option>
+                                            <option value="A37">A37</option>
+                                            <option value="A37H">A37H</option>
+                                            <option value="A44">A44</option>
+                                            <option value="A44H">A44H</option>
+                                            <option value="A54">A54</option>
+                                            <option value="A54H">A54H</option>
+                                            <option value="A59">A59</option>
+                                            <option value="B">B</option>
+                                            <option value="B12">B12</option>
+                                            <option value="B16">B16</option>
+                                            <option value="B25">B25</option>
+                                            <option value="B27">B27</option>
+                                            <option value="C14">C14</option>
+                                            <option value="D">D</option>
+                                            <option value="DL">DL</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4">
+
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <b>Pool</b>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <select name="Pool" class="form-control">
+                                            <option value="CJ">CJ</option>
+                                            <option value="CP">CP</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <b>Tanggal Awal</b>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="text" id="tglawalpilih" name="tglawalpilih" class="form-control" placeholder="dd/mm/yyyy" />
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <select class="form-control" name="hariawalpilih" id="hariawalpilih">
+                                            <option value="Monday">Senin</option>
+                                            <option value="Tuesday">Selasa</option>
+                                            <option value="Wednesday">Rabu</option>
+                                            <option value="Thursday">Kamis</option>
+                                            <option value="Friday">Jumat</option>
+                                            <option value="Saturday">Sabtu</option>
+                                            <option value="Sunday">Minggu</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="clockpicker">
+                                            <input type="text" name="jamawalpilih" id="jamawalpilih" class="form-control" placeholder="Pilih Jam">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <b>Kel Tujuan</b>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <select name="KelTujuan" class="form-control">
+                                            <option value="0A">0A</option>
+                                            <option value="0C">0C</option>
+                                            <option value="4A">4A</option>
+                                            <option value="4B">4B</option>
+                                            <option value="1A">1A</option>
+                                            <option value="1B">1B</option>
+                                            <option value="2A">2A</option>
+                                            <option value="2B">2B</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <b>Tanggal Akhir</b>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="text" name="tglakhirpilih" id="tglakhirpilih" class="form-control" placeholder="dd/mm/yyyy" />
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <select class="form-control" name="hariakhirpilih" id="hariakhirpilih">
+                                            <option value="Monday">Senin</option>
+                                            <option value="Tuesday">Selasa</option>
+                                            <option value="Wednesday">Rabu</option>
+                                            <option value="Thursday">Kamis</option>
+                                            <option value="Friday">Jumat</option>
+                                            <option value="Saturday">Sabtu</option>
+                                            <option value="Sunday">Minggu</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="clockpicker">
+                                            <input type="text" id="jamakhirpilih" name="jamakhirpilih" class="form-control" placeholder="Pilih Jam">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <b>Jumlah Bus</b>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="number" name="JumlahBus" class="form-control" autocomplete="on" />
+                                    </div>
+                                </div>
+                                <br />
+
+
+
+
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <b>Pemesan</b>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <input name="Pemesan" class="form-control" autocomplete="on" />
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-lg-2">
+
+                                    </div>
+                                    <div class="col-lg-2">
+                                        @*<a id="submit" href="#" class="btn btn-success col-lg-12 form-control"><b>HITUNG</b></a>*@
+                                        <input type="button" class="btn btn-success col-lg-12 form-control" value="HITUNG" id="submit" />
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <button type="button" class="btn btn-primary col-lg-12 form-control" onclick="ValidasiTgl();">
+                                            <b>KEEP</b>
+                                        </button>
+
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <button type="submit" class="btn btn-warning col-lg-12 form-control">
+                                            <b>LEPAS</b>
+                                        </button>
+                                    </div>
+                                </div>
+                                <br />
+
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="box box-success">
+
+        <div class="box-header">
+            @*untuk loader halaman*@
+            <div id="divLoader" style="display:none;text-align:center"> <img src="~/Content/dist/img/ajax-loader-blue.gif" alt="Loader" /> </div>
+        </div>
+
+        <div id="renderTable" class="box-body">
+            @Html.Partial("_TableDate")
+        </div>
+
+    </div>
+
+    <div class="box box-success">
+        <div class="box-header">
+
+        </div>
+
+        <div id="renderTable2" class="box-body">
+            @Html.Partial("_TableHasilInput")
+        </div>
+    </div>
+
+</section>
+<!-- /.content -->
+<!-- L A R G E  M O D A L -->
+<div id="myModal13" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form asp-action="CreateTaskLine">
+                <div class="modal-body">
+
+
+                    <div class="row form-border">
+                        <div class="form-group">
+
+
+
+                            <div class="col-sm-12">
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <b>No Order</b>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        @*<input asp-for="Item1.TaskCode" class="form-control" autocomplete="off" />*@
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <b>Kategori</b>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select class="form-control">
+                                            <option value="Sek">Sekolah</option>
+                                            <option value="Ins">Instansi</option>
+                                            <option value="Per">Perusahaan</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <b>Telp Pemesan</b>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>Nama Pemesan</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <b>Contact</b>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>Perusahaan</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <b>Alamat Pemesan</b>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <textarea asp-for="Address" class="form-control" rows="2"></textarea>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <b>Nama Pemakai</b>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <b>Telp Pemakai</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <b>Alamat Pemakai</b>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <textarea asp-for="Address" class="form-control" rows="2"></textarea>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <b>Penerima Order</b>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <b>Jenis Bus</b>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <b>Kel Tujuan</b>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <b>Tujuan</b>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <b>Permintaan Khusus</b>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <b>Lapor</b>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <b>Tgl Jemput</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="tgljemputmodal" class="form-control" />
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <b>Jam</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        @*<div class="input-group clockpicker">
+                                                <input type="text" id="jamjemputmodal" class="form-control" value="18:00">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-time"></span>
+                                                </span>
+                                            </div>*@
+                                        <div class="clockpicker">
+                                            <input type="text" id="jamjemputmodal" name="jamjemputmodal" class="form-control" placeholder="Pilih Jam">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <b>Tgl Selesai</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="tglselesaimodal" class="form-control" />
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <b>Jam</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        @*<div class="input-group clockpicker">
+                                                <input type="text" id="jamslsaimodal" class="form-control">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-time"></span>
+                                                </span>
+                                            </div>*@
+                                        <div class="clockpicker">
+                                            <input type="text" id="jamslsaimodal" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+
+                                @*<div class="row">
+                                        <div class="col-sm-6">
+
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button type="submit" style="float:right" class="btn btn-primary btn-md form-control">
+                                                <span class="glyphicon glyphicon-floppy-save"></span>
+                                                Simpan
+                                            </button>
+
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <button type="submit" style="float:right" class="btn btn-warning btn-md form-control">
+                                                <span class="glyphicon glyphicon-floppy-save"></span>
+                                                Batal
+                                            </button>
+                                        </div>
+                                    </div>*@<br />
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-floppy-save"></span>
+                        Save changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+@*Javascript Validasi Tanggal*@
+<script type="text/javascript">
+    function ValidasiTgl() {
+        var weekday = new Array(7);
+        weekday[0] = "Sunday";
+        weekday[1] = "Monday";
+        weekday[2] = "Tuesday";
+        weekday[3] = "Wednesday";
+        weekday[4] = "Thursday";
+        weekday[5] = "Friday";
+        weekday[6] = "Saturday";
+
+        var a0 = document.getElementById("tglawalpilih").value;
+        var a = a0.split("-").reverse().join("-");
+        var b = document.getElementById("hariawalpilih").value;
+        var c = document.getElementById("jamawalpilih").value;
+
+        var d0 = document.getElementById("tglakhirpilih").value;
+        var d = d0.split("-").reverse().join("-");
+        var e = document.getElementById("hariakhirpilih").value;
+        var f = document.getElementById("jamakhirpilih").value;
+
+        console.log(a + ", " + b);
+        var dt = new Date(a);
+        var dt2 = new Date(d);
+        console.log(dt + ", " + dt2);
+
+        var datenoww = dt.getDate();
+        var bulanNow = dt.getMonth() + 1;
+
+        var datenowakhir = dt2.getDate();
+        var bulanNowakhir = dt2.getMonth() + 1;
+
+        if (bulanNow < 10) bulanNow = "0" + bulanNow;
+        if (datenoww < 10) datenoww = "0" + datenoww;
+
+        if (bulanNowakhir < 10) bulanNowakhir = "0" + bulanNowakhir;
+        if (datenowakhir < 10) datenowakhir = "0" + datenowakhir;
+
+        var DateSelected = dt.getFullYear() + "-" + bulanNow + "-" + datenoww;
+        var DateSelected2 = dt2.getFullYear() + "-" + bulanNowakhir + "-" + datenowakhir;
+
+        console.log(DateSelected);
+        var n = weekday[dt.getDay()];
+        var m = weekday[dt2.getDay()];
+
+        //HITUNG BRAPA JARAK JUMLAH HARI DARI TGL1 KE TGL2
+        var diff = Date.parse(d) - Date.parse(a);
+        var hasil_jarak = Math.floor(diff / 86400000);
+        console.log("hasil jarak =" + hasil_jarak);
+
+        if (b == n) {
+
+            console.log("hari 1 sama");
+            if (e == m) {
+
+                document.getElementById("tgljemputmodal").value = a0;
+                document.getElementById("tglselesaimodal").value = d0;
+
+                document.getElementById("jamjemputmodal").value = c;
+                document.getElementById("jamslsaimodal").value = f;
+
+                $('#myModal13').modal('toggle');
+            }
+            else {
+                swal("Perhatikan Hari", "Hari yang Anda Pilih di Tanggal Akhir Tidak Sama", "warning");
+                console.log("Hari Tidak sama 2");
+            }
+
+
+
+        }
+        else {
+            swal("Perhatikan Hari", "Hari yang Anda Pilih di Tanggal Awal Tidak Sama", "warning");
+            console.log("hari tidak sama");
+        }
+
+    }
+
+</script>
+
+@*Javascript Jam*@
+<script type="text/javascript">
+    $('.clockpicker').clockpicker({
+        placement: 'top',
+        align: 'left',
+        donetext: 'Done',
+        autoclose: true
+    });
+</script>
+
+@*Javascript Datatable*@
+<script>
+
+    $(function () {
+        $('#example1').DataTable()
+        $('#example2').DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+        })
+    })
+</script>
+
+@*Javascript Kalender*@
+<script>
+    $(function () {
+        $("#tglawalpilih,#tglakhirpilih,#tgljemputmodal,#tglselesaimodal").datepicker({ dateFormat: 'dd-mm-yy' });
+    });
+</script>
+
+@*Javascript untuk mendapatkan range tanggal ke table*@
+<script>
+
+    $(document).ready(function () {
+        $('#submit').on('click', function () {
+            $("#divLoader").show();
+            var tesnu = $('#Form1').serialize();
+            console.log(tesnu);
+            $('#renderTable').load("_TableDate", $('#Form1').serialize());
+        });
+    });
+
+</script>
+
+
+

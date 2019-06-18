@@ -1,8 +1,9 @@
 ﻿@*@model IEnumerable<ReservBigBird.API_Model.AfterPostTerimaOrder>*@
 @using ReservBigBird.API_Model;
+
 @if (ViewBag.ResulData != null)
 {
-    <table class="table table-bordered table-striped" id="table1">
+    <table class="table table-bordered table-striped" id="TableHasil">
         <thead>
             <tr>
                 <th>Jenis</th>
@@ -13,27 +14,28 @@
                 <th>Tgl Akhir</th>
                 <th>Jam Akhir</th>
                 <th>Jmlh</th>
-                <th>CB</th>
-                <th>CS</th>
-                <th>CT</th>
-
+                <th>Tgl Trans</th>
+                <th>Jam Trans</th>
+                <th>Kel Tujuan</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
             @foreach (AfterPostTerimaOrder afterPostTerimaOrder in ViewBag.ResulData)
             {
                 <tr>
-                    <td>@afterPostTerimaOrder.Jenis</td>
-                    <td>@afterPostTerimaOrder.AC</td>
-                    <td>@afterPostTerimaOrder.Pool</td>
-                    <td>@afterPostTerimaOrder.TglAwal</td>
-                    <td>@afterPostTerimaOrder.JamAwal</td>
-                    <td>@afterPostTerimaOrder.TglAkhir</td>
-                    <td>@afterPostTerimaOrder.JamAkhir</td>
-                    <td>@afterPostTerimaOrder.Jumlah</td>
-                    <td>@afterPostTerimaOrder.CB</td>
-                    <td>@afterPostTerimaOrder.CS</td>
-                    <td>@afterPostTerimaOrder.CT</td>
+                    <td class="Jenis">@afterPostTerimaOrder.Jenis</td>
+                    <td class="AC">@afterPostTerimaOrder.AC</td>
+                    <td class="Pool">@afterPostTerimaOrder.Pool</td>
+                    <td class="TglAwal">@afterPostTerimaOrder.TglAwal</td>
+                    <td class="JamAwal">@afterPostTerimaOrder.JamAwal</td>
+                    <td class="TglAkhir">@afterPostTerimaOrder.TglAkhir</td>
+                    <td class="JamAkhir">@afterPostTerimaOrder.JamAkhir</td>
+                    <td class="Jumlah">@afterPostTerimaOrder.Jumlah</td>
+                    <td class="TglTrans">@afterPostTerimaOrder.TglTrans</td>
+                    <td class="JamTrans">@afterPostTerimaOrder.JamTrans</td>
+                    <td class="KelTujuan">@afterPostTerimaOrder.KelTujuan</td>
+                    <td class="btn btn-default" id="btnDel"><a onclick="deleteRow(this)">Delete</a></td>
                 </tr>
             }
         </tbody>
@@ -43,4 +45,73 @@
         $('#ModalSmall').modal('hide');
     </script>
 }
+    <script>
+        var a, b, c, d, e, f, g, h, i, j, k;
+        var param;
+        function deleteRow(r) {
+            param = r.parentNode.parentNode.rowIndex;
+            console.log(param);
+        }
+        $('#TableHasil tbody').on('click', '#btnDel', function () {
+            var currow = $(this).closest('tr');
+            console.log(currow);
+            
+            a = $.trim(currow.find('.Jenis').text());
 
+            b = $.trim(currow.find('.AC').text());
+
+            c = $.trim(currow.find('.Pool').text());
+            
+            d = $.trim(currow.find('.TglAwal').text());
+
+            e = $.trim(currow.find('.JamAwal').text());
+
+            f = $.trim(currow.find('.TglAkhir').text());
+
+            g = $.trim(currow.find('.JamAkhir').text());
+
+            h = $.trim(currow.find('.Jumlah').text());
+
+            i = $.trim(currow.find('.TglTrans').text());
+
+            j = $.trim(currow.find('.JamTrans').text());
+
+            k = $.trim(currow.find('.KelTujuan').text());
+
+            swal({
+            title: "Deleting a Task will also delete Task Line associated with this Task ?",
+            text: "Once deleted, you will not be able to recover your data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("Delete")',
+                        data: { Jenis: a, AC: b},
+                        dataType: "json",
+                      // success: window.location.reload(),
+                        success: function (response) {
+                            swal("Order Has Been Deleted!", {
+                                icon: "success",
+                            }).then(function() {
+                              //  window.location.href = "/Technician/Index"
+                                // window.location.reload()
+                                $(this).closest('tr').remove();
+                                document.getElementById("TableHasil").deleteRow(param);
+                            });
+                           
+                        }
+                        
+                    });
+                }
+                else {
+                    swal("Your data is safe!");
+                }
+            });
+        })
+
+        
+    </script>

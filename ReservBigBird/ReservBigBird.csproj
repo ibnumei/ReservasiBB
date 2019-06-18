@@ -5370,6 +5370,7 @@
     <Content Include="Content\bower_components\jquery\dist\core.js" />
     <Content Include="Content\bower_components\jquery\dist\jquery.js" />
     <Content Include="Content\bower_components\jquery\dist\jquery.min.js" />
+    <Content Include="Content\bower_components\jquery\dist\jquery.min_real.js" />
     <Content Include="Content\bower_components\jquery\dist\jquery.slim.js" />
     <Content Include="Content\bower_components\jquery\dist\jquery.slim.min.js" />
     <Content Include="Content\bower_components\jquery\external\sizzle\dist\sizzle.js" />
@@ -7060,6 +7061,7 @@
     <Content Include="Content\fonts\poppins\Poppins-SemiBoldItalic.ttf" />
     <Content Include="Content\fonts\poppins\Poppins-Thin.ttf" />
     <Content Include="Content\fonts\poppins\Poppins-ThinItalic.ttf" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

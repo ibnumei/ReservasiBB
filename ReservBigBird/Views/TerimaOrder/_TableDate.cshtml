@@ -138,15 +138,15 @@
                 <form id="FormPopup">
                     @*Input Tes : <input type="text" id="testestestes" name="testestestes" />*@
 
-                    Nama Pool : <input type="text" id="ModalNmPool" name="ModalNmPool" />
-                    Jenis : <input type="text" id="ModalJenis" name="ModalJenis" />
-                    Jml Bus : <input type="text" id="ModalJmlBus" name="ModalJmlBus" />
+                    <input type="text" id="ModalNmPool" name="ModalNmPool" />
+                    <input type="text" id="ModalJenis" name="ModalJenis" />
+                    <input type="text" id="ModalJmlBus" name="ModalJmlBus" />
 
-                    ModalTglAwal : <input type="text" id="ModalTglAwal" name="ModalTglAwal" />
-                    ModalJamAwal : <input type="text" id="ModalJamAwal" name="ModalJamAwal" />
-                    ModalTglAkhir : <input type="text" id="ModalTglAkhir" name="ModalTglAkhir" />
-                    ModalJamAkhir : <input type="text" id="ModalJamAkhir" name="ModalJamAkhir" />
-                    ModalKelTujuan : <input type="text" id="ModalKelTujuan" name="ModalKelTujuan" />
+                    <input type="text" id="ModalTglAwal" name="ModalTglAwal" />
+                    <input type="text" id="ModalJamAwal" name="ModalJamAwal" />
+                    <input type="text" id="ModalTglAkhir" name="ModalTglAkhir" />
+                    <input type="text" id="ModalJamAkhir" name="ModalJamAkhir" />
+                    <input type="text" id="ModalKelTujuan" name="ModalKelTujuan" />
 
                     <input type="button" class="btn btn-primary btn-md" value="Pilih" id="submit2" />
                 </form>
@@ -168,7 +168,7 @@
     var mins = 0.12;
     var trigger = 0;
     //calculate the seconds
-    var secs = 10;
+    var secs = 5;
 
     //countdown function is evoked when page is loaded
     function countdown() {
@@ -297,8 +297,6 @@
         var a7 = $.trim(currow.find('.KelTujuan').text());
         document.getElementById("ModalKelTujuan").value = a7;
 
-
-        alert(aa);
     })
 </script>
 

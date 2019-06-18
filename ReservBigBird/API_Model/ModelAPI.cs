@@ -113,9 +113,25 @@ namespace ReservBigBird.API_Model
         public string TglAkhir { get; set; }
         public string JamAkhir { get; set; }
         public string Jumlah { get; set; }
-        public string CB { get; set; }
-        public string CS { get; set; }
-        public string CT { get; set; }
+        public string TglTrans { get; set; }
+        public string JamTrans { get; set; }
+        public string KelTujuan { get; set; }
+    }
+
+    public class DeleteTerimaOrder
+    {
+        public string userid { get; set; }
+        public string Jenis { get; set; }
+        public string AC { get; set; }
+        public string Pool { get; set; }
+        public string TglAwal { get; set; }
+        public string JamAwal { get; set; }
+        public string TglAkhir { get; set; }
+        public string JamAkhir { get; set; }
+        public string Jumlah { get; set; }
+        public string TglTrans { get; set; }
+        public string JamTrans { get; set; }
+        public string KelTujuan { get; set; }
     }
 
     public class ListJml

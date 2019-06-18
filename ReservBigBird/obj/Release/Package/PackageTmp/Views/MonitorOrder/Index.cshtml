@@ -1,0 +1,181 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<script src="~/Content/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="~/Content/js/sweetalert.min.js"></script>
+
+
+<section class="content-header">
+    <h1>
+        Monitor Order
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li>Monitor Order</li>
+        <li class="active">Index</li>
+    </ol>
+    <br />
+
+</section>
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <!--  --------------------- Task Header --------------------------- -->
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title"></h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <form id="Form1">
+                        <div class="row form-border">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+
+                                <div class="col-sm-6">
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <b>Kondisi Order</b>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <select name="KondisiOrder" id="KondisiOrder" class="form-control">
+                                                <option value="semua">Semua</option>
+                                                <option value="keep">Keep</option>
+                                                <option value="tolak">Tolak</option>
+                                                <option value="batal">Batal</option>
+                                                <option value="prospek">Prospek</option>
+                                                <option value="kuota">Kuota</option>
+                                                <option value="normal">Normal</option>
+                                                <option value="pbl">Pemb Belum Lunas</option>
+                                                <option value="kredit">Kredit</option>
+                                                <option value="oek">Order Ex Keep</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <b>No Order</b>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="NoOrder" id="NoOrder" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                </div>
+
+                                <div class="col-sm-6">
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <b>Perusahaan</b>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="Perusahaan" id="Perusahaan" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <b>Pemesan</b>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="Pemesan" id="Pemesan" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="button" class="btn btn-primary btn-md" value="Search" id="submit" />&nbsp;
+                                            <button type="button" class="btn btn-danger btn-md" id="Hapus">Clear</button>
+                                            
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+            <!-- ---------------------- Task Lines --------------------------- -->
+            <div class="box box-success">
+
+                @*untuk loader halaman*@
+                
+
+                <div class="box-header">
+                    <div id="divLoader" style="display:none;text-align:center"> <img src="~/Content/dist/img/ajax-loader-blue.gif" alt="Loader" /> </div>
+                </div>
+
+                <div class="box-body" id="renderTable">
+                    @Html.Partial("_TableMonitorOrder")
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+@*Untuk Table Partial View*@
+<script>
+
+    $(document).ready(function () {
+        $('#submit').on('click', function () {
+            $("#divLoader").show(); 
+            var tesnu = $('#Form1').serialize();
+
+            var count = 0;
+            if (document.getElementById("KondisiOrder").value == "semua") { count = count + 1 }
+            if (document.getElementById("NoOrder").value == "") { count = count + 1 }
+            if (document.getElementById("Perusahaan").value == "") { count = count + 1 }
+            if (document.getElementById("Pemesan").value == "") { count = count + 1 }
+            console.log(count);
+
+            console.log(tesnu);
+            if (count < 4) {
+                $('#renderTable').load("_TableMonitorOrder", $('#Form1').serialize());
+            }
+            else {
+                swal("Perhatikan Kolom", "Silahkan Isi Salah Satu Kolom di Form Tersebut", "warning");
+                $("#divLoader").hide();
+            }
+
+        });
+    });
+
+</script>
+
+
+@*Untuk Button Clear*@
+<script>
+    $(document).ready(function () {
+        $('#Hapus').on('click', function () {
+            
+            document.getElementById("KondisiOrder").value = "semua";
+            document.getElementById("NoOrder").value = "";
+            document.getElementById("Perusahaan").value = "";
+            document.getElementById("Pemesan").value = "";
+
+        });
+    });
+</script>
