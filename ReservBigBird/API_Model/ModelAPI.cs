@@ -103,6 +103,7 @@ namespace ReservBigBird.API_Model
         public string keltujuan { get; set; }
     }
 
+    /*
     public class AfterPostTerimaOrder
     {
         public string Jenis { get; set; }
@@ -116,6 +117,23 @@ namespace ReservBigBird.API_Model
         public string TglTrans { get; set; }
         public string JamTrans { get; set; }
         public string KelTujuan { get; set; }
+    }
+    */
+
+    public class AfterPostTerimaOrder
+    {
+        public string USRID { get; set; }
+        public string JNBID { get; set; }
+        public string JNBAC { get; set; }
+        public string POLID { get; set; }
+        public string SBSTAW { get; set; }
+        public string SBSJAW { get; set; }
+        public string SBSTAK { get; set; }
+        public string SBSJAK { get; set; }
+        public string SBSTAS { get; set; }
+        public string SBSJAS { get; set; }
+        public Nullable<decimal> SBSJB { get; set; }
+        public string KTJID { get; set; }
     }
 
     public class DeleteTerimaOrder

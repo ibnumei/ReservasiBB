@@ -24,17 +24,17 @@
             @foreach (AfterPostTerimaOrder afterPostTerimaOrder in ViewBag.ResulData)
             {
                 <tr>
-                    <td class="Jenis">@afterPostTerimaOrder.Jenis</td>
-                    <td class="AC">@afterPostTerimaOrder.AC</td>
-                    <td class="Pool">@afterPostTerimaOrder.Pool</td>
-                    <td class="TglAwal">@afterPostTerimaOrder.TglAwal</td>
-                    <td class="JamAwal">@afterPostTerimaOrder.JamAwal</td>
-                    <td class="TglAkhir">@afterPostTerimaOrder.TglAkhir</td>
-                    <td class="JamAkhir">@afterPostTerimaOrder.JamAkhir</td>
-                    <td class="Jumlah">@afterPostTerimaOrder.Jumlah</td>
-                    <td class="TglTrans">@afterPostTerimaOrder.TglTrans</td>
-                    <td class="JamTrans">@afterPostTerimaOrder.JamTrans</td>
-                    <td class="KelTujuan">@afterPostTerimaOrder.KelTujuan</td>
+                    <td class="Jenis">@afterPostTerimaOrder.JNBID</td>
+                    <td class="AC">@afterPostTerimaOrder.JNBAC</td>
+                    <td class="Pool">@afterPostTerimaOrder.POLID</td>
+                    <td class="TglAwal">@afterPostTerimaOrder.SBSTAW</td>
+                    <td class="JamAwal">@afterPostTerimaOrder.SBSJAW</td>
+                    <td class="TglAkhir">@afterPostTerimaOrder.SBSTAK</td>
+                    <td class="JamAkhir">@afterPostTerimaOrder.SBSJAK</td>
+                    <td class="Jumlah">@afterPostTerimaOrder.SBSJB</td>
+                    <td class="TglTrans">@afterPostTerimaOrder.SBSTAS</td>
+                    <td class="JamTrans">@afterPostTerimaOrder.SBSJAS</td>
+                    <td class="KelTujuan">@afterPostTerimaOrder.KTJID</td>
                     <td class="btn btn-default" id="btnDel"><a onclick="deleteRow(this)">Delete</a></td>
                 </tr>
             }
@@ -79,7 +79,7 @@
             k = $.trim(currow.find('.KelTujuan').text());
 
             swal({
-            title: "Deleting a Task will also delete Task Line associated with this Task ?",
+            title: "Delete Your Order ?",
             text: "Once deleted, you will not be able to recover your data!",
             icon: "warning",
             buttons: true,
@@ -103,8 +103,10 @@
                                 document.getElementById("TableHasil").deleteRow(param);
                             });
                            
+                        },
+                        error: function (response) {
+                            swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error")
                         }
-                        
                     });
                 }
                 else {
