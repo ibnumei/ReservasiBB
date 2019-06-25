@@ -608,6 +608,8 @@
     $(function () {
         $("#tglawalpilih,#tglakhirpilih,#tgljemputmodal,#tglselesaimodal").datepicker({ dateFormat: 'dd-mm-yy' });
     });
+
+    
 </script>
 
 @*Javascript untuk mendapatkan range tanggal ke table*@
@@ -620,6 +622,10 @@
             console.log(tesnu);
             $('#renderTable').load("_TableDate", $('#Form1').serialize());
         });
+    });
+
+    $('#tglawalpilih').change(function () {
+        alert($('#tglawalpilih').val());
     });
 
 </script>

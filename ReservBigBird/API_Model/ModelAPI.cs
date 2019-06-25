@@ -163,4 +163,12 @@ namespace ReservBigBird.API_Model
         public int stc { get; set; }
         public IList<ListJml> listJml { get; set; }
     }
+
+    public class GantiPass
+    {
+        public string PassLama { get; set; }
+        public string PassBaru { get; set; }
+        public string PassBaru2 { get; set; }
+    }
+
 }

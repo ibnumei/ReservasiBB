@@ -13,6 +13,7 @@ using System.Web.Mvc;
 using System.Configuration;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
+using System.Globalization;
 
 namespace ReservBigBird.Controllers
 {
@@ -27,6 +28,8 @@ namespace ReservBigBird.Controllers
 
         public ActionResult _TableDate(PenerimaOrder penerimaOrder)
         {
+            CultureInfo provider = CultureInfo.InvariantCulture;
+
             //Ambil link url di web config
             String url = ConfigurationManager.AppSettings["UrlApi"].ToString();
 
@@ -35,8 +38,8 @@ namespace ReservBigBird.Controllers
 
             String tglakhir = penerimaOrder.tglakhirpilih.Substring(3, 2) + "/" + penerimaOrder.tglakhirpilih.Substring(0, 2) + "/" + penerimaOrder.tglakhirpilih.Substring(6, 4);
 
-            DateTime awal = DateTime.Parse(tglawal);
-            DateTime akhir = DateTime.Parse(tglakhir);
+            DateTime awal = DateTime.ParseExact(tglawal, "MM/dd/yyyy",provider);
+            DateTime akhir = DateTime.ParseExact(tglakhir, "MM/dd/yyyy", provider);
 
             List<String> allDates = new List<String>();
 
@@ -75,7 +78,7 @@ namespace ReservBigBird.Controllers
                 try
                 {
                     
-                    HttpResponseMessage message = client.GetAsync("http://localhost:6768/Api/GetStock?jenisbus=" + penerimaOrder.JenisBus+"&pool=&jnbac=&tglawal="+ParamTglAwal+"&jamawal=&tglakhir="+ParamTglAkhir+"&jamakhir=").Result;
+                    HttpResponseMessage message = client.GetAsync(url+"/Api/GetStock?jenisbus=" + penerimaOrder.JenisBus+"&pool=&jnbac=&tglawal="+ParamTglAwal+"&jamawal=&tglakhir="+ParamTglAkhir+"&jamakhir=").Result;
 
                     if (message.IsSuccessStatusCode)
                     {
@@ -256,7 +259,7 @@ namespace ReservBigBird.Controllers
             {
                 try
                 {
-                    HttpResponseMessage message = client.DeleteAsync(url+ "api/GetStock?userid="+deleteTerima.userid+"&jenis="+deleteTerima.Jenis+"&ac="+deleteTerima.AC+"&pool="+deleteTerima.Pool+"&tglawal="+deleteTerima.TglAwal+"&jamawal="+deleteTerima.JamAwal+"&tglakhir="+deleteTerima.TglAkhir+"&jamakhir="+deleteTerima.JamAkhir+"&keltujuan="+ deleteTerima.KelTujuan).Result;
+                    HttpResponseMessage message = client.DeleteAsync(url+ "api/GetStock?userid=Administrator&jenis="+deleteTerima.Jenis+"&ac="+deleteTerima.AC+"&pool="+deleteTerima.Pool+"&tglawal="+deleteTerima.TglAwal+"&jamawal="+deleteTerima.JamAwal+"&tglakhir="+deleteTerima.TglAkhir+"&jamakhir="+deleteTerima.JamAkhir+"&keltujuan="+ deleteTerima.KelTujuan).Result;
 
                     if (message.IsSuccessStatusCode)
                     {

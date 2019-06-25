@@ -1,0 +1,139 @@
+﻿@model ReservBigBird.API_Model.GantiPass
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Content/bower_components/jquery/dist/jquery.min.js"></script>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <h3 class="text-center">Ubah Password</h3><br>
+
+            @using (Html.BeginForm("Index", "ChangePass", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <h4>Password Saat Ini</h4>
+                @Html.PasswordFor(model => model.PassLama, new { @class = "input-lg form-control", placeholder = "Current Password", id = "pass", name = "pass", autocomplete = "off", required="required" })
+
+                <h4>Password Baru</h4>
+                @Html.PasswordFor(model => model.PassBaru, new { @class = "input-lg form-control", placeholder = "New Password", id = "password1", name = "password1", autocomplete = "off" })
+                <div class="row">
+                    <div class="col-sm-6">
+                        <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 8 Characters Long<br>
+                        <span id="ucase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One Uppercase Letter
+                    </div>
+                    <div class="col-sm-6">
+                        <span id="lcase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One Lowercase Letter<br>
+                        <span id="num" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One Number
+                    </div>
+                </div>
+
+                <br /><h4>Ulangi Password Baru</h4>
+                @Html.PasswordFor(model => model.PassBaru2, new { @class = "input-lg form-control", placeholder = "Repeat Password", id = "password2", name = "password2", autocomplete = "off" })
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Passwords Match
+                    </div>
+                </div>
+
+                <input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" data-loading-text="Changing Password..." value="Change Password" disabled="disabled" id="BtnPass">
+            }
+
+
+            @*<form method="post" id="passwordForm">
+
+            <h4>Password Saat Ini</h4>
+            <input type="password" class="input-lg form-control" name="pass" id="pass" placeholder="New Password" autocomplete="off" required><br />
+
+            <h4>Password Baru</h4>
+            <input type="password" class="input-lg form-control" name="password1" id="password1" placeholder="New Password" autocomplete="off">
+            <div class="row">
+                <div class="col-sm-6">
+                    <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 8 Characters Long<br>
+                    <span id="ucase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One Uppercase Letter
+                </div>
+                <div class="col-sm-6">
+                    <span id="lcase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One Lowercase Letter<br>
+                    <span id="num" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One Number
+                </div>
+            </div>
+
+            <br /><h4>Ulangi Password Baru</h4>
+            <input type="password" class="input-lg form-control" name="password2" id="password2" placeholder="Repeat Password" autocomplete="off">
+            <div class="row">
+                <div class="col-sm-12">
+                    <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Passwords Match
+                </div>
+            </div>
+            <input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" data-loading-text="Changing Password..." value="Change Password" disabled="disabled" id="BtnPass">
+        </form>*@
+
+
+        </div><!--/col-sm-6-->
+    </div><!--/row-->
+</div>
+<script>
+    $("input[type=password]").keyup(function () {
+        var ucase = new RegExp("[A-Z]+");
+        var lcase = new RegExp("[a-z]+");
+        var num = new RegExp("[0-9]+");
+
+        if ($("#password1").val().length >= 8) {
+            $("#8char").removeClass("glyphicon-remove");
+            $("#8char").addClass("glyphicon-ok");
+            $("#8char").css("color", "#00A41E");
+        } else {
+            $("#8char").removeClass("glyphicon-ok");
+            $("#8char").addClass("glyphicon-remove");
+            $("#8char").css("color", "#FF0004");
+        }
+
+        if (ucase.test($("#password1").val())) {
+            $("#ucase").removeClass("glyphicon-remove");
+            $("#ucase").addClass("glyphicon-ok");
+            $("#ucase").css("color", "#00A41E");
+        } else {
+            $("#ucase").removeClass("glyphicon-ok");
+            $("#ucase").addClass("glyphicon-remove");
+            $("#ucase").css("color", "#FF0004");
+        }
+
+        if (lcase.test($("#password1").val())) {
+            $("#lcase").removeClass("glyphicon-remove");
+            $("#lcase").addClass("glyphicon-ok");
+            $("#lcase").css("color", "#00A41E");
+        } else {
+            $("#lcase").removeClass("glyphicon-ok");
+            $("#lcase").addClass("glyphicon-remove");
+            $("#lcase").css("color", "#FF0004");
+        }
+
+        if (num.test($("#password1").val())) {
+            $("#num").removeClass("glyphicon-remove");
+            $("#num").addClass("glyphicon-ok");
+            $("#num").css("color", "#00A41E");
+        } else {
+            $("#num").removeClass("glyphicon-ok");
+            $("#num").addClass("glyphicon-remove");
+            $("#num").css("color", "#FF0004");
+        }
+
+        if ($("#password1").val() == $("#password2").val() && $("#password1").val().length > 0) {
+            $("#pwmatch").removeClass("glyphicon-remove");
+            $("#pwmatch").addClass("glyphicon-ok");
+            $("#pwmatch").css("color", "#00A41E");
+
+            document.getElementById("BtnPass").disabled = false;
+        } else {
+            $("#pwmatch").removeClass("glyphicon-ok");
+            $("#pwmatch").addClass("glyphicon-remove");
+            $("#pwmatch").css("color", "#FF0004");
+
+            document.getElementById("BtnPass").disabled = true;
+        }
+    });
+</script>

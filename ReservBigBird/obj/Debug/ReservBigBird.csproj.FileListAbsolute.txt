@@ -393,8 +393,8 @@ C:\Users\ibnu.fauzi\source\repos\ReservasiBB\ReservBigBird\bin\Antlr3.Runtime.pd
 C:\Users\ibnu.fauzi\source\repos\ReservasiBB\ReservBigBird\bin\System.Diagnostics.DiagnosticSource.xml
 C:\Users\ibnu.fauzi\source\repos\ReservasiBB\ReservBigBird\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 C:\Users\ibnu.fauzi\source\repos\ReservasiBB\ReservBigBird\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\ibnu.fauzi\source\repos\ReservasiBB\ReservBigBird\obj\Debug\ReservBigBird.csprojAssemblyReference.cache
 C:\Users\ibnu.fauzi\source\repos\ReservasiBB\ReservBigBird\obj\Debug\ReservBigBird.csproj.CoreCompileInputs.cache
 C:\Users\ibnu.fauzi\source\repos\ReservasiBB\ReservBigBird\obj\Debug\ReservBigBird.csproj.CopyComplete
 C:\Users\ibnu.fauzi\source\repos\ReservasiBB\ReservBigBird\obj\Debug\ReservBigBird.dll
 C:\Users\ibnu.fauzi\source\repos\ReservasiBB\ReservBigBird\obj\Debug\ReservBigBird.pdb
+C:\Users\ibnu.fauzi\source\repos\ReservasiBB\ReservBigBird\obj\Debug\ReservBigBird.csprojAssemblyReference.cache

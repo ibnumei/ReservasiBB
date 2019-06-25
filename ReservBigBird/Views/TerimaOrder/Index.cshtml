@@ -82,7 +82,7 @@
                                         <b>Tanggal Awal</b>
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="text" id="tglawalpilih" name="tglawalpilih" class="form-control" placeholder="dd/mm/yyyy" />
+                                        <input type="text" id="tglawalpilih" name="tglawalpilih" class="form-control" placeholder="dd/mm/yyyy" autocomplete="off"/>
                                     </div>
                                     <div class="col-lg-2">
                                         <select class="form-control" name="hariawalpilih" id="hariawalpilih">
@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="col-lg-2">
                                         <div class="clockpicker">
-                                            <input type="text" name="jamawalpilih" id="jamawalpilih" class="form-control" placeholder="Pilih Jam">
+                                            <input type="text" name="jamawalpilih" id="jamawalpilih" class="form-control" placeholder="Pilih Jam" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="col-lg-2">
@@ -123,7 +123,7 @@
                                         <b>Tanggal Akhir</b>
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="text" name="tglakhirpilih" id="tglakhirpilih" class="form-control" placeholder="dd/mm/yyyy" />
+                                        <input type="text" name="tglakhirpilih" id="tglakhirpilih" class="form-control" placeholder="dd/mm/yyyy" autocomplete="off"/>
                                     </div>
                                     <div class="col-lg-2">
                                         <select class="form-control" name="hariakhirpilih" id="hariakhirpilih">
@@ -138,14 +138,14 @@
                                     </div>
                                     <div class="col-lg-2">
                                         <div class="clockpicker">
-                                            <input type="text" id="jamakhirpilih" name="jamakhirpilih" class="form-control" placeholder="Pilih Jam">
+                                            <input type="text" id="jamakhirpilih" name="jamakhirpilih" class="form-control" placeholder="Pilih Jam" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="col-lg-2">
                                         <b>Jumlah Bus</b>
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="number" name="JumlahBus" class="form-control" autocomplete="on" />
+                                        <input type="number" name="JumlahBus" class="form-control" autocomplete="on"/>
                                     </div>
                                 </div>
                                 <br />
@@ -158,7 +158,7 @@
                                         <b>Pemesan</b>
                                     </div>
                                     <div class="col-lg-4">
-                                        <input name="Pemesan" class="form-control" autocomplete="on" />
+                                        <input name="Pemesan" class="form-control" autocomplete="on" required/>
                                     </div>
                                 </div>
                                 <br />
@@ -167,21 +167,21 @@
                                     <div class="col-lg-2">
 
                                     </div>
-                                    <div class="col-lg-2">
+                                    <div class="col-lg-3">
                                         @*<a id="submit" href="#" class="btn btn-success col-lg-12 form-control"><b>HITUNG</b></a>*@
                                         <input type="button" class="btn btn-success col-lg-12 form-control" value="HITUNG" id="submit" />
                                     </div>
-                                    <div class="col-lg-2">
+                                    <div class="col-lg-3">
                                         <button type="button" class="btn btn-primary col-lg-12 form-control" onclick="ValidasiTgl();">
-                                            <b>KEEP</b>
+                                            KEEP
                                         </button>
 
                                     </div>
-                                    <div class="col-lg-2">
+                                    @*<div class="col-lg-2">
                                         <button type="submit" class="btn btn-warning col-lg-12 form-control">
                                             <b>LEPAS</b>
                                         </button>
-                                    </div>
+                                    </div>*@
                                 </div>
                                 <br />
 
@@ -608,6 +608,8 @@
     $(function () {
         $("#tglawalpilih,#tglakhirpilih,#tgljemputmodal,#tglselesaimodal").datepicker({ dateFormat: 'dd-mm-yy' });
     });
+
+    
 </script>
 
 @*Javascript untuk mendapatkan range tanggal ke table*@
@@ -621,6 +623,7 @@
             $('#renderTable').load("_TableDate", $('#Form1').serialize());
         });
     });
+
 
 </script>
 

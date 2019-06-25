@@ -74,12 +74,12 @@ desired effect
             <!-- Logo -->
             <a href="#" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini" style="background-image: url(../../Content/dist/img/bb-mini.jpeg);
+                <span class="logo-mini" style="background-image: url(/Content/dist/img/bb-mini.jpeg);
                         background-repeat: no-repeat;
                         background-size: contain;
                         background-position: center;">@*<b>A</b>LT*@<i style="color: transparent">a</i></span>
                         <!-- logo for regular state and mobile devices -->
-                        <span class="logo-lg" style="background-image: url(../../Content/dist/img/bluebird-logo-new.png);
+                        <span class="logo-lg" style="background-image: url(/Content/dist/img/bluebird-logo-new.png);
                         background-repeat: no-repeat;
                         background-size: contain;
                         background-position: center;">@*<b>Admin</b>LTE*@<i style="color: transparent">a</i></span>
@@ -132,7 +132,7 @@ desired effect
                                         <!-- Menu Footer-->
                                         <li class="user-footer">
                                             <div class="pull-left">
-                                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                                <a href="~/ChangePass" class="btn btn-default btn-flat">Ganti Password</a>
                                             </div>
                                             <div class="pull-right">
                                                 <a href="#" class="btn btn-default btn-flat">Sign out</a>
@@ -175,13 +175,14 @@ desired effect
                         <ul class="sidebar-menu" data-widget="tree">
                             <!-- Optionally, you can add icons to the links -->
                             @*<li><a href="~/Home/Index"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>*@
-                            <li class="@(ViewBag.Current == "1" ? "active" : "") "><a href="~/TerimaOrder/Index"><i class="fa fa-credit-card"></i> <span>Penerimaan Order</span></a></li>
-                            <li class="@(ViewBag.Current == "2" ? "active" : "") "><a href="~/MonitorOrder/Index"><i class="fa fa-desktop"></i> <span>Monitor Order</span></a></li>
-                            <li class="@(ViewBag.Current == "3" ? "active" : "") "><a href="~/DisplayPlanning/Index"><i class="fa fa-id-card-o"></i> <span>Display Planning Order</span></a></li>
+                            <li class="@(ViewBag.Current == "1" ? "active" : "") "><a href="~/TerimaOrder"><i class="fa fa-credit-card"></i> <span>Penerimaan Order</span></a></li>
+                            <li class="@(ViewBag.Current == "2" ? "active" : "") "><a href="~/MonitorOrder"><i class="fa fa-desktop"></i> <span>Monitor Order</span></a></li>
+                            <li class="@(ViewBag.Current == "3" ? "active" : "") "><a href="~/DisplayPlanning"><i class="fa fa-id-card-o"></i> <span>Display Planning Order</span></a></li>
+
 
                             @*<li class="@(ViewBag.Current == "1" ? "active" : "") "><a href="@Url.Action("Index","TerimaOrder")" target="_self">TerimaOrder</a></li>
-                            <li class="@(ViewBag.Current == "2" ? "active" : "") "><a href="@Url.Action("Index","MonitorOrder")" target="_self">MonitorOrder</a></li>
-                            <li class="@(ViewBag.Current == "3" ? "active" : "") "><a href="@Url.Action("Index","DisplayPlanning")" target="_self">DisplayPlanning</a></li>*@
+        <li class="@(ViewBag.Current == "2" ? "active" : "") "><a href="@Url.Action("Index","MonitorOrder")" target="_self">MonitorOrder</a></li>
+        <li class="@(ViewBag.Current == "3" ? "active" : "") "><a href="@Url.Action("Index","DisplayPlanning")" target="_self">DisplayPlanning</a></li>*@
 
                         </ul>
                         <!-- /.sidebar-menu -->

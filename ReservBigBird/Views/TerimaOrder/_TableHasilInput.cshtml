@@ -90,7 +90,7 @@
                     $.ajax({
                         type: "POST",
                         url: '@Url.Action("Delete")',
-                        data: { Jenis: a, AC: b},
+                        data: { Jenis: a, AC: b, Pool: c, TglAwal: d, JamAwal: e, TglAkhir: f, JamAkhir: g, KelTujuan: k},
                         dataType: "json",
                       // success: window.location.reload(),
                         success: function (response) {
