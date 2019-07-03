@@ -5,9 +5,13 @@
 
 
 
-<script src="~/Content/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="~/Content/js/sweetalert.min.js"></script>
 
+
+
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 <section class="content-header">
     <h1>
@@ -102,7 +106,7 @@
                                         <div class="col-sm-8">
                                             <input type="button" class="btn btn-primary btn-md" value="Search" id="submit" />&nbsp;
                                             <button type="button" class="btn btn-danger btn-md" id="Hapus">Clear</button>
-                                            
+
                                         </div>
                                     </div>
                                     <br />
@@ -119,7 +123,7 @@
             <div class="box box-success">
 
                 @*untuk loader halaman*@
-                
+
 
                 <div class="box-header">
                     <div id="divLoader" style="display:none;text-align:center"> <img src="~/Content/dist/img/ajax-loader-blue.gif" alt="Loader" /> </div>
@@ -141,7 +145,7 @@
 
     $(document).ready(function () {
         $('#submit').on('click', function () {
-            $("#divLoader").show(); 
+            $("#divLoader").show();
             var tesnu = $('#Form1').serialize();
 
             var count = 0;
@@ -170,7 +174,7 @@
 <script>
     $(document).ready(function () {
         $('#Hapus').on('click', function () {
-            
+
             document.getElementById("KondisiOrder").value = "semua";
             document.getElementById("NoOrder").value = "";
             document.getElementById("Perusahaan").value = "";

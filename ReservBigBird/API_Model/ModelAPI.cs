@@ -171,4 +171,10 @@ namespace ReservBigBird.API_Model
         public string PassBaru2 { get; set; }
     }
 
+    public class Login
+    {
+        public string username { get; set; }
+        public string pass { get; set; }
+    }
+
 }

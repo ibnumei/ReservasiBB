@@ -94,7 +94,7 @@ desired effect
                         <!-- Navbar Right Menu -->
                         <div class="navbar-custom-menu">
                             <ul class="nav navbar-nav">
-                                
+
                                 <!-- User Account Menu -->
                                 <li class="dropdown user user-menu">
                                     <!-- Menu Toggle Button -->
@@ -175,14 +175,13 @@ desired effect
                         <ul class="sidebar-menu" data-widget="tree">
                             <!-- Optionally, you can add icons to the links -->
                             @*<li><a href="~/Home/Index"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>*@
-                            <li class="@(ViewBag.Current == "1" ? "active" : "") "><a href="~/TerimaOrder"><i class="fa fa-credit-card"></i> <span>Penerimaan Order</span></a></li>
-                            <li class="@(ViewBag.Current == "2" ? "active" : "") "><a href="~/MonitorOrder"><i class="fa fa-desktop"></i> <span>Monitor Order</span></a></li>
-                            <li class="@(ViewBag.Current == "3" ? "active" : "") "><a href="~/DisplayPlanning"><i class="fa fa-id-card-o"></i> <span>Display Planning Order</span></a></li>
-
+                            <li class="@(ViewBag.Current == "1" ? "active" : "") "><a href="~/TerimaOrder/Index"><i class="fa fa-credit-card"></i> <span>Penerimaan Order</span></a></li>
+                            <li class="@(ViewBag.Current == "2" ? "active" : "") "><a href="~/MonitorOrder/Index"><i class="fa fa-desktop"></i> <span>Monitor Order</span></a></li>
+                            <li class="@(ViewBag.Current == "3" ? "active" : "") "><a href="~/DisplayPlanning/Index"><i class="fa fa-id-card-o"></i> <span>Display Planning Order</span></a></li>
 
                             @*<li class="@(ViewBag.Current == "1" ? "active" : "") "><a href="@Url.Action("Index","TerimaOrder")" target="_self">TerimaOrder</a></li>
-        <li class="@(ViewBag.Current == "2" ? "active" : "") "><a href="@Url.Action("Index","MonitorOrder")" target="_self">MonitorOrder</a></li>
-        <li class="@(ViewBag.Current == "3" ? "active" : "") "><a href="@Url.Action("Index","DisplayPlanning")" target="_self">DisplayPlanning</a></li>*@
+                                <li class="@(ViewBag.Current == "2" ? "active" : "") "><a href="@Url.Action("Index","MonitorOrder")" target="_self">MonitorOrder</a></li>
+                                <li class="@(ViewBag.Current == "3" ? "active" : "") "><a href="@Url.Action("Index","DisplayPlanning")" target="_self">DisplayPlanning</a></li>*@
 
                         </ul>
                         <!-- /.sidebar-menu -->
@@ -306,7 +305,7 @@ desired effect
 
 
 
-            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+            @*<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>*@
             <!-- Optionally, you can add Slimscroll and FastClick plugins.
                  Both of these plugins are recommended to enhance the
                  user experience. -->
@@ -348,4 +347,4 @@ desired effect
                     });
                 </script>*@
         </body>
-</html>
+    </html>

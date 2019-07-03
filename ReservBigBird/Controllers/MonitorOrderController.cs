@@ -27,7 +27,14 @@ namespace ReservBigBird.Controllers
 
         public ActionResult _TableMonitorOrder(ParamMonitorOrder paramMonitor)
         {
+            if(paramMonitor != null)
+            {
+                ViewBag.value = "Yes";
+            }
+            return PartialView("_TableMonitorOrder");
+            //================================================================================================================
 
+            /*
             //Ambil link url di web config
             String url = ConfigurationManager.AppSettings["UrlApi"].ToString();
 
@@ -81,7 +88,7 @@ namespace ReservBigBird.Controllers
                     return PartialView("_TableMonitorOrder");
                 }
             }
-
+            */
         }
     }
 }
