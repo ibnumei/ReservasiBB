@@ -14,9 +14,12 @@ using System.Configuration;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using System.Globalization;
+using ReservBigBird.Filters;
 
 namespace ReservBigBird.Controllers
 {
+    [UserAuthenticationFilter]
+
     public class TerimaOrderController : Controller
     {
         // GET: TerimaOrder

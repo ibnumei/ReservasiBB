@@ -11,9 +11,12 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Configuration;
+using ReservBigBird.Filters;
 
 namespace ReservBigBird.Controllers
 {
+    [UserAuthenticationFilter]
+
     public class MonitorOrderController : Controller
     {
         // GET: MonitorOrder

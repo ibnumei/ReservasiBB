@@ -177,4 +177,10 @@ namespace ReservBigBird.API_Model
         public string pass { get; set; }
     }
 
+    public class HasilLogin
+    {
+        public string USRID { get; set; }
+        public string USRNM { get; set; }
+    }
+
 }
