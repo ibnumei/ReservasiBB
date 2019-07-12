@@ -15,6 +15,7 @@
         <table id="example3" class="table  table-striped">
             <thead>
                 <tr style="background-color:#808080;color:#ffffff;">
+                    <th>Action</th>
                     <th>No Detail</th>
                     <th>No Order</th>
                     <th>Tgl Pakai</th>
@@ -32,7 +33,10 @@
                 {
                     <tr>
                         <td>
-                            <a  style="background-color: #e4e4e4; color: #444; border-color: #888484; cursor: pointer;"  class="btn btn-sm btn-default" onclick="get('@Html.DisplayFor(modelItem => item.Poppolid)','@Html.DisplayFor(modelItem => item.Popid)',' @Html.DisplayFor(modelItem => item.popdaow)')" id="aidi"><i class="fas fa-trash-alt"></i>  @Html.DisplayFor(modelItem => item.NoDetail) </a>
+                            <a  style="background-color: #e4e4e4; color: #444; border-color: #888484; cursor: pointer;"  class="btn btn-sm btn-default" onclick="get('@Html.DisplayFor(modelItem => item.Poppolid)','@Html.DisplayFor(modelItem => item.Popid)',' @Html.DisplayFor(modelItem => item.popdaow)')" id="aidi"><i class="fas fa-trash-alt"></i>  Pilih </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NoDetail)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.NoOrder)

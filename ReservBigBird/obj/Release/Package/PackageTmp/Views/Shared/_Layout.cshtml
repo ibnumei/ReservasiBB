@@ -42,8 +42,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <!-- Google Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    @*<link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">*@
+    @*<link href="https://fonts.googleapis.com/css?family=Open+Sans:300&display=swap" rel="stylesheet">*@
+    @*<link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">*@
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -74,12 +77,12 @@ desired effect
             <!-- Logo -->
             <a href="#" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini" style="background-image: url(../../Content/dist/img/bb-mini.jpeg);
+                <span class="logo-mini" style="background-image: url(/Content/dist/img/bb-mini.jpeg);
                         background-repeat: no-repeat;
                         background-size: contain;
                         background-position: center;">@*<b>A</b>LT*@<i style="color: transparent">a</i></span>
                         <!-- logo for regular state and mobile devices -->
-                        <span class="logo-lg" style="background-image: url(../../Content/dist/img/bluebird-logo-new.png);
+                        <span class="logo-lg" style="background-image: url(/Content/dist/img/bluebird-logo-new.png);
                         background-repeat: no-repeat;
                         background-size: contain;
                         background-position: center;">@*<b>Admin</b>LTE*@<i style="color: transparent">a</i></span>
@@ -94,7 +97,7 @@ desired effect
                         <!-- Navbar Right Menu -->
                         <div class="navbar-custom-menu">
                             <ul class="nav navbar-nav">
-                                
+
                                 <!-- User Account Menu -->
                                 <li class="dropdown user user-menu">
                                     <!-- Menu Toggle Button -->
@@ -102,7 +105,7 @@ desired effect
                                         <!-- The user image in the navbar-->
                                         <img src="~/Content/dist/img/avnew.jpg" class="user-image" alt="User Image">
                                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                        <span class="hidden-xs">Admin</span>
+                                        <span class="hidden-xs">@Session["usernm"] </span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <!-- The user image in the menu -->
@@ -110,8 +113,7 @@ desired effect
                                             <img src="~/Content/dist/img/avnew.jpg" class="img-circle" alt="User Image">
 
                                             <p>
-                                                Admin
-                                                <small>Member since Nov. 2012</small>
+                                                @Session["usernm"] 
                                             </p>
                                         </li>
                                         <!-- Menu Body -->
@@ -132,10 +134,10 @@ desired effect
                                         <!-- Menu Footer-->
                                         <li class="user-footer">
                                             <div class="pull-left">
-                                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                                <a href="~/ChangePass" class="btn btn-default btn-flat">Ganti Password</a>
                                             </div>
                                             <div class="pull-right">
-                                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                                <a href="~/Login/Logout" class="btn btn-default btn-flat">Sign out</a>
                                             </div>
                                         </li>
                                     </ul>
@@ -180,8 +182,8 @@ desired effect
                             <li class="@(ViewBag.Current == "3" ? "active" : "") "><a href="~/DisplayPlanning/Index"><i class="fa fa-id-card-o"></i> <span>Display Planning Order</span></a></li>
 
                             @*<li class="@(ViewBag.Current == "1" ? "active" : "") "><a href="@Url.Action("Index","TerimaOrder")" target="_self">TerimaOrder</a></li>
-                            <li class="@(ViewBag.Current == "2" ? "active" : "") "><a href="@Url.Action("Index","MonitorOrder")" target="_self">MonitorOrder</a></li>
-                            <li class="@(ViewBag.Current == "3" ? "active" : "") "><a href="@Url.Action("Index","DisplayPlanning")" target="_self">DisplayPlanning</a></li>*@
+                                <li class="@(ViewBag.Current == "2" ? "active" : "") "><a href="@Url.Action("Index","MonitorOrder")" target="_self">MonitorOrder</a></li>
+                                <li class="@(ViewBag.Current == "3" ? "active" : "") "><a href="@Url.Action("Index","DisplayPlanning")" target="_self">DisplayPlanning</a></li>*@
 
                         </ul>
                         <!-- /.sidebar-menu -->
@@ -305,7 +307,7 @@ desired effect
 
 
 
-            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+            @*<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>*@
             <!-- Optionally, you can add Slimscroll and FastClick plugins.
                  Both of these plugins are recommended to enhance the
                  user experience. -->
@@ -347,4 +349,4 @@ desired effect
                     });
                 </script>*@
         </body>
-</html>
+    </html>

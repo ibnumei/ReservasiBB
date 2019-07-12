@@ -29,6 +29,83 @@ namespace ReservBigBird.Controllers
             return View();
         }
 
+        //Submit form di pop up keep
+        [HttpPost]
+        public ActionResult Index(PostHeaderKeep postHeader)
+        {
+            DateTime now = DateTime.Now;
+
+
+            postHeader.TglJemput = postHeader.TglJemput.Substring(6, 4) + "" + postHeader.TglJemput.Substring(3, 2) + "" + postHeader.TglJemput.Substring(0, 2);
+
+            postHeader.JamJemput = postHeader.JamJemput.Substring(0, 2) + "" + postHeader.JamJemput.Substring(3, 2);
+
+            postHeader.TglSelesei = postHeader.TglSelesei.Substring(6, 4) + "" + postHeader.TglSelesei.Substring(3, 2) + "" + postHeader.TglSelesei.Substring(0, 2);
+
+            postHeader.JamSelesei = postHeader.JamSelesei.Substring(0, 2) + "" + postHeader.JamSelesei.Substring(3, 2);
+
+            //Var gagal ato sukses
+            String YesOrNo;
+
+            //Ambil link url di web config
+            String url = ConfigurationManager.AppSettings["UrlApi"].ToString();
+
+            //Ambil session username
+            postHeader.UserId = Session["usernm"].ToString();
+
+            var json2 = new JavaScriptSerializer().Serialize(postHeader);
+            var stringPayload = JsonConvert.SerializeObject(postHeader);
+            //String response = "";
+            var credentials = new NetworkCredential("username", "password");
+            var handler = new HttpClientHandler { Credentials = credentials };
+            var httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
+
+            using (var client = new HttpClient(handler))
+            {
+                try
+                {
+                    HttpResponseMessage message = client.PostAsync(url + "/api/Orders", httpContent).Result;
+                    if (message.IsSuccessStatusCode)
+                    {
+                        YesOrNo = "Yes";
+                    }
+                    else
+                    {
+                        YesOrNo = "No";
+                    }
+
+                    //Cek message gagal atau tidak
+                    if(YesOrNo == "Yes")
+                    {
+                        var serializer = new DataContractJsonSerializer(typeof(GetAfterPostHeader));
+                        var result = message.Content.ReadAsStringAsync().Result;
+                        byte[] byteArray = Encoding.UTF8.GetBytes(result);
+                        MemoryStream stream = new MemoryStream(byteArray);
+                        GetAfterPostHeader resultData = serializer.ReadObject(stream) as GetAfterPostHeader;
+
+                        var aa = resultData.noorder;
+
+                        TempData["NoOrderTemp"] = aa;
+                        return Redirect("MonitorOrder/Index");
+                    }
+                    else
+                    {
+                        return View();
+                    }
+                    
+
+                }
+                catch (Exception ex)
+                {
+                    String aa = ex.ToString();
+                    return View();
+                }
+
+             }
+
+             
+        }
+
         public ActionResult _TableDate(PenerimaOrder penerimaOrder)
         {
             CultureInfo provider = CultureInfo.InvariantCulture;
@@ -127,67 +204,166 @@ namespace ReservBigBird.Controllers
 
         //method with no return
         //public void _TableHasilInputNotReal(ListPostTerimaOrder listPostTerimaOrder)
-        public void _TableHasilInput(ListPostTerimaOrder listPostTerimaOrder)
+        public ActionResult _TableHasilInput(ListPostTerimaOrder listPostTerimaOrder)
         {
             //Ambil link url di web config
             String url = ConfigurationManager.AppSettings["UrlApi"].ToString();
 
-            DateTime now = DateTime.Now;
+            String sessionname = Session["usernm"].ToString();
 
-            listPostTerimaOrder.User = "Administrator";
-
-            listPostTerimaOrder.ModalTglAwal = listPostTerimaOrder.ModalTglAwal.Substring(6, 4) + "" + listPostTerimaOrder.ModalTglAwal.Substring(3, 2) + "" + listPostTerimaOrder.ModalTglAwal.Substring(0, 2);
-
-            listPostTerimaOrder.ModalJamAwal = listPostTerimaOrder.ModalJamAwal.Substring(0, 2) + "" + listPostTerimaOrder.ModalJamAwal.Substring(3, 2);
-
-            listPostTerimaOrder.ModalTglAkhir = listPostTerimaOrder.ModalTglAkhir.Substring(6, 4) + "" + listPostTerimaOrder.ModalTglAkhir.Substring(3, 2) + "" + listPostTerimaOrder.ModalTglAkhir.Substring(0, 2);
-
-            listPostTerimaOrder.ModalJamAkhir = listPostTerimaOrder.ModalJamAkhir.Substring(0, 2) + "" + listPostTerimaOrder.ModalJamAkhir.Substring(3, 2);
-
-            var datenow = now.ToString("yyyyMMdd");
-            var timenow = now.ToString("HHmm");
-            listPostTerimaOrder.TglTrans = datenow;
-            listPostTerimaOrder.JamTrans = timenow;
-
-            ParamPostTerimaOrder postTerimaOrder = new ParamPostTerimaOrder()
+            //JIKA PARAMETER NULL digunakan untuk reload setelah delete
+            if (listPostTerimaOrder.ModalNmPool != null)
             {
-                userid = listPostTerimaOrder.User,
-                jenis = listPostTerimaOrder.ModalJenis,
-                pool = listPostTerimaOrder.ModalNmPool,
-                tglawal = listPostTerimaOrder.ModalTglAwal,
-                jamawal = listPostTerimaOrder.ModalJamAwal,
-                tglakhir = listPostTerimaOrder.ModalTglAkhir,
-                jamakhir = listPostTerimaOrder.ModalJamAkhir,
-                jumlah = listPostTerimaOrder.ModalJmlBus,
-                tgltrans = listPostTerimaOrder.TglTrans,
-                jamtrans = listPostTerimaOrder.JamTrans,
-                keltujuan = listPostTerimaOrder.ModalKelTujuan,
-                ac = "Y"
-            };
+                
 
-            var json2 = new JavaScriptSerializer().Serialize(postTerimaOrder);
-            var stringPayload = JsonConvert.SerializeObject(postTerimaOrder);
-            //String response = "";
-            var credentials = new NetworkCredential("username", "password");
-            var handler = new HttpClientHandler { Credentials = credentials };
-            var httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
-            using (var client = new HttpClient(handler))
-            {
-                try
+                DateTime now = DateTime.Now;
+
+                listPostTerimaOrder.User = sessionname;
+
+                listPostTerimaOrder.ModalTglAwal = listPostTerimaOrder.ModalTglAwal.Substring(6, 4) + "" + listPostTerimaOrder.ModalTglAwal.Substring(3, 2) + "" + listPostTerimaOrder.ModalTglAwal.Substring(0, 2);
+
+                listPostTerimaOrder.ModalJamAwal = listPostTerimaOrder.ModalJamAwal.Substring(0, 2) + "" + listPostTerimaOrder.ModalJamAwal.Substring(3, 2);
+
+                listPostTerimaOrder.ModalTglAkhir = listPostTerimaOrder.ModalTglAkhir.Substring(6, 4) + "" + listPostTerimaOrder.ModalTglAkhir.Substring(3, 2) + "" + listPostTerimaOrder.ModalTglAkhir.Substring(0, 2);
+
+                listPostTerimaOrder.ModalJamAkhir = listPostTerimaOrder.ModalJamAkhir.Substring(0, 2) + "" + listPostTerimaOrder.ModalJamAkhir.Substring(3, 2);
+
+                var datenow = now.ToString("yyyyMMdd");
+                var timenow = now.ToString("HHmm");
+                listPostTerimaOrder.TglTrans = datenow;
+                listPostTerimaOrder.JamTrans = timenow;
+
+                ParamPostTerimaOrder postTerimaOrder = new ParamPostTerimaOrder()
                 {
-                    HttpResponseMessage message = client.PostAsync(url + "/api/GetStock", httpContent).Result;
-                    if (message.IsSuccessStatusCode)
+                    userid = listPostTerimaOrder.User,
+                    jenis = listPostTerimaOrder.ModalJenis,
+                    pool = listPostTerimaOrder.ModalNmPool,
+                    tglawal = listPostTerimaOrder.ModalTglAwal,
+                    jamawal = listPostTerimaOrder.ModalJamAwal,
+                    tglakhir = listPostTerimaOrder.ModalTglAkhir,
+                    jamakhir = listPostTerimaOrder.ModalJamAkhir,
+                    jumlah = listPostTerimaOrder.ModalJmlBus,
+                    tgltrans = listPostTerimaOrder.TglTrans,
+                    jamtrans = listPostTerimaOrder.JamTrans,
+                    keltujuan = listPostTerimaOrder.ModalKelTujuan,
+                    ac = "Y"
+                };
+
+                var json2 = new JavaScriptSerializer().Serialize(postTerimaOrder);
+                var stringPayload = JsonConvert.SerializeObject(postTerimaOrder);
+                //String response = "";
+                var credentials = new NetworkCredential("username", "password");
+                var handler = new HttpClientHandler { Credentials = credentials };
+                var httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
+                using (var client = new HttpClient(handler))
+                {
+                    try
                     {
-                        //Action jika mendapat balasan sukses dari post api, panggil method GetDataAfterPost
-                        GetDataAfterPost(listPostTerimaOrder);
+                        HttpResponseMessage message = client.PostAsync(url + "/api/GetStock", httpContent).Result;
+                        if (message.IsSuccessStatusCode)
+                        {
+                            //Action jika mendapat balasan sukses dari post api, panggil method GetDataAfterPost
+                            //GetDataAfterPost(listPostTerimaOrder);
+
+                            //=====================================================================
+                            String response = "";
+                            var credentials2 = new NetworkCredential("ac", "123");
+                            var handler2 = new HttpClientHandler { Credentials = credentials2 };
+                            using (var client2 = new HttpClient(handler2))
+                            {
+                                // Make your request...
+                                client2.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                                try
+                                {
+                                    //HttpResponseMessage message = client.GetAsync("https://jsonblob.com/api/b67aac55-90af-11e9-959d-b527025f20cc").Result;
+                                    HttpResponseMessage message2 = client2.GetAsync(url + "/Api/GetSbu?usrid="+ sessionname).Result;
+
+                                    if (message2.IsSuccessStatusCode)
+                                    {
+                                        var serializer = new DataContractJsonSerializer(typeof(List<AfterPostTerimaOrder>));
+                                        var result = message2.Content.ReadAsStringAsync().Result;
+                                        byte[] byteArray = Encoding.UTF8.GetBytes(result);
+                                        MemoryStream stream = new MemoryStream(byteArray);
+                                        List<AfterPostTerimaOrder> resultData = serializer.ReadObject(stream) as List<AfterPostTerimaOrder>;
+
+                                        ViewBag.ResulData = resultData;
+                                        return PartialView("_TableHasilInput");
+                                        //====================================================================================
+
+                                    }
+                                    else
+                                    {
+                                        ViewBag.error = "Tidak Dapat Respon dari Server";
+                                        return PartialView("_TableHasilInput");
+                                    }
+
+                                }
+                                catch (Exception ex)
+                                {
+                                    ViewBag.error = "Tidak Dapat Respon dari Server";
+                                    var error = ex.ToString();
+                                    return PartialView("_TableHasilInput");
+                                }
+                            }
+                            //=====================================================================
+                        }
+                        else
+                        {
+                            return PartialView("_TableHasilInput");
+                        }
+
                     }
-
-                }
-                catch
-                {
-
+                    catch
+                    {
+                        return PartialView("_TableHasilInput");
+                    }
                 }
             }
+            else
+            {
+                //=====================================================================
+                String response = "";
+                var credentials2 = new NetworkCredential("ac", "123");
+                var handler2 = new HttpClientHandler { Credentials = credentials2 };
+                using (var client2 = new HttpClient(handler2))
+                {
+                    // Make your request...
+                    client2.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    try
+                    {
+                        //HttpResponseMessage message = client.GetAsync("https://jsonblob.com/api/b67aac55-90af-11e9-959d-b527025f20cc").Result;
+                        HttpResponseMessage message2 = client2.GetAsync(url + "/Api/GetSbu?usrid="+ sessionname).Result;
+
+                        if (message2.IsSuccessStatusCode)
+                        {
+                            var serializer = new DataContractJsonSerializer(typeof(List<AfterPostTerimaOrder>));
+                            var result = message2.Content.ReadAsStringAsync().Result;
+                            byte[] byteArray = Encoding.UTF8.GetBytes(result);
+                            MemoryStream stream = new MemoryStream(byteArray);
+                            List<AfterPostTerimaOrder> resultData = serializer.ReadObject(stream) as List<AfterPostTerimaOrder>;
+
+                            ViewBag.ResulData = resultData;
+                            return PartialView("_TableHasilInput");
+                            //====================================================================================
+
+                        }
+                        else
+                        {
+                            ViewBag.error = "Tidak Dapat Respon dari Server";
+                            return PartialView("_TableHasilInput");
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.error = "Tidak Dapat Respon dari Server";
+                        var error = ex.ToString();
+                        return PartialView("_TableHasilInput");
+                    }
+                }
+                //=====================================================================
+            }
+
 
 
         }
@@ -209,7 +385,7 @@ namespace ReservBigBird.Controllers
                 try
                 {
                     //HttpResponseMessage message = client.GetAsync("https://jsonblob.com/api/b67aac55-90af-11e9-959d-b527025f20cc").Result;
-                    HttpResponseMessage message = client.GetAsync(url+ "Api/GetSbu?usrid=Administrator").Result;
+                    HttpResponseMessage message = client.GetAsync(url+ "/Api/GetSbu?usrid=Administrator").Result;
 
                     if (message.IsSuccessStatusCode)
                     {
@@ -242,7 +418,7 @@ namespace ReservBigBird.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(DeleteTerimaOrder deleteTerima)
+        public JsonResult Delete(DeleteTerimaOrder deleteTerima)
         {
             //Ambil link url di web config
             String url = ConfigurationManager.AppSettings["UrlApi"].ToString();
@@ -262,23 +438,28 @@ namespace ReservBigBird.Controllers
             {
                 try
                 {
-                    HttpResponseMessage message = client.DeleteAsync(url+ "api/GetStock?userid=Administrator&jenis="+deleteTerima.Jenis+"&ac="+deleteTerima.AC+"&pool="+deleteTerima.Pool+"&tglawal="+deleteTerima.TglAwal+"&jamawal="+deleteTerima.JamAwal+"&tglakhir="+deleteTerima.TglAkhir+"&jamakhir="+deleteTerima.JamAkhir+"&keltujuan="+ deleteTerima.KelTujuan).Result;
+                    HttpResponseMessage message = client.DeleteAsync(url+ "/api/GetStock?userid=Administrator&jenis="+deleteTerima.Jenis+"&ac="+deleteTerima.AC+"&pool="+deleteTerima.Pool+"&tglawal="+deleteTerima.TglAwal+"&jamawal="+deleteTerima.JamAwal+"&tglakhir="+deleteTerima.TglAkhir+"&jamakhir="+deleteTerima.JamAkhir+"&keltujuan="+ deleteTerima.KelTujuan).Result;
 
                     if (message.IsSuccessStatusCode)
                     {
-                        
-                        return Json(new { success = true });
+
+                        //return Json(new { success = true });
+                        //return "{\"msg\":\"success\"}";
+                        //return Json("Delete");
+                        return Json("delete", JsonRequestBehavior.AllowGet);
                     }
                     else
                     {
-                        return Json(new { success = false });
+                        //return Json(new { success = false });
+                        return Json("error", JsonRequestBehavior.AllowGet);
                     }
 
 
                 }
                 catch (Exception ex)
                 {
-                    return Json(new { success = false });
+                    //return Json(new { success = false });
+                    return Json("error", JsonRequestBehavior.AllowGet);
                 }
             }
 

@@ -153,11 +153,13 @@
                                     <div class="col-lg-2">
                                     </div>
                                     <div class="col-lg-3">
-                                        @*<a id="submit" href="#" class="btn btn-success col-lg-12 form-control"><b>HITUNG</b></a>*@
-                                        <input type="button" class="btn btn-success col-lg-12 form-control" value="HITUNG" id="submit" />
+                                        @* A S L I*@
+                                        @*<input type="button" class="btn btn-success col-lg-12 form-control" value="HITUNG" id="submit" />*@
+
+                                        <button type="button" class="btn btn-success col-lg-12 form-control" onclick="ValidasiTgl(2);">HITUNG</button>
                                     </div>
                                     <div class="col-lg-3">
-                                        <button type="button" class="btn btn-primary col-lg-12 form-control" onclick="ValidasiTgl();">
+                                        <button type="button" class="btn btn-primary col-lg-12 form-control" onclick="ValidasiTgl(1);">
                                             KEEP
                                         </button>
                                     </div>
@@ -205,32 +207,33 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form asp-action="CreateTaskLine">
+            @using (Html.BeginForm("Index", "TerimaOrder", FormMethod.Post))
+            {
                 <div class="modal-body">
 
                     <div class="row form-border">
                         <div class="form-group">
 
                             <div class="col-sm-12">
-                                <div class="row">
+                                @*<div class="row">
                                     <div class="col-sm-3">
                                         <b>No Order</b>
                                     </div>
                                     <div class="col-sm-9">
-                                        @*<input asp-for="Item1.TaskCode" class="form-control" autocomplete="off" />*@
-                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                        
+                                        <input type="text" class="form-control" name="NoOrder">
                                     </div>
-                                </div>
+                                </div>*@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <b>Kategori</b>
                                     </div>
                                     <div class="col-sm-9">
-                                        <select class="form-control">
-                                            <option value="Sek">Sekolah</option>
-                                            <option value="Ins">Instansi</option>
-                                            <option value="Per">Perusahaan</option>
+                                        <select class="form-control" name="Kategori">
+                                            <option value="Sekolah">Sekolah</option>
+                                            <option value="Instansi">Instansi</option>
+                                            <option value="Perusahaan">Perusahaan</option>
                                         </select>
                                     </div>
                                 </div>
@@ -240,13 +243,13 @@
                                         <b>Telp Pemesan</b>
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                        <input type="text" class="form-control" name="TelpPemesan">
                                     </div>
                                     <div class="col-sm-2">
                                         <b>Nama Pemesan</b>
                                     </div>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                        <input type="text" class="form-control" name="NamaPemesan">
                                     </div>
                                 </div>
                                 <br />
@@ -255,13 +258,13 @@
                                         <b>Contact</b>
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                        <input type="text" class="form-control" name="Contact">
                                     </div>
                                     <div class="col-sm-2">
                                         <b>Perusahaan</b>
                                     </div>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                        <input type="text" class="form-control" name="Perusahaan">
                                     </div>
                                 </div>
                                 <br />
@@ -270,7 +273,7 @@
                                         <b>Alamat Pemesan</b>
                                     </div>
                                     <div class="col-sm-9">
-                                        <textarea asp-for="Address" class="form-control" rows="2"></textarea>
+                                        <textarea asp-for="Address" class="form-control" rows="2" name="AlamatPemesan"></textarea>
                                     </div>
                                 </div>
                                 <br />
@@ -279,13 +282,13 @@
                                         <b>Nama Pemakai</b>
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                        <input type="text" class="form-control" name="NamaPemakai">
                                     </div>
                                     <div class="col-sm-2">
                                         <b>Telp Pemakai</b>
                                     </div>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                        <input type="text" class="form-control" name="TelpPemakai">
                                     </div>
                                 </div>
                                 <br />
@@ -294,7 +297,7 @@
                                         <b>Alamat Pemakai</b>
                                     </div>
                                     <div class="col-sm-9">
-                                        <textarea asp-for="Address" class="form-control" rows="2"></textarea>
+                                        <textarea asp-for="Address" class="form-control" rows="2" name="AlamatPemakai"></textarea>
                                     </div>
                                 </div>
                                 <br />
@@ -303,7 +306,7 @@
                                         <b>Penerima Order</b>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                        <input type="text" class="form-control" name="PenerimaOrder">
                                     </div>
                                 </div>
                                 <br />
@@ -312,7 +315,7 @@
                                         <b>Jenis Bus</b>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                        <input type="text" class="form-control" name="JenisBus">
                                     </div>
                                 </div>
                                 <br />
@@ -321,7 +324,7 @@
                                         <b>Kel Tujuan</b>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                        <input type="text" class="form-control" name="KelTujuan">
                                     </div>
                                 </div>
                                 <br />
@@ -330,7 +333,7 @@
                                         <b>Tujuan</b>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                        <input type="text" class="form-control" name="Tujuan">
                                     </div>
                                 </div>
                                 <br />
@@ -339,7 +342,7 @@
                                         <b>Permintaan Khusus</b>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                        <input type="text" class="form-control" name="PermintaanKhusus">
                                     </div>
                                 </div>
                                 <br />
@@ -348,7 +351,7 @@
                                         <b>Lapor</b>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" asp-for="TaskCode">
+                                        <input type="text" class="form-control" name="Lapor">
                                     </div>
                                 </div>
                                 <br />
@@ -357,20 +360,20 @@
                                         <b>Tgl Jemput</b>
                                     </div>
                                     <div class="col-sm-4">
-                                        <input type="text" id="tgljemputmodal" class="form-control" />
+                                        <input type="text" id="tgljemputmodal" class="form-control" name="TglJemput" />
                                     </div>
                                     <div class="col-sm-1">
                                         <b>Jam</b>
                                     </div>
                                     <div class="col-sm-4">
                                         @*<div class="input-group clockpicker">
-                                                <input type="text" id="jamjemputmodal" class="form-control" value="18:00">
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-time"></span>
-                                                </span>
-                                            </div>*@
+                                        <input type="text" id="jamjemputmodal" class="form-control" value="18:00">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>*@
                                         <div class="clockpicker">
-                                            <input type="text" id="jamjemputmodal" name="jamjemputmodal" class="form-control" placeholder="Pilih Jam">
+                                            <input type="text" id="jamjemputmodal" name="JamJemput" class="form-control" placeholder="Pilih Jam">
                                         </div>
                                     </div>
                                 </div>
@@ -380,44 +383,44 @@
                                         <b>Tgl Selesai</b>
                                     </div>
                                     <div class="col-sm-4">
-                                        <input type="text" id="tglselesaimodal" class="form-control" />
+                                        <input type="text" id="tglselesaimodal" class="form-control" name="TglSelesei" />
                                     </div>
                                     <div class="col-sm-1">
                                         <b>Jam</b>
                                     </div>
                                     <div class="col-sm-4">
                                         @*<div class="input-group clockpicker">
-                                                <input type="text" id="jamslsaimodal" class="form-control">
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-time"></span>
-                                                </span>
-                                            </div>*@
+                                        <input type="text" id="jamslsaimodal" class="form-control">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>*@
                                         <div class="clockpicker">
-                                            <input type="text" id="jamslsaimodal" class="form-control">
+                                            <input type="text" id="jamslsaimodal" class="form-control" name="JamSelesei">
                                         </div>
                                     </div>
                                 </div>
                                 <br />
 
                                 @*<div class="row">
-                                        <div class="col-sm-6">
+                                <div class="col-sm-6">
 
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <button type="submit" style="float:right" class="btn btn-primary btn-md form-control">
-                                                <span class="glyphicon glyphicon-floppy-save"></span>
-                                                Simpan
-                                            </button>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="submit" style="float:right" class="btn btn-primary btn-md form-control">
+                                        <span class="glyphicon glyphicon-floppy-save"></span>
+                                        Simpan
+                                    </button>
 
-                                        </div>
+                                </div>
 
-                                        <div class="col-sm-3">
-                                            <button type="submit" style="float:right" class="btn btn-warning btn-md form-control">
-                                                <span class="glyphicon glyphicon-floppy-save"></span>
-                                                Batal
-                                            </button>
-                                        </div>
-                                    </div>*@<br />
+                                <div class="col-sm-3">
+                                    <button type="submit" style="float:right" class="btn btn-warning btn-md form-control">
+                                        <span class="glyphicon glyphicon-floppy-save"></span>
+                                        Batal
+                                    </button>
+                                </div>
+                            </div>*@<br />
                             </div>
 
                         </div>
@@ -429,19 +432,22 @@
                         <span class="glyphicon glyphicon-trash"></span>
                         Close
                     </button>
-                    <button type="button" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-floppy-save"></span>
                         Save changes
                     </button>
+                    @*<input type="submit" value="Save Changes" class="btn btn-primary"/>*@
                 </div>
-            </form>
+            }
+            <form asp-action="CreateTaskLine"></form>
         </div>
     </div>
 </div>
 
 @*Javascript Validasi Tanggal*@
 <script type="text/javascript">
-    function ValidasiTgl() {
+    function ValidasiTgl(Jenis) {
+        
         var weekday = new Array(7);
         weekday[0] = "Sunday";
         weekday[1] = "Monday";
@@ -495,13 +501,33 @@
             console.log("hari 1 sama");
             if (e == m) {
 
-                document.getElementById("tgljemputmodal").value = a0;
-                document.getElementById("tglselesaimodal").value = d0;
+                if (c == "") {
+                    
+                    swal("Perhatikan Kolom Jam ", "Silahkan Isi Kolom Jam", "warning");
+                }
+                else {
+                    if (f == "") {
+                        swal("Perhatikan Kolom Jam ", "Silahkan Isi Kolom Jam", "warning");
+                    }
+                    else {
+                        document.getElementById("tgljemputmodal").value = a0;
+                        document.getElementById("tglselesaimodal").value = d0;
 
-                document.getElementById("jamjemputmodal").value = c;
-                document.getElementById("jamslsaimodal").value = f;
+                        document.getElementById("jamjemputmodal").value = c;
+                        document.getElementById("jamslsaimodal").value = f;
 
-                $('#myModal13').modal('toggle');
+                        //$('#myModal13').modal('toggle');
+
+                        if (Jenis == 1) {
+                            $('#myModal13').modal('toggle');
+                        }
+                        else {
+                            $('#renderTable').load("_TableDate", $('#Form1').serialize());
+                        }
+                    }
+                    
+                }
+                
             }
             else {
                 swal("Perhatikan Hari", "Hari yang Anda Pilih di Tanggal Akhir Tidak Sama", "warning");

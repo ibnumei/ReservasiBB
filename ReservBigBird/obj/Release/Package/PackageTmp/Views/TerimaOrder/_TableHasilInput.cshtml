@@ -1,51 +1,100 @@
-﻿@*@model IEnumerable<ReservBigBird.API_Model.AfterPostTerimaOrder>*@
+﻿﻿@*@model IEnumerable<ReservBigBird.API_Model.AfterPostTerimaOrder>
+*@
 @using ReservBigBird.API_Model;
 
 @if (ViewBag.ResulData != null)
 {
-    <table class="table table-bordered table-striped" id="TableHasil">
-        <thead>
-            <tr>
-                <th>Jenis</th>
-                <th>AC</th>
-                <th>Pool</th>
-                <th>Tgl Awal</th>
-                <th>Jam Awal</th>
-                <th>Tgl Akhir</th>
-                <th>Jam Akhir</th>
-                <th>Jmlh</th>
-                <th>Tgl Trans</th>
-                <th>Jam Trans</th>
-                <th>Kel Tujuan</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (AfterPostTerimaOrder afterPostTerimaOrder in ViewBag.ResulData)
-            {
+    <div class="table-responsive">
+        <table class="table table-striped" id="TableHasil">
+            <thead>
                 <tr>
-                    <td class="Jenis">@afterPostTerimaOrder.JNBID</td>
-                    <td class="AC">@afterPostTerimaOrder.JNBAC</td>
-                    <td class="Pool">@afterPostTerimaOrder.POLID</td>
-                    <td class="TglAwal">@afterPostTerimaOrder.SBSTAW</td>
-                    <td class="JamAwal">@afterPostTerimaOrder.SBSJAW</td>
-                    <td class="TglAkhir">@afterPostTerimaOrder.SBSTAK</td>
-                    <td class="JamAkhir">@afterPostTerimaOrder.SBSJAK</td>
-                    <td class="Jumlah">@afterPostTerimaOrder.SBSJB</td>
-                    <td class="TglTrans">@afterPostTerimaOrder.SBSTAS</td>
-                    <td class="JamTrans">@afterPostTerimaOrder.SBSJAS</td>
-                    <td class="KelTujuan">@afterPostTerimaOrder.KTJID</td>
-                    <td class="btn btn-default" id="btnDel"><a onclick="deleteRow(this)">Delete</a></td>
+                    <th>Jenis</th>
+                    <th>AC</th>
+                    <th>Pool</th>
+                    <th>Tgl Awal</th>
+                    <th>Jam Awal</th>
+                    <th>Tgl Akhir</th>
+                    <th>Jam Akhir</th>
+                    <th>Jmlh</th>
+                    <th>Tgl Trans</th>
+                    <th>Jam Trans</th>
+                    <th>Kel Tujuan</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (AfterPostTerimaOrder afterPostTerimaOrder in ViewBag.ResulData)
+                {
+                    <tr>
+                        <td class="Jenis">@afterPostTerimaOrder.JNBID</td>
+                        <td class="AC">@afterPostTerimaOrder.JNBAC</td>
+                        <td class="Pool">@afterPostTerimaOrder.POLID</td>
+                        <td class="TglAwal">@afterPostTerimaOrder.SBSTAW</td>
+                        <td class="JamAwal">@afterPostTerimaOrder.SBSJAW</td>
+                        <td class="TglAkhir">@afterPostTerimaOrder.SBSTAK</td>
+                        <td class="JamAkhir">@afterPostTerimaOrder.SBSJAK</td>
+                        <td class="Jumlah">@afterPostTerimaOrder.SBSJB</td>
+                        <td class="TglTrans">@afterPostTerimaOrder.SBSTAS</td>
+                        <td class="JamTrans">@afterPostTerimaOrder.SBSJAS</td>
+                        <td class="KelTujuan">@afterPostTerimaOrder.KTJID</td>
+                        <td id="btnDel">
+                            @*<a onclick="deleteRow(this)">Delete</a>*@
+                        <button class="btn btn-danger" onclick="deleteRow(this)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </td>
                 </tr>
             }
-        </tbody>
-    </table>
-
+            </tbody>
+        </table>
+    </div>
+    
     <script>
         $('#ModalSmall').modal('hide');
     </script>
 }
-    <script>
+<div id="ModalSmallNo" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3>Pilih Data Berikut</h3>
+            </div>
+
+            <div class="modal-body">
+
+                <form id="FormPopupNo">
+                    @*Input Tes : <input type="text" id="testestestes" name="testestestes" />*@
+
+                    <input type="text" id="ModalNmPool"  />
+                    <input type="text" id="ModalJenis"  />
+                    <input type="text" id="ModalJmlBus"  />
+
+                    <input type="text" id="ModalTglAwal"  />
+                    <input type="text" id="ModalJamAwal"  />
+                    <input type="text" id="ModalTglAkhir" />
+                    <input type="text" id="ModalJamAkhir"  />
+                    <input type="text" id="ModalKelTujuan" />
+
+                    <input type="button" class="btn btn-primary btn-md" value="Pilih" id="submit2" />
+                </form>
+
+
+            </div>
+
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+        var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["UrlApi"]';
         var a, b, c, d, e, f, g, h, i, j, k;
         var param;
         function deleteRow(r) {
@@ -55,27 +104,18 @@
         $('#TableHasil tbody').on('click', '#btnDel', function () {
             var currow = $(this).closest('tr');
             console.log(currow);
-            
+
             a = $.trim(currow.find('.Jenis').text());
-
             b = $.trim(currow.find('.AC').text());
-
             c = $.trim(currow.find('.Pool').text());
-            
+
             d = $.trim(currow.find('.TglAwal').text());
-
             e = $.trim(currow.find('.JamAwal').text());
-
             f = $.trim(currow.find('.TglAkhir').text());
-
             g = $.trim(currow.find('.JamAkhir').text());
-
             h = $.trim(currow.find('.Jumlah').text());
-
             i = $.trim(currow.find('.TglTrans').text());
-
             j = $.trim(currow.find('.JamTrans').text());
-
             k = $.trim(currow.find('.KelTujuan').text());
 
             swal({
@@ -88,10 +128,8 @@
             .then((willDelete) => {
                 if (willDelete) {
                     $.ajax({
-                        type: "POST",
-                        url: '@Url.Action("Delete")',
-                        data: { Jenis: a, AC: b, Pool: c, TglAwal: d, JamAwal: e, TglAkhir: f, JamAkhir: g, KelTujuan: k},
-                        dataType: "json",
+                        type: "DELETE",
+                        url: apiUrl + "/api/GetStock?userid=Administrator&jenis=" + a + "&ac=" + b + "&pool=" + c + "&tglawal=" + d + "&jamawal=" + e + "&tglakhir=" + f + "&jamakhir=" + g + "&keltujuan=" + k,
                       // success: window.location.reload(),
                         success: function (response) {
                             swal("Order Has Been Deleted!", {
@@ -99,10 +137,11 @@
                             }).then(function() {
                               //  window.location.href = "/Technician/Index"
                                 // window.location.reload()
-                                $(this).closest('tr').remove();
-                                document.getElementById("TableHasil").deleteRow(param);
+                                //$(this).closest('tr').remove();
+                                //document.getElementById("TableHasil").deleteRow(param);
+                                $('#renderTable2').load("_TableHasilInput", $('#FormPopupNo').serialize());
                             });
-                           
+
                         },
                         error: function (response) {
                             swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error")
@@ -115,5 +154,54 @@
             });
         })
 
-        
-    </script>
+
+        @*function deleteRow() {
+            //param = r.parentNode.parentNode.rowIndex;
+            //console.log(param);
+            var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["UrlApi"]';
+
+            swal({
+                title: "Delete Your Order ?",
+                text: "Once deleted, you will not be able to recover your data!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            type: "DELETE",
+                            data: { Jenis: a, AC: b, Pool: c, TglAwal: d, JamAwal: e, TglAkhir: f, JamAkhir: g, KelTujuan: k },
+                            url: apiUrl + "/api/GetStock?userid=Administrator&jenis=" + a + "&ac=" + b + "&pool=" + c + "&tglawal=" + d + "&jamawal=" + e + "&tglakhir=" + f + "&jamakhir=" + g + "&keltujuan=" + k,
+                            //dataType: "json",
+
+                            success: function (data) {
+                                console.log(data);
+                                alert("Berhasil");
+                                swal("Order Has Been Deleted!", {
+                                    icon: "success",
+                                }).then(function () {
+                                    //  window.location.href = "/Technician/Index"
+                                    // window.location.reload()
+                                    $(this).closest('tr').remove();
+                                    document.getElementById("TableHasil").deleteRow(param);
+                                });
+
+                            },
+                            error: function (data) {
+                                swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error");
+                                console.log(data);
+                            }
+                        });
+                    }
+                    else {
+                        swal("Your data is safe!");
+                    }
+                });
+        }*@
+</script>
+<style>
+    #renderTable3 {
+        background-color: white;
+    }
+</style>

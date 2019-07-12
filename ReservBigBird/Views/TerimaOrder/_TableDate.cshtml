@@ -24,74 +24,91 @@
                         font-weight: bold; color: black;">
     </div>
 
-    <table class="table table-bordered table-striped" id="table1">
-        <thead>
-            <tr>
-                <th>@ViewBag.bus</th>
-                <th hidden>Jenis Bus</th>
-                <th hidden>Jml Submit Bus</th>
-                <th hidden>Max</th>
-                <th hidden>Min</th>
-                <th hidden>Stock</th>
-                <th hidden>TglAwal</th>
-                <th hidden>JamAwal</th>
-                <th hidden>TglAkhir</th>
-                <th hidden>JamAkhir</th>
-                <th hidden>KelTujuan</th>
-
-                @for (int i = 0; i < ViewBag.tgl.Count; i++)
-                {
-                    <th>@ViewBag.tgl[i]</th>
-                }
-
-
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var aa in Model)
-            {
-                //untuk membuat list sementara u/ mencari nilai max & min
-                var listTemp = new List<int>();
-                foreach (var tes in aa.listJml)
-                {
-                    listTemp.Add(tes.jml);
-                }
-
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped" id="table1">
+            <thead>
                 <tr>
-                    <td class="NamaPool">
-                        @if (listTemp.Min() < ViewBag.JmlBus)
-                        {
-                            <a class="btn" disabled>@aa.poolName</a>
-                        }
-                        else
-                        {
-                            <a onclick="getStatus()" class="btn btn-default">@aa.poolName</a>
-                        }
-                    </td>
+                    <th>@ViewBag.bus</th>
+                    <th hidden>Jenis Bus</th>
+                    <th hidden>Jml Submit Bus</th>
+                    <th hidden>Max</th>
+                    <th hidden>Min</th>
+                    <th hidden>Stock</th>
+                    <th hidden>TglAwal</th>
+                    <th hidden>JamAwal</th>
+                    <th hidden>TglAkhir</th>
+                    <th hidden>JamAkhir</th>
+                    <th hidden>KelTujuan</th>
 
-                    <td class="Jenis" hidden>@ViewBag.bus</td>
-                    <td class="JmlBus" hidden>@ViewBag.JmlBus</td>
-                    <td hidden>@listTemp.Max()</td>
-                    <td hidden>@listTemp.Min()</td>
-                    <td hidden>@aa.stc</td>
-                    <td class="TglAwal" hidden>@ViewBag.TglAwal</td>
-                    <td class="JamAwal" hidden>@ViewBag.JamAwal</td>
-                    <td class="TglAkhir" hidden>@ViewBag.TglAkhir</td>
-                    <td class="JamAkhir" hidden>@ViewBag.JamAkhir</td>
-                    <td class="KelTujuan" hidden>@ViewBag.KelTujuan</td>
-
-                    @foreach (var bb in aa.listJml)
+                    @for (int i = 0; i < ViewBag.tgl.Count; i++)
                     {
-                        <td>@bb.jml</td>
+                        <th>@ViewBag.tgl[i]</th>
                     }
 
 
                 </tr>
-            }
+            </thead>
+            <tbody>
+
+                @foreach (var aa in Model)
+                {
+                    //untuk membuat list sementara u/ mencari nilai max & min
+                    var listTemp = new List<int>();
+                    foreach (var tes in aa.listJml)
+                    {
+                        listTemp.Add(tes.jml);
+                    }
+
+                    <tr>
+                        <td class="NamaPool">
+                            @if (listTemp.Min() < ViewBag.JmlBus)
+                            {
+                                <a class="btn" disabled>@aa.poolName</a>
+                            }
+                            else
+                            {
+                                @* A S L I*@
+                                <a onclick="getStatus()" class="btn btn-default">@aa.poolName</a>
+
+                                @*<form id="FormPopup2">
+
+                                    <input type="text" value="@aa.poolName" name="ModalNmPool" hidden/>
+                                    <input type="text" value="@ViewBag.bus" name="ModalJenis" hidden/>
+                                    <input type="text" value="@ViewBag.JmlBus" name="ModalJmlBus" hidden/>
+
+                                    <input type="text" value="@ViewBag.TglAwal" name="ModalTglAwal" hidden/>
+                                    <input type="text" value="@ViewBag.JamAwal" name="ModalJamAwal" hidden/>
+                                    <input type="text" value="@ViewBag.TglAkhir" name="ModalTglAkhir" hidden/>
+                                    <input type="text" value="@ViewBag.JamAkhir" name="ModalJamAkhir" hidden/>
+                                    <input type="text" value="@ViewBag.KelTujuan" name="ModalKelTujuan" hidden/>
+
+                                    <input type="button" class="btn btn-primary btn-md" value="@aa.poolName" id="submit2" />
+                                </form>*@
+                            }
+                        </td>
+
+                        <td class="Jenis" hidden>@ViewBag.bus</td>
+                        <td class="JmlBus" hidden>@ViewBag.JmlBus</td>
+                        <td hidden>@listTemp.Max()</td>
+                        <td hidden>@listTemp.Min()</td>
+                        <td hidden>@aa.stc</td>
+                        <td class="TglAwal" hidden>@ViewBag.TglAwal</td>
+                        <td class="JamAwal" hidden>@ViewBag.JamAwal</td>
+                        <td class="TglAkhir" hidden>@ViewBag.TglAkhir</td>
+                        <td class="JamAkhir" hidden>@ViewBag.JamAkhir</td>
+                        <td class="KelTujuan" hidden>@ViewBag.KelTujuan</td>
+
+                        @foreach (var bb in aa.listJml)
+                        {
+                            <td>@bb.jml</td>
+                        }
 
 
-            @*@foreach (var aa in ViewBag.tes1)
+                    </tr>
+                }
+
+
+                @*@foreach (var aa in ViewBag.tes1)
                 {
                     <tr>
                         <td>@aa.poolName</td>
@@ -112,8 +129,10 @@
                     </tr>
                 }*@
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+    
 
     <script>
         $("#divLoader").hide();
@@ -122,8 +141,8 @@
 
 
 
-<div id="ModalSmall" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+<div id="ModalSmall" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
             <div class="modal-header">
@@ -136,28 +155,112 @@
             <div class="modal-body">
 
                 <form id="FormPopup">
-                    @*Input Tes : <input type="text" id="testestestes" name="testestestes" />*@
-
-                    <input type="text" id="ModalNmPool" name="ModalNmPool" hidden/>
-                    <input type="text" id="ModalJenis" name="ModalJenis" hidden/>
-                    <input type="text" id="ModalJmlBus" name="ModalJmlBus" hidden/>
-
-                    <input type="text" id="ModalTglAwal" name="ModalTglAwal" hidden/>
-                    <input type="text" id="ModalJamAwal" name="ModalJamAwal" hidden/>
-                    <input type="text" id="ModalTglAkhir" name="ModalTglAkhir" hidden/>
-                    <input type="text" id="ModalJamAkhir" name="ModalJamAkhir" hidden/>
-                    <input type="text" id="ModalKelTujuan" name="ModalKelTujuan" hidden/>
-
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Nama Pool</label>
+                            <input type="text" id="ModalNmPool" name="ModalNmPool" class="form-control" readonly="readonly" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Jenis</label>
+                            <input type="text" id="ModalJenis" name="ModalJenis" class="form-control" readonly="readonly" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Jumlah Bus</label>
+                            <input type="text" id="ModalJmlBus" name="ModalJmlBus" class="form-control" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Tgl Awal</label>
+                            <input type="text" id="ModalTglAwal" name="ModalTglAwal" class="form-control" readonly="readonly" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Jam Awal</label>
+                            <input type="text" id="ModalJamAwal" name="ModalJamAwal" class="form-control" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Tgl Akhir</label>
+                            <input type="text" id="ModalTglAkhir" name="ModalTglAkhir" class="form-control" readonly="readonly" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Jam Akhir</label>
+                            <input type="text" id="ModalJamAkhir" name="ModalJamAkhir" class="form-control" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Kel Tujuan</label>
+                            <input type="text" id="ModalKelTujuan" name="ModalKelTujuan" class="form-control" readonly="readonly" />
+                        </div>
+                        
+                    </div>
                     <input type="button" class="btn btn-primary btn-md" value="Pilih" id="submit2" />
                 </form>
 
 
+                @*<form id="FormPopup">
+                    <div class="form-group">
+                        <label>Nama Pool</label>
+                        <input type="text" id="ModalNmPool" name="ModalNmPool" class="form-control" readonly="readonly" />
+                    </div>
+                    <div class="form-group">
+                        <label>Jenis</label>
+                        <input type="text" id="ModalJenis" name="ModalJenis" class="form-control" readonly="readonly" />
+                    </div>
+                    <div class="form-group">
+                        <label>Jumlah Bus</label>
+                        <input type="text" id="ModalJmlBus" name="ModalJmlBus" class="form-control" readonly="readonly" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tgl Awal</label>
+                        <input type="text" id="ModalTglAwal" name="ModalTglAwal" class="form-control" readonly="readonly" />
+                    </div>
+                    <div class="form-group">
+                        <label>Jam Awal</label>
+                        <input type="text" id="ModalJamAwal" name="ModalJamAwal" class="form-control" readonly="readonly" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tgl Akhir</label>
+                        <input type="text" id="ModalTglAkhir" name="ModalTglAkhir" class="form-control" readonly="readonly" />
+                    </div>
+                    <div class="form-group">
+                        <label>Jam Akhir</label>
+                        <input type="text" id="ModalJamAkhir" name="ModalJamAkhir" class="form-control" readonly="readonly" />
+                    </div>
+                    <div class="form-group">
+                        <label>Kel Tujuan</label>
+                        <input type="text" id="ModalKelTujuan" name="ModalKelTujuan" class="form-control" readonly="readonly" />
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="btn btn-primary btn-md" value="Pilih" id="submit2" />
+                    </div>
+                </form>*@
+
+                @*<form id="FormPopup">
+
+
+                    <input type="text" id="ModalNmPool" name="ModalNmPool" />
+                    <input type="text" id="ModalJenis" name="ModalJenis" />
+                    <input type="text" id="ModalJmlBus" name="ModalJmlBus" />
+
+                    <input type="text" id="ModalTglAwal" name="ModalTglAwal" />
+                    <input type="text" id="ModalJamAwal" name="ModalJamAwal" />
+                    <input type="text" id="ModalTglAkhir" name="ModalTglAkhir" />
+                    <input type="text" id="ModalJamAkhir" name="ModalJamAkhir" />
+                    <input type="text" id="ModalKelTujuan" name="ModalKelTujuan" />
+
+                    <input type="button" class="btn btn-primary btn-md" value="Pilih" id="submit2" />
+                </form>*@
+
+
             </div>
 
-            <div class="modal-footer">
+                <div class="modal-footer">
 
+                </div>
             </div>
-        </div>
     </div>
 
 </div>
@@ -168,7 +271,7 @@
     var mins = 0.12;
     var trigger = 0;
     //calculate the seconds
-    var secs = 5;
+    var secs = 10;
 
     //countdown function is evoked when page is loaded
     function countdown() {

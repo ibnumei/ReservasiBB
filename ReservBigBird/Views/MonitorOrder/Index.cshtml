@@ -5,13 +5,12 @@
 
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+@*<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="~/Content/js/sweetalert.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>*@
 
-
-
-
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="~/Content/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="~/Content/js/sweetalert.min.js"></script>
 
 <section class="content-header">
     <h1>
@@ -144,6 +143,14 @@
 <script>
 
     $(document).ready(function () {
+        if ("@ViewBag.NoOrderParsing" != "") {
+            @*alert("@ViewBag.NoOrderParsing");*@
+            $('#NoOrder').val("@ViewBag.NoOrderParsing");
+            $("#divLoader").show();
+            var tesnu = $('#Form1').serialize();
+            $('#renderTable').load("_TableMonitorOrder", $('#Form1').serialize());
+            $("#divLoader").hide();
+        }
         $('#submit').on('click', function () {
             $("#divLoader").show();
             var tesnu = $('#Form1').serialize();

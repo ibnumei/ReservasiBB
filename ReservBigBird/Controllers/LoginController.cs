@@ -62,7 +62,7 @@ namespace ReservBigBird.Controllers
                             Session["userid"] = resultData.USRNM;
                             Session["usernm"] = resultData.USRNM;
 
-                            return RedirectToAction("Index", "TerimaOrder");
+                            return Redirect("TerimaOrder/Index");
                             //====================================================================================
 
                         }
@@ -107,5 +107,14 @@ namespace ReservBigBird.Controllers
             }
         }
         //=======================================================================================
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            //Session.Remove("userid");
+            //Session.Remove("usernm");
+            Session.RemoveAll();
+            Session.Clear();
+            return Redirect("Index");
+        }
     }
 }

@@ -42,8 +42,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <!-- Google Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    @*<link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">*@
+    @*<link href="https://fonts.googleapis.com/css?family=Open+Sans:300&display=swap" rel="stylesheet">*@
+    @*<link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">*@
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -102,7 +105,7 @@ desired effect
                                         <!-- The user image in the navbar-->
                                         <img src="~/Content/dist/img/avnew.jpg" class="user-image" alt="User Image">
                                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                        <span class="hidden-xs">Admin</span>
+                                        <span class="hidden-xs">@Session["usernm"] </span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <!-- The user image in the menu -->
@@ -110,8 +113,7 @@ desired effect
                                             <img src="~/Content/dist/img/avnew.jpg" class="img-circle" alt="User Image">
 
                                             <p>
-                                                Admin
-                                                <small>Member since Nov. 2012</small>
+                                                @Session["usernm"] 
                                             </p>
                                         </li>
                                         <!-- Menu Body -->
@@ -135,7 +137,7 @@ desired effect
                                                 <a href="~/ChangePass" class="btn btn-default btn-flat">Ganti Password</a>
                                             </div>
                                             <div class="pull-right">
-                                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                                <a href="~/Login/Logout" class="btn btn-default btn-flat">Sign out</a>
                                             </div>
                                         </li>
                                     </ul>

@@ -23,9 +23,19 @@ namespace ReservBigBird.Controllers
         public ActionResult Index()
         {
             ViewBag.Current = "2";
+            if (TempData["NoOrderTemp"] != null)
+            {
+                String data = TempData["NoOrderTemp"].ToString();
+                ViewBag.NoOrderParsing = data;
 
+                return View();
+            }
+            else
+            {
+                return View();
+            }
             
-            return View();
+            
         }
 
         public ActionResult _TableMonitorOrder(ParamMonitorOrder paramMonitor)

@@ -183,4 +183,35 @@ namespace ReservBigBird.API_Model
         public string USRNM { get; set; }
     }
 
+
+    public class PostHeaderKeep
+    {
+        public string UserId { get; set; }
+        public string NoOrder { get; set; }
+        public string Kategori { get; set; }
+        public string TelpPemesan { get; set; }
+        public string NamaPemesan { get; set; }
+        public string Contact { get; set; }
+        public string Perusahaan { get; set; }
+        public string AlamatPemesan { get; set; }
+        public string NamaPemakai { get; set; }
+        public string TelpPemakai { get; set; }
+        public string AlamatPemakai { get; set; }
+        public string PenerimaOrder { get; set; }
+        public string JenisBus { get; set; }
+        public string KelTujuan { get; set; }
+        public string Tujuan { get; set; }
+        public string PermintaanKhusus { get; set; }
+        public string Lapor { get; set; }
+        public string TglJemput { get; set; }
+        public string JamJemput { get; set; }
+        public string TglSelesei { get; set; }
+        public string JamSelesei { get; set; }
+    }
+
+    public class GetAfterPostHeader
+    {
+        public string noorder { get; set; }
+    }
+
 }

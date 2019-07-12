@@ -19,6 +19,7 @@
         <table id="example3" class="table table-striped">
             <thead>
                 <tr style="background-color:#808080;color:#ffffff;">
+                    <th>Action</th>
                     <th>No Order</th>
                     <th>No Item</th>
                     <th>STS</th>
@@ -31,7 +32,7 @@
                     <th>JAM JEMPUT</th>
                     <th>TGL SELESAI</th>
                     <th>JAM SELESAI</th>
-                    <th></th>
+                    @*<th></th>*@
                 </tr>
             </thead>
 
@@ -59,6 +60,57 @@
             <div class="modal-body" id="BodyModal">
 
                 <form asp-action="CreateTaskLine">
+                    @*<div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Jenis Pembayaran</label>
+                            <input type="text" class="form-control" id="JenisPemby" readonly="readonly">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Tarif Bus</label>
+                            <input type="text" class="form-control" id="TarifBus" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Lebih Bayar</label>
+                            <input type="text" class="form-control" id="LbhBayar" readonly="readonly">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>% Diskon</label>
+                            <input type="text" class="form-control" id="Diskon" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Biaya Pembatalan</label>
+                            <input type="text" class="form-control" id="BiayaPembatalan" readonly="readonly">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Rp Diskon</label>
+                            <input type="text" class="form-control" id="RpDiskon" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Total Pembayaran</label>
+                            <input type="text" class="form-control" id="TotalPembayaran" readonly="readonly">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Sudah Dibayar</label>
+                            <input type="text" class="form-control" id="SdhDibayar" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Sisa Pembayaran</label>
+                            <input type="text" class="form-control" id="SisaPembyran" readonly="readonly">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>PPH 23</label>
+                            <input type="text" class="form-control" id="pph23" readonly="readonly">
+                        </div>
+                    </div>*@
+
                     <div class="row form-border">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
@@ -197,8 +249,8 @@
 
                         </div>
                     </div>
-                </form>
 
+                </form>
 
             </div>
 
@@ -243,14 +295,15 @@
                 datatype: "json",
             },
 
-            "columnDefs": [{
-                "targets": -1,
-                "data": null,
-                "defaultContent": "<button>Click!</button>"
-            }],
+            
 
             "columns": [
 
+                {
+                    "targets": -1,
+                    "data": null,
+                    "defaultContent": "<button>Pilih</button>"
+                },
                 { "data": "NoOrder", "name": "NoOrder", "autoWidth": true, },
                 { "data": "NoItem", "name": "NoItem", "autoWidth": true },
                 { "data": "Sts", "name": "Sts", "autoWidth": true },
@@ -263,14 +316,12 @@
                 { "data": "JamJemput", "name": "JamJemput", "autoWidth": true },
                 { "data": "TglSelesei", "name": "TglSelesei", "autoWidth": true },
                 { "data": "JamSelesei", "name": "JamSelesei", "autoWidth": true },
-                {
-                    //"render": function (data, type, full, meta) {
-                    //    return '<button type="submit" value="Pilih" class="btn btn-default" onclick="get2(' + full.NoOrder + ')" id="aidi"> Pilih </button>';
-                    //}
-                    "targets": -1,
-                    "data": null,
-                    "defaultContent": "<button>Click!</button>"
-                },
+                //{
+                    
+                //    "targets": -1,
+                //    "data": null,
+                //    "defaultContent": "<button>Click!</button>"
+                //},
             ]
 
         });

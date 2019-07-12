@@ -1,13 +1,15 @@
 ﻿@model IEnumerable<ReservBigBird.API_Model.MonitorOrder>
 
-@if(Model == null && ViewBag.error == "Tidak Dapat Respon dari Server")
-{
-    <script>
-        swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error");
-        $("#divLoader").hide();
-    </script>
-}
-@if (Model != null)
+
+@*@if(Model == null && ViewBag.error == "Tidak Dapat Respon dari Server")
+    {
+        <script>
+            swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error");
+            $("#divLoader").hide();
+        </script>
+    }*@
+
+@if (ViewBag.value != null)
 {
 
     <h3 class="box-title">Hasil Pencarian</h3>
@@ -17,6 +19,7 @@
         <table id="example3" class="table table-striped">
             <thead>
                 <tr style="background-color:#808080;color:#ffffff;">
+                    <th>Action</th>
                     <th>No Order</th>
                     <th>No Item</th>
                     <th>STS</th>
@@ -29,60 +32,18 @@
                     <th>JAM JEMPUT</th>
                     <th>TGL SELESAI</th>
                     <th>JAM SELESAI</th>
+                    @*<th></th>*@
                 </tr>
             </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            <a style="background-color: #e4e4e4; color: #444; border-color: #888484; cursor: pointer;" class="btn btn-sm btn-default" onclick="get('@Html.DisplayFor(modelItem => item.NoOrder)')" id="aidi"><i class="fas fa-trash-alt"></i>  @Html.DisplayFor(modelItem => item.NoOrder) </a>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NoItem)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Sts)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Disc)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Jenis)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Pool)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.KelTujuan)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AlamatJemput)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TglJemput)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.JamJemput)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TglSelesei)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.JamSelesei)
-                        </td>
-                    </tr>
-                }
 
-            </tbody>
         </table>
     </div>
 
-    <script>
-        $("#divLoader").hide();
-    </script>
+
 }
 
+
+@*Tampilan Popup*@
 <div id="myModalPopup" class="modal fade bd-example-modal-lg3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -99,6 +60,57 @@
             <div class="modal-body" id="BodyModal">
 
                 <form asp-action="CreateTaskLine">
+                    @*<div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Jenis Pembayaran</label>
+                            <input type="text" class="form-control" id="JenisPemby" readonly="readonly">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Tarif Bus</label>
+                            <input type="text" class="form-control" id="TarifBus" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Lebih Bayar</label>
+                            <input type="text" class="form-control" id="LbhBayar" readonly="readonly">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>% Diskon</label>
+                            <input type="text" class="form-control" id="Diskon" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Biaya Pembatalan</label>
+                            <input type="text" class="form-control" id="BiayaPembatalan" readonly="readonly">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Rp Diskon</label>
+                            <input type="text" class="form-control" id="RpDiskon" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Total Pembayaran</label>
+                            <input type="text" class="form-control" id="TotalPembayaran" readonly="readonly">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Sudah Dibayar</label>
+                            <input type="text" class="form-control" id="SdhDibayar" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Sisa Pembayaran</label>
+                            <input type="text" class="form-control" id="SisaPembyran" readonly="readonly">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>PPH 23</label>
+                            <input type="text" class="form-control" id="pph23" readonly="readonly">
+                        </div>
+                    </div>*@
+
                     <div class="row form-border">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
@@ -237,8 +249,8 @@
 
                         </div>
                     </div>
-                </form>
 
+                </form>
 
             </div>
 
@@ -252,30 +264,164 @@
     </div>
 </div>
 
-<script>
-    $(function () {
-        $('#example3').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': false,
-            'ordering': false,
-            'info': true,
-            'autoWidth': true
-        })
-    })
-</script>
 
+
+
+@*Javascipt untuk datatable server side*@
 <script type="text/javascript">
-    function get(NoOrder1) {
 
-      
+    $(document).ready(function () {
+
+        $("#divLoader").hide();
+
         var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["UrlApi"]';
+        var ordid = $("#NoOrder").val();
+        var ordnpt = $("#Perusahaan").val();
+        var ordnpm = $("#Pemesan").val();
+        var kondisi = $("#KondisiOrder").val();
+
+        var url = apiUrl + "/Api/PostOrdersDT?ordid=" + ordid + "&ordnpt=" + ordnpt + "&ordnpm=" + ordnpm + "&kondisi=" + kondisi;
+
+        var table = $("#example3").DataTable({
+            "processing": true, // for show progress bar
+            "serverSide": true, // for process server side
+            "filter": true,
+            "searching": false,
+            "ordering": false,
+            // this is for disable filter (search box)
+            "ajax": {
+                url: url,
+                type: "POST",
+                datatype: "json",
+            },
+
+            
+
+            "columns": [
+
+                {
+                    "targets": -1,
+                    "data": null,
+                    "defaultContent": "<button>Pilih</button>"
+                },
+                { "data": "NoOrder", "name": "NoOrder", "autoWidth": true, },
+                { "data": "NoItem", "name": "NoItem", "autoWidth": true },
+                { "data": "Sts", "name": "Sts", "autoWidth": true },
+                { "data": "Disc", "name": "Disc", "autoWidth": true },
+                { "data": "Jenis", "name": "Jenis", "autoWidth": true },
+                { "data": "Pool", "name": "Pool", "autoWidth": true },
+                { "data": "KelTujuan", "name": "KelTujuan", "autoWidth": true },
+                { "data": "AlamatJemput", "name": "AlamatJemput", "autoWidth": true },
+                { "data": "TglJemput", "name": "TglJemput", "autoWidth": true },
+                { "data": "JamJemput", "name": "JamJemput", "autoWidth": true },
+                { "data": "TglSelesei", "name": "TglSelesei", "autoWidth": true },
+                { "data": "JamSelesei", "name": "JamSelesei", "autoWidth": true },
+                //{
+                    
+                //    "targets": -1,
+                //    "data": null,
+                //    "defaultContent": "<button>Click!</button>"
+                //},
+            ]
+
+        });
+
+        $('#example3 tbody').on('click', 'button', function () {
+            var data = table.row($(this).parents('tr')).data();
+            console.log(data);
+            var bb = data[NoOrder];
+            console.log(bb);
+
+            for (var aa in data) {
+                if (aa == "NoOrder") {
+                    var a1 = aa;
+                    var a2 = data[aa];
+
+                    console.log(a1 + "," + a2);
+                    //alert(aa + " = " + data[aa])
+
+                    var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["UrlApi"]';
+                    //alert(apiUrl);
+
+                    var a = $.trim(a2);
+
+                    $("#divLoader2").show();
+                    $("#BodyModal").hide(); $("#JudulModal").hide(); $("#ButtonModal").hide();
+                    $('#myModalPopup').modal('toggle');
+
+                    $.ajax({
+                        type: "GET",
+                        url: apiUrl + "/Api/Orders?ordid=" + a + "&ordnpt=&ordnpm=&kondisi=",
+                        dataType: "json",
+
+                        success: function (data) {
+                            console.log(data);
+                            $("#divLoader2").hide();
+                            $.each(data, function (i, item) {
+
+                                if (item.JenisPembayaran == null) { document.getElementById("JenisPemby").value = ""; }
+                                else { document.getElementById("JenisPemby").value = item.JenisPembayaran; }
+
+                                if (item.LebihBayar == null) { document.getElementById("LbhBayar").value = ""; }
+                                else { document.getElementById("LbhBayar").value = item.LebihBayar; }
+
+                                if (item.BiayaBatal == null) { document.getElementById("BiayaPembatalan").value = ""; }
+                                else { document.getElementById("BiayaPembatalan").value = item.BiayaBatal; }
+
+                                if (item.TarifBus == null) { document.getElementById("TarifBus").value = ""; }
+                                else { document.getElementById("TarifBus").value = item.TarifBus; }
+
+                                if (item.Disc == null) { document.getElementById("Diskon").value = ""; }
+                                else { document.getElementById("Diskon").value = item.Disc; }
+
+                                if (item.RpDiskon == null) { document.getElementById("RpDiskon").value = ""; }
+                                else { document.getElementById("RpDiskon").value = item.RpDiskon; }
+
+                                if (item.TotalBayar == null) { document.getElementById("TotalPembayaran").value = ""; }
+                                else { document.getElementById("TotalPembayaran").value = item.TotalBayar; }
+
+                                if (item.SudahDibayar == null) { document.getElementById("SdhDibayar").value = ""; }
+                                else { document.getElementById("SdhDibayar").value = item.SudahDibayar; }
+
+                                if (item.SisaPembayaran == null) { document.getElementById("SisaPembyran").value = ""; }
+                                else { document.getElementById("SisaPembyran").value = item.SisaPembayaran; }
+
+                                if (item.Pph23 == null) { document.getElementById("pph23").value = ""; }
+                                else { document.getElementById("pph23").value = item.Pph23; }
+
+
+
+                            });
+
+                            $("#BodyModal").show(); $("#JudulModal").show(); $("#ButtonModal").show();
+                            //$('#myModalPopup').modal('toggle');
+                        },
+                        error: function (data) {
+                            //alert("erorr");
+                            $('#myModalPopup').modal('hide');
+                            swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error")
+                        }, //
+                    });
+                }
+                
+            }
+            
+        });
+    });
+
+    
+
+    function get2(NoOrder) {
+
+        alert(NoOrder);
+
+        @*var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["UrlApi"]';
         //alert(apiUrl);
 
         var a = $.trim(NoOrder1);
 
         $("#divLoader2").show();
-        $("#BodyModal").hide(); $("#JudulModal").hide(); $("#ButtonModal").hide(); 
+        $("#BodyModal").hide(); $("#JudulModal").hide(); $("#ButtonModal").hide();
         $('#myModalPopup').modal('toggle');
 
         $.ajax({
@@ -322,7 +468,7 @@
 
                 });
 
-                $("#BodyModal").show(); $("#JudulModal").show(); $("#ButtonModal").show(); 
+                $("#BodyModal").show(); $("#JudulModal").show(); $("#ButtonModal").show();
                 //$('#myModalPopup').modal('toggle');
             },
             error: function (data) {
@@ -330,7 +476,13 @@
                 $('#myModalPopup').modal('hide');
                 swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error")
             }, //
-        });
+        });*@
+
     }
 </script>
+
+@*Javascript untuk get data using popup*@
+@*<script type="text/javascript">
+    
+</script>*@
 
