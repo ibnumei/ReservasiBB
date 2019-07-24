@@ -26,6 +26,7 @@ namespace ReservBigBird.Controllers
         public ActionResult Index()
         {
             ViewBag.Current = "1";
+            ViewBag.CekDataVar = "CekDataValue";
             return View();
         }
 
@@ -222,11 +223,29 @@ namespace ReservBigBird.Controllers
 
                 listPostTerimaOrder.ModalTglAwal = listPostTerimaOrder.ModalTglAwal.Substring(6, 4) + "" + listPostTerimaOrder.ModalTglAwal.Substring(3, 2) + "" + listPostTerimaOrder.ModalTglAwal.Substring(0, 2);
 
-                listPostTerimaOrder.ModalJamAwal = listPostTerimaOrder.ModalJamAwal.Substring(0, 2) + "" + listPostTerimaOrder.ModalJamAwal.Substring(3, 2);
+                if(Convert.ToInt64(listPostTerimaOrder.ModalJamAwal) < 10)
+                {
+                    //listPostTerimaOrder.ModalJamAwal = listPostTerimaOrder.ModalJamAwal.Substring(0, 2) + "" + listPostTerimaOrder.ModalJamAwal.Substring(3, 2);
+                    listPostTerimaOrder.ModalJamAwal = "0"+listPostTerimaOrder.ModalJamAwal+"00";
+                }
+                else
+                {
+                    listPostTerimaOrder.ModalJamAwal = listPostTerimaOrder.ModalJamAwal + "00";
+                }
+                
 
                 listPostTerimaOrder.ModalTglAkhir = listPostTerimaOrder.ModalTglAkhir.Substring(6, 4) + "" + listPostTerimaOrder.ModalTglAkhir.Substring(3, 2) + "" + listPostTerimaOrder.ModalTglAkhir.Substring(0, 2);
 
-                listPostTerimaOrder.ModalJamAkhir = listPostTerimaOrder.ModalJamAkhir.Substring(0, 2) + "" + listPostTerimaOrder.ModalJamAkhir.Substring(3, 2);
+                if (Convert.ToInt64(listPostTerimaOrder.ModalJamAkhir) < 10)
+                {
+                    //listPostTerimaOrder.ModalJamAkhir = listPostTerimaOrder.ModalJamAkhir.Substring(0, 2) + "" + listPostTerimaOrder.ModalJamAkhir.Substring(3, 2);
+                    listPostTerimaOrder.ModalJamAkhir = "0" + listPostTerimaOrder.ModalJamAkhir + "00";
+                }
+                else
+                {
+                    listPostTerimaOrder.ModalJamAkhir = listPostTerimaOrder.ModalJamAkhir + "00";
+                }
+                
 
                 var datenow = now.ToString("yyyyMMdd");
                 var timenow = now.ToString("HHmm");

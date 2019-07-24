@@ -60,7 +60,7 @@
                     }
 
                     <tr>
-                        <td class="NamaPool">
+                        <td class="NamaPool" id="btnPostDate">
                             @if (listTemp.Min() < ViewBag.JmlBus)
                             {
                                 <a class="btn" disabled>@aa.poolName</a>
@@ -70,20 +70,7 @@
                                 @* A S L I*@
                                 <a onclick="getStatus()" class="btn btn-default">@aa.poolName</a>
 
-                                @*<form id="FormPopup2">
-
-                                    <input type="text" value="@aa.poolName" name="ModalNmPool" hidden/>
-                                    <input type="text" value="@ViewBag.bus" name="ModalJenis" hidden/>
-                                    <input type="text" value="@ViewBag.JmlBus" name="ModalJmlBus" hidden/>
-
-                                    <input type="text" value="@ViewBag.TglAwal" name="ModalTglAwal" hidden/>
-                                    <input type="text" value="@ViewBag.JamAwal" name="ModalJamAwal" hidden/>
-                                    <input type="text" value="@ViewBag.TglAkhir" name="ModalTglAkhir" hidden/>
-                                    <input type="text" value="@ViewBag.JamAkhir" name="ModalJamAkhir" hidden/>
-                                    <input type="text" value="@ViewBag.KelTujuan" name="ModalKelTujuan" hidden/>
-
-                                    <input type="button" class="btn btn-primary btn-md" value="@aa.poolName" id="submit2" />
-                                </form>*@
+                                
                             }
                         </td>
 
@@ -140,7 +127,6 @@
 }
 
 
-
 <div id="ModalSmall" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -154,45 +140,45 @@
 
             <div class="modal-body">
 
-                <form id="FormPopup">
+                <form id="FormPopupTableDate">
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label>Nama Pool</label>
-                            <input type="text" id="ModalNmPool" name="ModalNmPool" class="form-control" readonly="readonly" />
+                            <input type="text" id="ModalNmPool" name="ModalNmPool" class="form-control" />
                         </div>
                         <div class="form-group col-md-4">
                             <label>Jenis</label>
-                            <input type="text" id="ModalJenis" name="ModalJenis" class="form-control" readonly="readonly" />
+                            <input type="text" id="ModalJenis" name="ModalJenis" class="form-control" />
                         </div>
                         <div class="form-group col-md-4">
                             <label>Jumlah Bus</label>
-                            <input type="text" id="ModalJmlBus" name="ModalJmlBus" class="form-control" readonly="readonly" />
+                            <input type="text" id="ModalJmlBus" name="ModalJmlBus" class="form-control" />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Tgl Awal</label>
-                            <input type="text" id="ModalTglAwal" name="ModalTglAwal" class="form-control" readonly="readonly" />
+                            <input type="text" id="ModalTglAwal" name="ModalTglAwal" class="form-control" />
                         </div>
                         <div class="form-group col-md-6">
                             <label>Jam Awal</label>
-                            <input type="text" id="ModalJamAwal" name="ModalJamAwal" class="form-control" readonly="readonly" />
+                            <input type="text" id="ModalJamAwal" name="ModalJamAwal" class="form-control" />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Tgl Akhir</label>
-                            <input type="text" id="ModalTglAkhir" name="ModalTglAkhir" class="form-control" readonly="readonly" />
+                            <input type="text" id="ModalTglAkhir" name="ModalTglAkhir" class="form-control" />
                         </div>
                         <div class="form-group col-md-6">
                             <label>Jam Akhir</label>
-                            <input type="text" id="ModalJamAkhir" name="ModalJamAkhir" class="form-control" readonly="readonly" />
+                            <input type="text" id="ModalJamAkhir" name="ModalJamAkhir" class="form-control" />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label>Kel Tujuan</label>
-                            <input type="text" id="ModalKelTujuan" name="ModalKelTujuan" class="form-control" readonly="readonly" />
+                            <input type="text" id="ModalKelTujuan" name="ModalKelTujuan" class="form-control" />
                         </div>
                         
                     </div>
@@ -267,9 +253,10 @@
 
 <script>
 
+
     //set minutes
     var mins = 0.12;
-    var trigger = 0;
+    var trigger = 0; var statusclick = 0;
     //calculate the seconds
     var secs = 10;
 
@@ -343,7 +330,37 @@
             swal("Warning", "Batas Waktu Telah Habis, Lakukan Pencarian Ulang..!", "warning");
         }
         else {
-            $('#ModalSmall').modal('toggle');
+            $('#table1 tbody').on('click', '#btnPostDate', function () {
+                var currow = $(this).closest('tr');
+                //console.log(currow);
+
+                var a = $.trim(currow.find('.NamaPool').text());
+                document.getElementById("ModalNmPool").value = a;
+                
+                var a1 = $.trim(currow.find('.Jenis').text());
+                document.getElementById("ModalJenis").value = a1;
+
+                var a2 = $.trim(currow.find('.JmlBus').text());
+                document.getElementById("ModalJmlBus").value = a2;
+
+                var a3 = $.trim(currow.find('.TglAwal').text());
+                document.getElementById("ModalTglAwal").value = a3;
+
+                var a4 = $.trim(currow.find('.JamAwal').text());
+                document.getElementById("ModalJamAwal").value = a4;
+
+                var a5 = $.trim(currow.find('.TglAkhir').text());
+                document.getElementById("ModalTglAkhir").value = a5;
+
+                var a6 = $.trim(currow.find('.JamAkhir').text());
+                document.getElementById("ModalJamAkhir").value = a6;
+
+                var a7 = $.trim(currow.find('.KelTujuan').text());
+                document.getElementById("ModalKelTujuan").value = a7;
+
+                $('#renderTable2').load("_TableHasilInput", $('#FormPopupTableDate').serialize());
+            })
+            //$('#ModalSmall').modal('toggle');
         }
     }
 
@@ -372,35 +389,7 @@
     }
 </style>
 <script>
-    $('#table1 tbody').on('click', '.btn', function () {
-        var currow = $(this).closest('tr');
-        console.log(currow);
-
-        var a = $.trim(currow.find('.NamaPool').text());
-        document.getElementById("ModalNmPool").value = a;
-
-        var a1 = $.trim(currow.find('.Jenis').text());
-        document.getElementById("ModalJenis").value = a1;
-
-        var a2 = $.trim(currow.find('.JmlBus').text());
-        document.getElementById("ModalJmlBus").value = a2;
-
-        var a3 = $.trim(currow.find('.TglAwal').text());
-        document.getElementById("ModalTglAwal").value = a3;
-
-        var a4 = $.trim(currow.find('.JamAwal').text());
-        document.getElementById("ModalJamAwal").value = a4;
-
-        var a5 = $.trim(currow.find('.TglAkhir').text());
-        document.getElementById("ModalTglAkhir").value = a5;
-
-        var a6 = $.trim(currow.find('.JamAkhir').text());
-        document.getElementById("ModalJamAkhir").value = a6;
-
-        var a7 = $.trim(currow.find('.KelTujuan').text());
-        document.getElementById("ModalKelTujuan").value = a7;
-
-    })
+    
 </script>
 
 

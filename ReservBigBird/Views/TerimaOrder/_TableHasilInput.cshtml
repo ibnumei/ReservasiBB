@@ -33,17 +33,17 @@
                         <td class="JamAwal">@afterPostTerimaOrder.SBSJAW</td>
                         <td class="TglAkhir">@afterPostTerimaOrder.SBSTAK</td>
                         <td class="JamAkhir">@afterPostTerimaOrder.SBSJAK</td>
-                        <td class="Jumlah">@afterPostTerimaOrder.SBSJB</td>
+                        <td class="Jumlah">@((int)afterPostTerimaOrder.SBSJB)</td>
                         <td class="TglTrans">@afterPostTerimaOrder.SBSTAS</td>
                         <td class="JamTrans">@afterPostTerimaOrder.SBSJAS</td>
                         <td class="KelTujuan">@afterPostTerimaOrder.KTJID</td>
                         <td id="btnDel">
                             @*<a onclick="deleteRow(this)">Delete</a>*@
-                        <button class="btn btn-danger" onclick="deleteRow(this)">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </td>
-                </tr>
+                            <button class="btn btn-danger" onclick="deleteRow(this)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
             }
             </tbody>
         </table>
@@ -94,6 +94,11 @@
 </div>
 
 <script>
+    $(document).ready(function () {
+        if ("@ViewBag.CekDataVar" == "CekDataValue") {
+            $('#renderTable2').load("_TableHasilInput", $('#FormPopupNo').serialize());
+        }
+    });
         var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["UrlApi"]';
         var a, b, c, d, e, f, g, h, i, j, k;
         var param;

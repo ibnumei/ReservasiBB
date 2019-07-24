@@ -85,16 +85,20 @@
                                             <option value="Sunday">Minggu</option>
                                         </select>
                                     </div>
-                                    <div class="col-lg-2">
-                                        <div class="clockpicker">
-                                            <input type="text" name="jamawalpilih" id="jamawalpilih" class="form-control" placeholder="Pilih Jam" autocomplete="off">
+                                    <div class="col-lg-1">
+                                        <b>Jam Awal</b>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <div>
+                                            @*<input type="text" name="jamawalpilih" id="jamawalpilih" class="form-control" placeholder="Pilih Jam">*@
+                                            <input type="number" name="jamawalpilih" id="jamawalpilih" class="form-control" placeholder="Jam" min="1" max="24"/>
                                         </div>
                                     </div>
                                     <div class="col-lg-2">
                                         <b>Kel Tujuan</b>
                                     </div>
                                     <div class="col-lg-2">
-                                        <select name="KelTujuan" class="form-control">
+                                        <select name="KelTujuan" class="form-control" id="KelTujuan">
                                             <option value="0A">0A</option>
                                             <option value="0C">0C</option>
                                             <option value="4A">4A</option>
@@ -125,16 +129,20 @@
                                             <option value="Sunday">Minggu</option>
                                         </select>
                                     </div>
-                                    <div class="col-lg-2">
+                                    <div class="col-lg-1">
+                                        <b>Jam Akhir</b>
+                                    </div>
+                                    <div class="col-lg-1">
                                         <div class="clockpicker">
-                                            <input type="text" id="jamakhirpilih" name="jamakhirpilih" class="form-control" placeholder="Pilih Jam" autocomplete="off">
+                                            @*<input type="text" id="jamakhirpilih" name="jamakhirpilih" class="form-control" placeholder="Pilih Jam" autocomplete="off">*@
+                                            <input type="number" name="jamakhirpilih" id="jamakhirpilih" class="form-control" placeholder="Jam" min="0" max="24" readonly="readonly" />
                                         </div>
                                     </div>
                                     <div class="col-lg-2">
                                         <b>Jumlah Bus</b>
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="number" name="JumlahBus" class="form-control" autocomplete="on" />
+                                        <input type="number" min="1" name="JumlahBus" class="form-control" autocomplete="on" />
                                     </div>
                                 </div>
                                 <br />
@@ -231,9 +239,12 @@
                                     </div>
                                     <div class="col-sm-9">
                                         <select class="form-control" name="Kategori">
-                                            <option value="Sekolah">Sekolah</option>
-                                            <option value="Instansi">Instansi</option>
                                             <option value="Perusahaan">Perusahaan</option>
+                                            <option value="Sekolah">Sekolah</option>
+                                            <option value="Travel">Travel</option>
+                                            <option value="Personal">Personal</option>
+                                            <option value="Instansi">Instansi</option>
+                                            <option value="Dinas">Dinas</option>
                                         </select>
                                     </div>
                                 </div>
@@ -306,28 +317,28 @@
                                         <b>Penerima Order</b>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="PenerimaOrder">
+                                        <input type="text" class="form-control" name="PenerimaOrder" value="@Session["usernm"]" readonly>
                                     </div>
                                 </div>
                                 <br />
-                                <div class="row">
+                                @*<div class="row">
                                     <div class="col-sm-3">
                                         <b>Jenis Bus</b>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="JenisBus">
+                                        <input type="text" class="form-control" name="JenisBus" >
                                     </div>
                                 </div>
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <b>Kel Tujuan</b>
+                                        <b >Kel Tujuan</b>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="KelTujuan">
+                                        <input type="text" class="form-control" name="KelTujuan" >
                                     </div>
                                 </div>
-                                <br />
+                                <br />*@
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <b>Tujuan</b>
@@ -446,6 +457,41 @@
 
 @*Javascript Validasi Tanggal*@
 <script type="text/javascript">
+    $(function () {
+        $("#KelTujuan").change(function () {
+            //var selectedText = $(this).find("option:selected").text();
+            //var selectedValue = $(this).val();
+            //alert("Selected Text: " + selectedText + " Value: " + selectedValue);
+            var selectedValue = $(this).val();
+            var SumTgl = $("#jamawalpilih").val();
+            var SumTgl2 = parseInt(SumTgl);
+            SumTgl2 = SumTgl2 + 12;
+            if (SumTgl2 > 24) {
+                SumTgl2 = 24;
+                $("#jamakhirpilih").val(SumTgl2);
+            }
+            else {
+                $("#jamakhirpilih").val(SumTgl2);
+            }
+            
+        });
+    });
+    $(function () {
+        $("#jamawalpilih").change(function () {
+            var SumJam = $(this).val();
+            var SumTgl = $("#KelTujuan").val();
+            var SumTgl2 = parseInt(SumJam);
+            SumTgl2 = SumTgl2 + 12;
+            if (SumTgl2 > 24) {
+                SumTgl2 = 24;
+                $("#jamakhirpilih").val(SumTgl2);
+            }
+            else {
+                $("#jamakhirpilih").val(SumTgl2);
+            }
+
+        });
+    });
     function ValidasiTgl(Jenis) {
         
         var weekday = new Array(7);
@@ -513,8 +559,20 @@
                         document.getElementById("tgljemputmodal").value = a0;
                         document.getElementById("tglselesaimodal").value = d0;
 
-                        document.getElementById("jamjemputmodal").value = c;
-                        document.getElementById("jamslsaimodal").value = f;
+                        //convert jam to int
+                        var IntC = parseInt(c); var IntF = parseInt(f);
+                        if (IntC < 10) {
+                            IntC = "0" + IntC + ":00";
+                        } else {
+                            IntC = IntC + ":00";
+                        }
+                        if (IntF < 10) {
+                            IntF = "0" + IntF + ":00";
+                        } else {
+                            IntF = IntF + ":00"
+                        }
+                        document.getElementById("jamjemputmodal").value = IntC;
+                        document.getElementById("jamslsaimodal").value = IntF;
 
                         //$('#myModal13').modal('toggle');
 
@@ -572,7 +630,13 @@
 @*Javascript Kalender*@
 <script>
     $(function () {
-        $("#tglawalpilih,#tglakhirpilih,#tgljemputmodal,#tglselesaimodal").datepicker({ dateFormat: 'dd-mm-yy' });
+        $("#tglawalpilih,#tglakhirpilih,#tgljemputmodal,#tglselesaimodal").datepicker({
+            
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd-mm-yy',
+            minDate:0
+        });
     });
 
 
