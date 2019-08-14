@@ -162,7 +162,7 @@ namespace ReservBigBird.API_Model
         public string JamAwal { get; set; }
         public string TglAkhir { get; set; }
         public string JamAkhir { get; set; }
-        
+
         public string KelTujuan { get; set; }
     }
 
@@ -251,6 +251,20 @@ namespace ReservBigBird.API_Model
         public string Nip1Nama { get; set; }
         public string Nip2Nama { get; set; }
         public object Nip2Hp { get; set; }
+    }
+
+    public class PopupMonitorOrder
+    {
+        public string JenisPembayaran { get; set; }
+        public String LebihBayar { get; set; }
+        public string BiayaBatal { get; set; }
+        public String TarifBus { get; set; }
+        public String Disc { get; set; }
+        public String RpDiskon { get; set; }
+        public String TotalBayar { get; set; }
+        public String SudahDibayar { get; set; }
+        public String SisaPembayaran { get; set; }
+        public String Pph23 { get; set; }
     }
 
 }

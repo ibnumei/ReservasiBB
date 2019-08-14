@@ -134,24 +134,29 @@
             .then((willDelete) => {
                 if (willDelete) {
                     $.ajax({
-                        type: "DELETE",
-                        //type: "POST",
-                        url: apiUrl + "/api/GetStock?userid=Administrator&jenis=" + a + "&ac=" + b + "&pool=" + c + "&tglawal=" + d + "&jamawal=" + e + "&tglakhir=" + f + "&jamakhir=" + g + "&keltujuan=" + k,
-                        //url: "/TerimaOrder/NewFuncDel",
-                        //data: JSON.stringify(pardel),
-                        //contentType: "application/json; charset=utf-8",
-                        //dataType: "json",
+                        //type: "DELETE",
+                        type: "POST",
+                        
+                        url: "/TerimaOrder/NewFuncDel",
+                        data: JSON.stringify(pardel),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
                       // success: window.location.reload(),
                         success: function (response) {
-                            swal("Order Has Been Deleted!", {
-                                icon: "success",
-                            }).then(function() {
-                              //  window.location.href = "/Technician/Index"
-                                // window.location.reload()
-                                //$(this).closest('tr').remove();
-                                //document.getElementById("TableHasil").deleteRow(param);
-                                $('#renderTable2').load("_TableHasilInput", $('#FormPopupNo').serialize());
-                            });
+                            if (response.success) {
+                                swal("Order Has Been Deleted!", {
+                                    icon: "success",
+                                }).then(function () {
+                                    //  window.location.href = "/Technician/Index"
+                                    // window.location.reload()
+                                    //$(this).closest('tr').remove();
+                                    //document.getElementById("TableHasil").deleteRow(param);
+                                    $('#renderTable2').load("_TableHasilInput", $('#FormPopupNo').serialize());
+                                });
+                            } else {
+                                swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error")
+                            }
+                            
 
                         },
                         error: function (response) {

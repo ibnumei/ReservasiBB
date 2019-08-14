@@ -59,7 +59,7 @@ namespace ReservBigBird.Controllers
                             MemoryStream stream = new MemoryStream(byteArray);
                             HasilLogin resultData = serializer.ReadObject(stream) as HasilLogin;
 
-                            Session["userid"] = resultData.USRNM;
+                            Session["userid"] = resultData.USRID;
                             Session["usernm"] = resultData.USRNM;
 
                             return Redirect("TerimaOrder/Index");

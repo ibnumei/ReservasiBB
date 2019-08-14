@@ -97,6 +97,8 @@ namespace ReservBigBird.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 try
                 {
+                    //url: apiUrl + "/Api/Plans?popordid=&popnpk=&popnpm=&popid=" + b + "&poppolid=" + a + "&popdaow=" + c,
+
                     HttpResponseMessage message = client.GetAsync(url + "/Api/Plans?popordid=&popnpk=&popnpm=&popid=" + popid + "&poppolid=" + poppolid + "&popdaow=" + popdaow).Result;
 
                     if (message.IsSuccessStatusCode)

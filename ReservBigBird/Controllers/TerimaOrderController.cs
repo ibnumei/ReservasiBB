@@ -52,7 +52,7 @@ namespace ReservBigBird.Controllers
             String url = ConfigurationManager.AppSettings["UrlApi"].ToString();
 
             //Ambil session username
-            postHeader.UserId = Session["usernm"].ToString();
+            postHeader.UserId = Session["userid"].ToString();
 
             var json2 = new JavaScriptSerializer().Serialize(postHeader);
             var stringPayload = JsonConvert.SerializeObject(postHeader);
@@ -210,7 +210,7 @@ namespace ReservBigBird.Controllers
             //Ambil link url di web config
             String url = ConfigurationManager.AppSettings["UrlApi"].ToString();
 
-            String sessionname = Session["usernm"].ToString();
+            String sessionname = Session["userid"].ToString();
 
             //JIKA PARAMETER NULL digunakan untuk reload setelah delete
             if (listPostTerimaOrder.ModalNmPool != null)
@@ -486,13 +486,52 @@ namespace ReservBigBird.Controllers
             //return Json(new { success = true });
         }
 
-        //[HttpPost]
-        //public JsonResult NewFuncDel(DeleteTerimaOrderNew deleteTerimaOrderNew)
-        //{
-        //    //Ambil link url di web config
-        //    String url = ConfigurationManager.AppSettings["UrlApi"].ToString();
-        //    String sessionname = Session["usernm"].ToString();
-        //    deleteTerimaOrderNew.userid = sessionname;
-        //}
+        [HttpPost]
+        public JsonResult NewFuncDel(DeleteTerimaOrderNew deleteTerimaOrderNew)
+        {
+            //Ambil link url di web config
+            String url = ConfigurationManager.AppSettings["UrlApi"].ToString();
+
+            String sessionname = Session["userid"].ToString();
+
+            deleteTerimaOrderNew.userid = sessionname;
+
+            var json2 = new JavaScriptSerializer().Serialize(deleteTerimaOrderNew);
+            var stringPayload = JsonConvert.SerializeObject(deleteTerimaOrderNew);
+            //String response = "";
+            var credentials = new NetworkCredential("username", "password");
+            var handler = new HttpClientHandler { Credentials = credentials };
+            var httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
+            using (var client = new HttpClient(handler))
+            {
+                try
+                {
+                    //url: apiUrl + "/api/GetStock?userid=Administrator&jenis=" + a + "&ac=" + b + "&pool=" + c + "&tglawal=" + d + "&jamawal=" + e + "&tglakhir=" + f + "&jamakhir=" + g + "&keltujuan=" + k,
+                    HttpResponseMessage message = client.DeleteAsync(url + "/api/GetStock?userid="+deleteTerimaOrderNew.userid+"&jenis=" + deleteTerimaOrderNew.Jenis + "&ac=" + deleteTerimaOrderNew.AC + "&pool=" + deleteTerimaOrderNew.Pool + "&tglawal=" + deleteTerimaOrderNew.TglAwal + "&jamawal=" + deleteTerimaOrderNew.JamAwal + "&tglakhir=" + deleteTerimaOrderNew.TglAkhir + "&jamakhir=" + deleteTerimaOrderNew.JamAkhir + "&keltujuan=" + deleteTerimaOrderNew.KelTujuan).Result;
+
+                    if (message.IsSuccessStatusCode)
+                    {
+
+                        //return Json(new { success = true });
+                        //return "{\"msg\":\"success\"}";
+                        //return Json("Delete");
+                        return Json(new { success = true, responseText = "The attached file is not supported." }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        //return Json(new { success = false });
+                        return Json(new { success = false, responseText = "The attached file is not supported." }, JsonRequestBehavior.AllowGet);
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    //return Json(new { success = false });
+                    return Json(new { success = false, responseText = "The attached file is not supported." }, JsonRequestBehavior.AllowGet);
+                }
+            }
+
+        }
     }
 }

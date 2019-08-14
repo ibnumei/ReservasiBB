@@ -349,52 +349,66 @@
                     $("#BodyModal").hide(); $("#JudulModal").hide(); $("#ButtonModal").hide();
                     $('#myModalPopup').modal('toggle');
 
+                    var parmo = new Object();
+                    parmo.ordid = a;
+
                     $.ajax({
-                        type: "GET",
-                        url: apiUrl + "/Api/Orders?ordid=" + a + "&ordnpt=&ordnpm=&kondisi=",
+                        //type: "GET",
+                        type: "POST",
+                        //url: apiUrl + "/Api/Orders?ordid=" + a + "&ordnpt=&ordnpm=&kondisi=",
+                        url: "/MonitorOrder/GetDetail",
+                        data: JSON.stringify(parmo),
+                        contentType: "application/json; charset=utf-8",
                         dataType: "json",
 
                         success: function (data) {
-                            //console.log(data);
-                            $("#divLoader2").hide();
-                            $.each(data, function (i, item) {
+                            if (data.success) {
+                                $('#myModalPopup').modal('hide');
+                                swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error")
+                            }
+                            else {
+                                //console.log(data);
+                                $("#divLoader2").hide();
+                                $.each(data, function (i, item) {
 
-                                if (item.JenisPembayaran == null) { document.getElementById("JenisPemby").value = ""; }
-                                else { document.getElementById("JenisPemby").value = item.JenisPembayaran; }
+                                    if (item.JenisPembayaran == null) { document.getElementById("JenisPemby").value = ""; }
+                                    else { document.getElementById("JenisPemby").value = item.JenisPembayaran; }
 
-                                if (item.LebihBayar == null) { document.getElementById("LbhBayar").value = ""; }
-                                else { document.getElementById("LbhBayar").value = item.LebihBayar; }
+                                    if (item.LebihBayar == null) { document.getElementById("LbhBayar").value = ""; }
+                                    else { document.getElementById("LbhBayar").value = item.LebihBayar; }
 
-                                if (item.BiayaBatal == null) { document.getElementById("BiayaPembatalan").value = ""; }
-                                else { document.getElementById("BiayaPembatalan").value = item.BiayaBatal; }
+                                    if (item.BiayaBatal == null) { document.getElementById("BiayaPembatalan").value = ""; }
+                                    else { document.getElementById("BiayaPembatalan").value = item.BiayaBatal; }
 
-                                if (item.TarifBus == null) { document.getElementById("TarifBus").value = ""; }
-                                else { document.getElementById("TarifBus").value = item.TarifBus; }
+                                    if (item.TarifBus == null) { document.getElementById("TarifBus").value = ""; }
+                                    else { document.getElementById("TarifBus").value = item.TarifBus; }
 
-                                if (item.Disc == null) { document.getElementById("Diskon").value = ""; }
-                                else { document.getElementById("Diskon").value = item.Disc; }
+                                    if (item.Disc == null) { document.getElementById("Diskon").value = ""; }
+                                    else { document.getElementById("Diskon").value = item.Disc; }
 
-                                if (item.RpDiskon == null) { document.getElementById("RpDiskon").value = ""; }
-                                else { document.getElementById("RpDiskon").value = item.RpDiskon; }
+                                    if (item.RpDiskon == null) { document.getElementById("RpDiskon").value = ""; }
+                                    else { document.getElementById("RpDiskon").value = item.RpDiskon; }
 
-                                if (item.TotalBayar == null) { document.getElementById("TotalPembayaran").value = ""; }
-                                else { document.getElementById("TotalPembayaran").value = item.TotalBayar; }
+                                    if (item.TotalBayar == null) { document.getElementById("TotalPembayaran").value = ""; }
+                                    else { document.getElementById("TotalPembayaran").value = item.TotalBayar; }
 
-                                if (item.SudahDibayar == null) { document.getElementById("SdhDibayar").value = ""; }
-                                else { document.getElementById("SdhDibayar").value = item.SudahDibayar; }
+                                    if (item.SudahDibayar == null) { document.getElementById("SdhDibayar").value = ""; }
+                                    else { document.getElementById("SdhDibayar").value = item.SudahDibayar; }
 
-                                if (item.SisaPembayaran == null) { document.getElementById("SisaPembyran").value = ""; }
-                                else { document.getElementById("SisaPembyran").value = item.SisaPembayaran; }
+                                    if (item.SisaPembayaran == null) { document.getElementById("SisaPembyran").value = ""; }
+                                    else { document.getElementById("SisaPembyran").value = item.SisaPembayaran; }
 
-                                if (item.Pph23 == null) { document.getElementById("pph23").value = ""; }
-                                else { document.getElementById("pph23").value = item.Pph23; }
+                                    if (item.Pph23 == null) { document.getElementById("pph23").value = ""; }
+                                    else { document.getElementById("pph23").value = item.Pph23; }
 
 
 
-                            });
+                                });
 
-                            $("#BodyModal").show(); $("#JudulModal").show(); $("#ButtonModal").show();
+                                $("#BodyModal").show(); $("#JudulModal").show(); $("#ButtonModal").show();
                             //$('#myModalPopup').modal('toggle');
+                            }
+                           
                         },
                         error: function (data) {
                             //alert("erorr");

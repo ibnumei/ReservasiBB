@@ -360,7 +360,7 @@
 
     $(document).ready(function () {
         $('#submit').on('click', function () {
-            var VarSes = '@Session["usernm"]';
+            var VarSes = '@Session["userid"]';
             if (VarSes == null || VarSes == "") {
                 window.location.href = '/Login/Index';
             } else {
