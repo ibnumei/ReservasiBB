@@ -360,24 +360,30 @@
 
     $(document).ready(function () {
         $('#submit').on('click', function () {
-            $("#divLoader").show();
-            var tesnu = $('#Form1').serialize();
+            var VarSes = '@Session["usernm"]';
+            if (VarSes == null || VarSes == "") {
+                window.location.href = '/Login/Index';
+            } else {
+                $("#divLoader").show();
+                var tesnu = $('#Form1').serialize();
 
-            var count = 0;
+                var count = 0;
 
-            if (document.getElementById("NoOrder").value == "") { count = count + 1 }
-            if (document.getElementById("NamaPemakai").value == "") { count = count + 1 }
-            if (document.getElementById("NamaPemesan").value == "") { count = count + 1 }
-            if (document.getElementById("Pool").value == "") { count = count + 1 }
-            console.log(count);
+                if (document.getElementById("NoOrder").value == "") { count = count + 1 }
+                if (document.getElementById("NamaPemakai").value == "") { count = count + 1 }
+                if (document.getElementById("NamaPemesan").value == "") { count = count + 1 }
+                if (document.getElementById("Pool").value == "") { count = count + 1 }
+                //console.log(count);
 
-            console.log(tesnu);
-            if (count < 4) {
-                $('#renderTable').load("_TableDisplayPlanning", $('#Form1').serialize());
+                //console.log(tesnu);
+                if (count < 4) {
+                    $('#renderTable').load("_TableDisplayPlanning", $('#Form1').serialize());
+                }
+                else {
+                    swal("Perhatikan Kolom", "Silahkan Isi Salah Satu Kolom di Form Tersebut", "warning");
+                }
             }
-            else {
-                swal("Perhatikan Kolom", "Silahkan Isi Salah Satu Kolom di Form Tersebut", "warning");
-            }
+
 
         });
     });

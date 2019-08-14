@@ -129,6 +129,10 @@
                 </div>
 
                 <div class="box-body" id="renderTable">
+                    @*@if (Session["usernm"] == null || Session["usernm"].ToString() == "")
+                    {
+                        Response.Redirect("~/Login");
+                    }*@
                     @Html.Partial("_TableMonitorOrder")
                 </div>
 
@@ -152,24 +156,30 @@
             $("#divLoader").hide();
         }
         $('#submit').on('click', function () {
-            $("#divLoader").show();
-            var tesnu = $('#Form1').serialize();
+            var VarSes = '@Session["usernm"]';
+            if (VarSes == null || VarSes == "") {
+                window.location.href = '/Login/Index';
+            } else {
+                $("#divLoader").show();
+                var tesnu = $('#Form1').serialize();
 
-            var count = 0;
-            if (document.getElementById("KondisiOrder").value == "semua") { count = count + 1 }
-            if (document.getElementById("NoOrder").value == "") { count = count + 1 }
-            if (document.getElementById("Perusahaan").value == "") { count = count + 1 }
-            if (document.getElementById("Pemesan").value == "") { count = count + 1 }
-            console.log(count);
+                var count = 0;
+                if (document.getElementById("KondisiOrder").value == "semua") { count = count + 1 }
+                if (document.getElementById("NoOrder").value == "") { count = count + 1 }
+                if (document.getElementById("Perusahaan").value == "") { count = count + 1 }
+                if (document.getElementById("Pemesan").value == "") { count = count + 1 }
+                //console.log(count);
 
-            console.log(tesnu);
-            if (count < 4) {
-                $('#renderTable').load("_TableMonitorOrder", $('#Form1').serialize());
+                //console.log(tesnu);
+                if (count < 4) {
+                    $('#renderTable').load("_TableMonitorOrder", $('#Form1').serialize());
+                }
+                else {
+                    swal("Perhatikan Kolom", "Silahkan Isi Salah Satu Kolom di Form Tersebut", "warning");
+                    $("#divLoader").hide();
+                }
             }
-            else {
-                swal("Perhatikan Kolom", "Silahkan Isi Salah Satu Kolom di Form Tersebut", "warning");
-                $("#divLoader").hide();
-            }
+            
 
         });
     });

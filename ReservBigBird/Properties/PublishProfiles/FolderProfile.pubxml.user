@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\ibnumei\Desktop\Upload Web BB 24072019</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\ibnumei\Desktop\upload 26072019</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Antlr3.Runtime.dll">
@@ -28,10 +28,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/10/2019 08:30:59</publishTime>
     </File>
     <File Include="bin/ReservBigBird.dll">
-      <publishTime>07/24/2019 16:01:32</publishTime>
+      <publishTime>07/26/2019 15:26:19</publishTime>
     </File>
     <File Include="bin/ReservBigBird.pdb">
-      <publishTime>07/24/2019 16:01:32</publishTime>
+      <publishTime>07/26/2019 15:26:19</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>07/10/2019 08:30:59</publishTime>
@@ -20122,7 +20122,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/10/2019 08:30:33</publishTime>
     </File>
     <File Include="Content/CssLogin/main.css">
-      <publishTime>07/10/2019 08:30:33</publishTime>
+      <publishTime>07/26/2019 11:02:46</publishTime>
     </File>
     <File Include="Content/CssLogin/util.css">
       <publishTime>07/10/2019 08:30:33</publishTime>
@@ -20179,7 +20179,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/10/2019 08:30:44</publishTime>
     </File>
     <File Include="Content/dist/css/skins/skin-blue-light.min.css">
-      <publishTime>07/10/2019 08:30:44</publishTime>
+      <publishTime>07/26/2019 09:58:02</publishTime>
     </File>
     <File Include="Content/dist/css/skins/skin-blue.css">
       <publishTime>07/10/2019 08:30:44</publishTime>
@@ -20273,6 +20273,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/dist/img/bg-02.jpeg">
       <publishTime>07/10/2019 08:30:44</publishTime>
+    </File>
+    <File Include="Content/dist/img/bigbirdfull.png">
+      <publishTime>07/25/2019 22:50:05</publishTime>
+    </File>
+    <File Include="Content/dist/img/bigbirdfull2.png">
+      <publishTime>07/26/2019 10:10:12</publishTime>
+    </File>
+    <File Include="Content/dist/img/bigbirdlogo.png">
+      <publishTime>07/25/2019 22:38:30</publishTime>
     </File>
     <File Include="Content/dist/img/bluebird-logo-new.png">
       <publishTime>07/10/2019 08:30:44</publishTime>
@@ -21019,10 +21028,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/10/2019 08:30:45</publishTime>
     </File>
     <File Include="Views/DisplayPlanning/Index.cshtml">
-      <publishTime>07/10/2019 08:30:45</publishTime>
+      <publishTime>07/26/2019 14:58:14</publishTime>
     </File>
     <File Include="Views/DisplayPlanning/_TableDisplayPlanning.cshtml">
-      <publishTime>07/10/2019 09:17:43</publishTime>
+      <publishTime>07/26/2019 14:58:14</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>07/10/2019 08:30:45</publishTime>
@@ -21034,28 +21043,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/10/2019 08:30:45</publishTime>
     </File>
     <File Include="Views/Login/Index.cshtml">
-      <publishTime>07/10/2019 08:30:45</publishTime>
+      <publishTime>07/26/2019 11:06:25</publishTime>
     </File>
     <File Include="Views/MonitorOrder/Index.cshtml">
-      <publishTime>07/12/2019 14:23:10</publishTime>
+      <publishTime>07/26/2019 14:59:51</publishTime>
     </File>
     <File Include="Views/MonitorOrder/_TableMonitorOrder.cshtml">
-      <publishTime>07/12/2019 11:22:42</publishTime>
+      <publishTime>07/26/2019 14:59:51</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>07/10/2019 08:30:45</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>07/11/2019 20:46:15</publishTime>
+      <publishTime>07/26/2019 10:07:01</publishTime>
     </File>
     <File Include="Views/TerimaOrder/Index.cshtml">
-      <publishTime>07/24/2019 15:55:22</publishTime>
+      <publishTime>07/26/2019 15:08:34</publishTime>
     </File>
     <File Include="Views/TerimaOrder/_TableDate.cshtml">
-      <publishTime>07/12/2019 22:45:40</publishTime>
+      <publishTime>07/26/2019 15:19:26</publishTime>
     </File>
     <File Include="Views/TerimaOrder/_TableHasilInput.cshtml">
-      <publishTime>07/15/2019 15:26:22</publishTime>
+      <publishTime>07/26/2019 15:19:26</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>07/10/2019 08:30:45</publishTime>

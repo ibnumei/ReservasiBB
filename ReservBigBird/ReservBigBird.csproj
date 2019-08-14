@@ -6354,6 +6354,9 @@
     <Content Include="Content\dist\img\avnew.jpg" />
     <Content Include="Content\dist\img\bb-mini.jpeg" />
     <Content Include="Content\dist\img\bg-02.jpeg" />
+    <Content Include="Content\dist\img\bigbirdfull.png" />
+    <Content Include="Content\dist\img\bigbirdfull2.png" />
+    <Content Include="Content\dist\img\bigbirdlogo.png" />
     <Content Include="Content\dist\img\bluebird-logo-new.png" />
     <Content Include="Content\dist\img\credit\american-express.png" />
     <Content Include="Content\dist\img\credit\cirrus.png" />

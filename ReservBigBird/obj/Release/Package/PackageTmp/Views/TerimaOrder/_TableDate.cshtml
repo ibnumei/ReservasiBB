@@ -373,8 +373,14 @@
             }
             else {
                 var tesnu3 = $('#FormPopup').serialize();
-                console.log(tesnu3);
-                $('#renderTable2').load("_TableHasilInput", $('#FormPopup').serialize());
+                //console.log(tesnu3);
+                var VarSes = '@Session["usernm"]';
+                if (VarSes == null || VarSes == "") {
+                    window.location.href = '/Login/Index';
+                } else {
+                    $('#renderTable2').load("_TableHasilInput", $('#FormPopup').serialize());
+                }
+                
             }
 
 

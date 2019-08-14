@@ -104,11 +104,11 @@
         var param;
         function deleteRow(r) {
             param = r.parentNode.parentNode.rowIndex;
-            console.log(param);
+            //console.log(param);
         }
         $('#TableHasil tbody').on('click', '#btnDel', function () {
             var currow = $(this).closest('tr');
-            console.log(currow);
+            //console.log(currow);
 
             a = $.trim(currow.find('.Jenis').text());
             b = $.trim(currow.find('.AC').text());
@@ -122,7 +122,8 @@
             i = $.trim(currow.find('.TglTrans').text());
             j = $.trim(currow.find('.JamTrans').text());
             k = $.trim(currow.find('.KelTujuan').text());
-
+            var pardel = new Object();
+            pardel.Jenis = a; pardel.Ac = b; pardel.Pool = c; pardel.Tglawal = d; pardel.Jamawal = e; pardel.Tglakhir = f; pardel.Jamakhir = g; pardel.Keltujuan = k;
             swal({
             title: "Delete Your Order ?",
             text: "Once deleted, you will not be able to recover your data!",
@@ -134,7 +135,12 @@
                 if (willDelete) {
                     $.ajax({
                         type: "DELETE",
+                        //type: "POST",
                         url: apiUrl + "/api/GetStock?userid=Administrator&jenis=" + a + "&ac=" + b + "&pool=" + c + "&tglawal=" + d + "&jamawal=" + e + "&tglakhir=" + f + "&jamakhir=" + g + "&keltujuan=" + k,
+                        //url: "/TerimaOrder/NewFuncDel",
+                        //data: JSON.stringify(pardel),
+                        //contentType: "application/json; charset=utf-8",
+                        //dataType: "json",
                       // success: window.location.reload(),
                         success: function (response) {
                             swal("Order Has Been Deleted!", {

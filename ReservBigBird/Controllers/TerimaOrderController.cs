@@ -445,6 +445,7 @@ namespace ReservBigBird.Controllers
             DeleteTerimaOrder deleteTerimaOrder = new DeleteTerimaOrder()
             {
                 Jenis = deleteTerima.Jenis
+                
             };
 
             var json2 = new JavaScriptSerializer().Serialize(deleteTerimaOrder);
@@ -484,5 +485,14 @@ namespace ReservBigBird.Controllers
 
             //return Json(new { success = true });
         }
+
+        //[HttpPost]
+        //public JsonResult NewFuncDel(DeleteTerimaOrderNew deleteTerimaOrderNew)
+        //{
+        //    //Ambil link url di web config
+        //    String url = ConfigurationManager.AppSettings["UrlApi"].ToString();
+        //    String sessionname = Session["usernm"].ToString();
+        //    deleteTerimaOrderNew.userid = sessionname;
+        //}
     }
 }

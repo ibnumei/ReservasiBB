@@ -328,16 +328,16 @@
 
         $('#example3 tbody').on('click', 'button', function () {
             var data = table.row($(this).parents('tr')).data();
-            console.log(data);
+            //console.log(data);
             var bb = data[NoOrder];
-            console.log(bb);
+            //console.log(bb);
 
             for (var aa in data) {
                 if (aa == "NoOrder") {
                     var a1 = aa;
                     var a2 = data[aa];
 
-                    console.log(a1 + "," + a2);
+                    //console.log(a1 + "," + a2);
                     //alert(aa + " = " + data[aa])
 
                     var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["UrlApi"]';
@@ -355,7 +355,7 @@
                         dataType: "json",
 
                         success: function (data) {
-                            console.log(data);
+                            //console.log(data);
                             $("#divLoader2").hide();
                             $.each(data, function (i, item) {
 

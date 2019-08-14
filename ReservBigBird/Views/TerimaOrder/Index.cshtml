@@ -57,13 +57,13 @@
                                     <div class="col-lg-4">
                                     </div>
                                     <div class="col-lg-2">
-                                        <b>Pool</b>
+                                        @*<b>Pool</b>*@
                                     </div>
                                     <div class="col-lg-2">
-                                        <select name="Pool" class="form-control">
+                                        @*<select name="Pool" class="form-control">
                                             <option value="CJ">CJ</option>
                                             <option value="CP">CP</option>
-                                        </select>
+                                        </select>*@
                                     </div>
                                 </div>
                                 <br />
@@ -91,7 +91,7 @@
                                     <div class="col-lg-1">
                                         <div>
                                             @*<input type="text" name="jamawalpilih" id="jamawalpilih" class="form-control" placeholder="Pilih Jam">*@
-                                            <input type="number" name="jamawalpilih" id="jamawalpilih" class="form-control" placeholder="Jam" min="1" max="24"/>
+                                            <input type="number" name="jamawalpilih" id="jamawalpilih" class="form-control" placeholder="Jam" min="0" max="24"/>
                                         </div>
                                     </div>
                                     <div class="col-lg-2">
@@ -101,12 +101,12 @@
                                         <select name="KelTujuan" class="form-control" id="KelTujuan">
                                             <option value="0A">0A</option>
                                             <option value="0C">0C</option>
-                                            <option value="4A">4A</option>
-                                            <option value="4B">4B</option>
                                             <option value="1A">1A</option>
                                             <option value="1B">1B</option>
                                             <option value="2A">2A</option>
                                             <option value="2B">2B</option>
+                                            <option value="4A">4A</option>
+                                            <option value="4B">4B</option>
                                         </select>
                                     </div>
                                 </div>
@@ -133,11 +133,11 @@
                                         <b>Jam Akhir</b>
                                     </div>
                                     <div class="col-lg-1">
-                                        <div class="clockpicker">
-                                            @*<input type="text" id="jamakhirpilih" name="jamakhirpilih" class="form-control" placeholder="Pilih Jam" autocomplete="off">*@
-                                            <input type="number" name="jamakhirpilih" id="jamakhirpilih" class="form-control" placeholder="Jam" min="0" max="24" readonly="readonly" />
-                                        </div>
-                                    </div>
+                                        <input type="number" name="jamakhirpilih" id="jamakhirpilih" class="form-control" placeholder="Jam" min="0" max="24"/>
+                                        @*<div class="clockpicker">
+                                            <input type="text" id="jamakhirpilih" name="jamakhirpilih" class="form-control" placeholder="Pilih Jam" autocomplete="off">
+                                        </div>*@
+                                </div>
                                     <div class="col-lg-2">
                                         <b>Jumlah Bus</b>
                                     </div>
@@ -194,14 +194,18 @@
             <div id="divLoader" style="display:none;text-align:center"> <img src="~/Content/dist/img/ajax-loader-blue.gif" alt="Loader" /> </div>
         </div>
         <div id="renderTable" class="box-body">
+
             @Html.Partial("_TableDate")
+
         </div>
     </div>
     <div class="box box-success">
         <div class="box-header">
         </div>
         <div id="renderTable2" class="box-body">
+
             @Html.Partial("_TableHasilInput")
+
         </div>
     </div>
 </section>
@@ -457,41 +461,56 @@
 
 @*Javascript Validasi Tanggal*@
 <script type="text/javascript">
-    $(function () {
-        $("#KelTujuan").change(function () {
-            //var selectedText = $(this).find("option:selected").text();
-            //var selectedValue = $(this).val();
-            //alert("Selected Text: " + selectedText + " Value: " + selectedValue);
-            var selectedValue = $(this).val();
-            var SumTgl = $("#jamawalpilih").val();
-            var SumTgl2 = parseInt(SumTgl);
-            SumTgl2 = SumTgl2 + 12;
-            if (SumTgl2 > 24) {
-                SumTgl2 = 24;
-                $("#jamakhirpilih").val(SumTgl2);
-            }
-            else {
-                $("#jamakhirpilih").val(SumTgl2);
-            }
-            
-        });
-    });
-    $(function () {
-        $("#jamawalpilih").change(function () {
-            var SumJam = $(this).val();
-            var SumTgl = $("#KelTujuan").val();
-            var SumTgl2 = parseInt(SumJam);
-            SumTgl2 = SumTgl2 + 12;
-            if (SumTgl2 > 24) {
-                SumTgl2 = 24;
-                $("#jamakhirpilih").val(SumTgl2);
-            }
-            else {
-                $("#jamakhirpilih").val(SumTgl2);
-            }
+    var go = false;//switch off
+    $('#KelTujuan').on('click', function () {//on click
+        if (go) {
+            //alert($(this).val());//testing
+            //go = false;//switch off
+            KT();
+        } else { go = true; }//if !go, switch on
+    }).on('blur', function () { go = false; });//switch off on blur
 
-        });
-    });
+    function KT() {
+        var selectedValue = $("#KelTujuan").val();
+        var SumTgl = $("#jamawalpilih").val();
+        var SumTgl2 = parseInt(SumTgl);
+        if (selectedValue === "1A" || selectedValue === "1B") {
+            SumTgl2 = SumTgl2 + 8;
+            if (SumTgl2 > 24) {
+                SumTgl2 = 24;
+                $("#jamakhirpilih").val(SumTgl2);
+            }
+            else {
+                $("#jamakhirpilih").val(SumTgl2);
+            }
+        }
+        else if (selectedValue === "2A" || selectedValue === "2B") {
+            SumTgl2 = SumTgl2 + 9;
+            if (SumTgl2 > 24) {
+                SumTgl2 = 24;
+                $("#jamakhirpilih").val(SumTgl2);
+            }
+            else {
+                $("#jamakhirpilih").val(SumTgl2);
+            }
+        }
+        else if (selectedValue === "0A" || selectedValue === "0C") {
+            $('#tglakhirpilih').val($('#tglawalpilih').val());
+            $('#hariakhirpilih').val($('#hariawalpilih').val());
+        }
+        else {
+            var tglawal = $("#tglawalpilih").val();
+            var a = tglawal.split("-").reverse().join("-");
+            var date = new Date(a);
+            var newdate = new Date(date);
+            newdate.setDate(newdate.getDate() + 2);
+            var a1 = newdate.getDate(); if (a1 < 10) { a1 = "0" + a1; }
+            var a2 = newdate.getMonth() + 1; if (a2 < 10) { a2 = "0" + a2; }
+            var a3 = newdate.getFullYear();
+            $('#tglakhirpilih').val(a1 + "-" + a2 + "-" + a3);
+        }
+        
+    }
     function ValidasiTgl(Jenis) {
         
         var weekday = new Array(7);
@@ -513,10 +532,10 @@
         var e = document.getElementById("hariakhirpilih").value;
         var f = document.getElementById("jamakhirpilih").value;
 
-        console.log(a + ", " + b);
+        //console.log(a + ", " + b);
         var dt = new Date(a);
         var dt2 = new Date(d);
-        console.log(dt + ", " + dt2);
+        //console.log(dt + ", " + dt2);
 
         var datenoww = dt.getDate();
         var bulanNow = dt.getMonth() + 1;
@@ -533,18 +552,18 @@
         var DateSelected = dt.getFullYear() + "-" + bulanNow + "-" + datenoww;
         var DateSelected2 = dt2.getFullYear() + "-" + bulanNowakhir + "-" + datenowakhir;
 
-        console.log(DateSelected);
+        //console.log(DateSelected);
         var n = weekday[dt.getDay()];
         var m = weekday[dt2.getDay()];
 
         //HITUNG BRAPA JARAK JUMLAH HARI DARI TGL1 KE TGL2
         var diff = Date.parse(d) - Date.parse(a);
         var hasil_jarak = Math.floor(diff / 86400000);
-        console.log("hasil jarak =" + hasil_jarak);
+        //console.log("hasil jarak =" + hasil_jarak);
 
         if (b == n) {
 
-            console.log("hari 1 sama");
+            //console.log("hari 1 sama");
             if (e == m) {
 
                 if (c == "") {
@@ -580,7 +599,13 @@
                             $('#myModal13').modal('toggle');
                         }
                         else {
-                            $('#renderTable').load("_TableDate", $('#Form1').serialize());
+                            var VarSes = '@Session["usernm"]';
+                            if (VarSes == null || VarSes == "") {
+                                window.location.href = '/Login/Index';
+                            } else {
+                                $('#renderTable').load("_TableDate", $('#Form1').serialize());
+                            }
+                            
                         }
                     }
                     
@@ -589,7 +614,7 @@
             }
             else {
                 swal("Perhatikan Hari", "Hari yang Anda Pilih di Tanggal Akhir Tidak Sama", "warning");
-                console.log("Hari Tidak sama 2");
+                //console.log("Hari Tidak sama 2");
             }
 
 
@@ -597,7 +622,7 @@
         }
         else {
             swal("Perhatikan Hari", "Hari yang Anda Pilih di Tanggal Awal Tidak Sama", "warning");
-            console.log("hari tidak sama");
+            //console.log("hari tidak sama");
         }
 
     }
@@ -648,7 +673,7 @@
         $('#submit').on('click', function () {
             $("#divLoader").show();
             var tesnu = $('#Form1').serialize();
-            console.log(tesnu);
+            //console.log(tesnu);
             $('#renderTable').load("_TableDate", $('#Form1').serialize());
         });
     });

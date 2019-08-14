@@ -54,7 +54,7 @@ namespace ReservBigBird.Controllers
                         List<DisplayPlanning> resultData = serializer.ReadObject(stream) as List<DisplayPlanning>;
                         ViewBag.data = resultData.ToList();
 
-
+                        //return Json(resultData.ToList());
                         return PartialView("_TableDisplayPlanning", resultData.ToList());
                         //====================================================================================
 
@@ -77,5 +77,62 @@ namespace ReservBigBird.Controllers
             }
 
         }
+
+        [HttpPost]
+        public JsonResult NewMethod(string popid, string poppolid, string popdaow)
+        {
+            //return Json(popid);
+
+            //Ambil link url di web config
+            String url = ConfigurationManager.AppSettings["UrlApi"].ToString();
+
+            //Method untuk consume api
+            String response = "";
+            var credentials = new NetworkCredential("ac", "123");
+            var handler = new HttpClientHandler { Credentials = credentials }; // for validation
+                                                                               //    handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };// allow domain checker
+            using (var client = new HttpClient(handler))
+            {
+                // Make your request...
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                try
+                {
+                    HttpResponseMessage message = client.GetAsync(url + "/Api/Plans?popordid=&popnpk=&popnpm=&popid=" + popid + "&poppolid=" + poppolid + "&popdaow=" + popdaow).Result;
+
+                    if (message.IsSuccessStatusCode)
+                    {
+                        var serializer = new DataContractJsonSerializer(typeof(List<PopupDisplayPlanning>));
+                        var result = message.Content.ReadAsStringAsync().Result;
+                        byte[] byteArray = Encoding.UTF8.GetBytes(result);
+                        MemoryStream stream = new MemoryStream(byteArray);
+                        List<PopupDisplayPlanning> resultData = serializer.ReadObject(stream) as List<PopupDisplayPlanning>;
+                        //ViewBag.data = resultData.ToList();
+
+                        return Json(resultData.ToList(), JsonRequestBehavior.AllowGet);
+                        //return PartialView("_TableDisplayPlanning", resultData.ToList());
+                        //====================================================================================
+
+                    }
+                    else
+                    {
+                        ViewBag.error = "Tidak Dapat Respon dari Server";
+                        //return PartialView("_TableDisplayPlanning");
+                        return Json(new { success = true, responseText = "The attached file is not supported." }, JsonRequestBehavior.AllowGet);
+                    }
+                    //if(message.)
+
+
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.error = "Tidak Dapat Respon dari Server";
+                    var error = ex.ToString();
+                    //return PartialView("_TableDisplayPlanning");
+                    return Json(new { success = true, responseText = "The attached file is not supported." }, JsonRequestBehavior.AllowGet);
+                }
+            }
+
+        }
+
     }
 }

@@ -152,6 +152,20 @@ namespace ReservBigBird.API_Model
         public string KelTujuan { get; set; }
     }
 
+    public class DeleteTerimaOrderNew
+    {
+        public string userid { get; set; }
+        public string Jenis { get; set; }
+        public string AC { get; set; }
+        public string Pool { get; set; }
+        public string TglAwal { get; set; }
+        public string JamAwal { get; set; }
+        public string TglAkhir { get; set; }
+        public string JamAkhir { get; set; }
+        
+        public string KelTujuan { get; set; }
+    }
+
     public class ListJml
     {
         public int jml { get; set; }
@@ -212,6 +226,31 @@ namespace ReservBigBird.API_Model
     public class GetAfterPostHeader
     {
         public string noorder { get; set; }
+    }
+
+    public class PopupDisplayPlanning
+    {
+        public double NoDetail { get; set; }
+        public string NoOrder { get; set; }
+        public string TglPakai { get; set; }
+        public string JamJemput { get; set; }
+        public string Bus { get; set; }
+        public string Nip1 { get; set; }
+        public string Hp { get; set; }
+        public string Popnpk { get; set; }
+        public int Popid { get; set; }
+        public string Popnpm { get; set; }
+        public string Poppolid { get; set; }
+        public string popdaow { get; set; }
+        public string KelTujuan { get; set; }
+        public string Tujuan { get; set; }
+        public string Alamat { get; set; }
+        public string JenisBus { get; set; }
+        public string NoBody { get; set; }
+        public string NoPol { get; set; }
+        public string Nip1Nama { get; set; }
+        public string Nip2Nama { get; set; }
+        public object Nip2Hp { get; set; }
     }
 
 }

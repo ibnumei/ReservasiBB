@@ -321,5 +321,55 @@
 </script>
 <script>
     function get(Poppolid1, Popid1, popdaow1) {
-        var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["UrlApi"]'; var a = $.trim(Poppolid1); var b = $.trim(Popid1); var c = $.trim(popdaow1); $("#divLoader2").show(); $("#BodyModal").hide(); $("#JudulModal").hide(); $("#ButtonModal").hide(); $('#myModalPopup').modal('toggle'); $.ajax({ type: "GET", url: apiUrl + "/Api/Plans?popordid=&popnpk=&popnpm=&popid=" + b + "&poppolid=" + a + "&popdaow=" + c, dataType: "json", success: function (data) { console.log(data); $("#divLoader2").hide(); $.each(data, function (i, item) { if (item.NoOrder == null) { document.getElementById("ModalNoOrder").value = "" } else { document.getElementById("ModalNoOrder").value = item.NoOrder } if (item.Popnpm == null) { document.getElementById("ModalNamaPemesan").value = "" } else { document.getElementById("ModalNamaPemesan").value = item.Popnpm } if (item.NoDetail == null) { document.getElementById("ModalNoDetail").value = "" } else { document.getElementById("ModalNoDetail").value = item.NoDetail } if (item.NoOrder == null) { document.getElementById("ModalNoOrder").value = "" } else { document.getElementById("ModalNoOrder").value = item.NoOrder } if (item.Poppolid == null) { document.getElementById("POOL").value = "" } else { document.getElementById("POOL").value = item.Poppolid } if (item.TglPakai == null) { document.getElementById("ModalTglPakai").value = "" } else { document.getElementById("ModalTglPakai").value = item.TglPakai } if (item.JamJemput == null) { document.getElementById("ModalJamJemput").value = "" } else { document.getElementById("ModalJamJemput").value = item.JamJemput } if (item.KelTujuan == null) { document.getElementById("ModalKelTujuan").value = "" } else { document.getElementById("ModalKelTujuan").value = item.KelTujuan } if (item.Tujuan == null) { document.getElementById("ModalTujuan").value = "" } else { document.getElementById("ModalTujuan").value = item.Tujuan } if (item.Alamat == null) { document.getElementById("ModalAlamat").value = "" } else { document.getElementById("ModalAlamat").value = item.Alamat } if (item.JenisBus == null) { document.getElementById("ModalJenisBus").value = "" } else { document.getElementById("ModalJenisBus").value = item.JenisBus } if (item.NoBody == null) { document.getElementById("ModalNoBody").value = "" } else { document.getElementById("ModalNoBody").value = item.NoBody } if (item.NoPol == null) { document.getElementById("ModalNoPol").value = "" } else { document.getElementById("ModalNoPol").value = item.NoPol } if (item.Nip1Nama == null) { document.getElementById("ModalNamaNip1").value = "" } else { document.getElementById("ModalNamaNip1").value = item.Nip1Nama } if (item.Hp == null) { document.getElementById("ModalHpNip1").value = "" } else { document.getElementById("ModalHpNip1").value = item.Hp } if (item.Nip2Nama == null) { document.getElementById("ModalNamaNip2").value = "" } else { document.getElementById("ModalNamaNip2").value = item.Nip2Nama } if (item.Nip2Hp == null) { document.getElementById("ModalHpNip2").value = "" } else { document.getElementById("ModalHpNip2").value = item.Nip2Hp } }); $("#BodyModal").show(); $("#JudulModal").show(); $("#ButtonModal").show(); }, error: function (data) { $('#myModalPopup').modal('hide'); swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error") }, }) }
+        var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["UrlApi"]';
+        var a = $.trim(Poppolid1); var b = $.trim(Popid1); var c = $.trim(popdaow1);
+        $("#divLoader2").show(); $("#BodyModal").hide(); $("#JudulModal").hide(); $("#ButtonModal").hide();
+        $('#myModalPopup').modal('toggle');
+        var par = new Object();
+        par.popid = b;
+        par.poppolid = a;
+        par.popdaow = c;
+        $.ajax({
+            //type: "GET",
+            type: "POST",
+            //url: apiUrl + "/Api/Plans?popordid=&popnpk=&popnpm=&popid=" + b + "&poppolid=" + a + "&popdaow=" + c,
+            url: "/DisplayPlanning/NewMethod",
+            data: JSON.stringify(par),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.success) {
+                    $('#myModalPopup').modal('hide'); swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error")
+                } else {
+                    console.log(data);
+                    $("#divLoader2").hide();
+                    $.each(data, function (i, item) {
+                        if (item.NoOrder == null) { document.getElementById("ModalNoOrder").value = "" } else { document.getElementById("ModalNoOrder").value = item.NoOrder }
+                        if (item.Popnpm == null) { document.getElementById("ModalNamaPemesan").value = "" } else { document.getElementById("ModalNamaPemesan").value = item.Popnpm }
+                        if (item.NoDetail == null) { document.getElementById("ModalNoDetail").value = "" } else { document.getElementById("ModalNoDetail").value = item.NoDetail }
+                        if (item.NoOrder == null) { document.getElementById("ModalNoOrder").value = "" } else { document.getElementById("ModalNoOrder").value = item.NoOrder }
+                        if (item.Poppolid == null) { document.getElementById("POOL").value = "" } else { document.getElementById("POOL").value = item.Poppolid }
+                        if (item.TglPakai == null) { document.getElementById("ModalTglPakai").value = "" } else { document.getElementById("ModalTglPakai").value = item.TglPakai }
+                        if (item.JamJemput == null) { document.getElementById("ModalJamJemput").value = "" } else { document.getElementById("ModalJamJemput").value = item.JamJemput }
+                        if (item.KelTujuan == null) { document.getElementById("ModalKelTujuan").value = "" } else { document.getElementById("ModalKelTujuan").value = item.KelTujuan }
+                        if (item.Tujuan == null) { document.getElementById("ModalTujuan").value = "" } else { document.getElementById("ModalTujuan").value = item.Tujuan }
+                        if (item.Alamat == null) { document.getElementById("ModalAlamat").value = "" } else { document.getElementById("ModalAlamat").value = item.Alamat }
+                        if (item.JenisBus == null) { document.getElementById("ModalJenisBus").value = "" } else { document.getElementById("ModalJenisBus").value = item.JenisBus }
+                        if (item.NoBody == null) { document.getElementById("ModalNoBody").value = "" } else { document.getElementById("ModalNoBody").value = item.NoBody }
+                        if (item.NoPol == null) { document.getElementById("ModalNoPol").value = "" } else { document.getElementById("ModalNoPol").value = item.NoPol }
+                        if (item.Nip1Nama == null) { document.getElementById("ModalNamaNip1").value = "" } else { document.getElementById("ModalNamaNip1").value = item.Nip1Nama }
+                        if (item.Hp == null) { document.getElementById("ModalHpNip1").value = "" } else { document.getElementById("ModalHpNip1").value = item.Hp }
+                        if (item.Nip2Nama == null) { document.getElementById("ModalNamaNip2").value = "" } else { document.getElementById("ModalNamaNip2").value = item.Nip2Nama }
+                        if (item.Nip2Hp == null) { document.getElementById("ModalHpNip2").value = "" } else { document.getElementById("ModalHpNip2").value = item.Nip2Hp }
+                    });
+                    $("#BodyModal").show(); $("#JudulModal").show(); $("#ButtonModal").show();
+                }
+                 
+               
+            },
+            error: function (data) {
+                $('#myModalPopup').modal('hide'); swal("Error", "Tidak Mendapat Respon dari Server, Silahkan coba lagi", "error")
+            },
+        })
+    }
 </script>

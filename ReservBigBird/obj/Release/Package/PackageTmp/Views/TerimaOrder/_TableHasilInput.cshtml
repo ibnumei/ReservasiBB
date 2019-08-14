@@ -104,11 +104,11 @@
         var param;
         function deleteRow(r) {
             param = r.parentNode.parentNode.rowIndex;
-            console.log(param);
+            //console.log(param);
         }
         $('#TableHasil tbody').on('click', '#btnDel', function () {
             var currow = $(this).closest('tr');
-            console.log(currow);
+            //console.log(currow);
 
             a = $.trim(currow.find('.Jenis').text());
             b = $.trim(currow.find('.AC').text());
