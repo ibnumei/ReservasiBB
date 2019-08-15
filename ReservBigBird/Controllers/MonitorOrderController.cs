@@ -12,6 +12,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Configuration;
 using ReservBigBird.Filters;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace ReservBigBird.Controllers
 {
@@ -156,6 +158,53 @@ namespace ReservBigBird.Controllers
                     //return PartialView("_TableDisplayPlanning");
                     return Json(new { success = true, responseText = "The attached file is not supported." }, JsonRequestBehavior.AllowGet);
                 }
+            }
+
+        }
+
+        [HttpPost]
+        public JsonResult GetDatatab(ModelPostOrderDTAjax dt, string ordid, string ordnpt, string ordnpm, string kondisi)
+        {
+            String YesOrNo;
+            //Ambil link url di web config
+            String url = ConfigurationManager.AppSettings["UrlApi"].ToString();
+
+            var json2 = new JavaScriptSerializer().Serialize(dt);
+            var stringPayload = JsonConvert.SerializeObject(dt);
+            //String response = "";
+            var credentials = new NetworkCredential("username", "password");
+            var handler = new HttpClientHandler { Credentials = credentials };
+            var httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
+
+            using (var client = new HttpClient(handler))
+            {
+                try
+                {
+                    HttpResponseMessage message = client.PostAsync(url + "/Api/PostOrdersDT?ordid=" + ordid + "&ordnpt=" + ordnpt + "&ordnpm=" + ordnpm + "&kondisi=" + kondisi, httpContent).Result;
+
+                    var contentString = message.Content.ReadAsStringAsync().Result;
+                    var serializer = new JavaScriptSerializer().DeserializeObject(contentString);
+                    
+
+                    if (message.IsSuccessStatusCode)
+                    {
+                        YesOrNo = "Yes";
+                    }
+                    else
+                    {
+                        YesOrNo = "No";
+                    }
+
+                    return Json(serializer);
+
+
+                }
+                catch (Exception ex)
+                {
+                    String aa = ex.ToString();
+                    return Json(aa);
+                }
+
             }
 
         }

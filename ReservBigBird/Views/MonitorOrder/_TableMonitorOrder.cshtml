@@ -280,7 +280,13 @@
         var ordnpm = $("#Pemesan").val();
         var kondisi = $("#KondisiOrder").val();
 
-        var url = apiUrl + "/Api/PostOrdersDT?ordid=" + ordid + "&ordnpt=" + ordnpt + "&ordnpm=" + ordnpm + "&kondisi=" + kondisi;
+        
+
+        var pardt = new Object();
+        pardt.ordid = ordid;
+        pardt.ordnpt = ordnpt;
+        pardt.ordnpm = ordnpm;
+        pardt.kondisi = kondisi;
 
         var table = $("#example3").DataTable({
             "processing": true, // for show progress bar
@@ -290,9 +296,12 @@
             "ordering": false,
             // this is for disable filter (search box)
             "ajax": {
-                url: url,
+                //url: url,
+                url: "/MonitorOrder/GetDatatab?ordid=" + ordid + "&ordnpt=" + ordnpt + "&ordnpm=" + ordnpm + "&kondisi=" + kondisi,
                 type: "POST",
+                
                 datatype: "json",
+                
             },
 
             
