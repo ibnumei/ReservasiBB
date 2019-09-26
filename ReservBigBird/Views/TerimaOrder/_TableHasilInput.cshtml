@@ -136,8 +136,8 @@
                     $.ajax({
                         //type: "DELETE",
                         type: "POST",
-                        
-                        url: "/TerimaOrder/NewFuncDel",
+                        url: '@Url.Action("NewFuncDel", "TerimaOrder")',
+                        //url: "/TerimaOrder/NewFuncDel",
                         data: JSON.stringify(pardel),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
