@@ -332,8 +332,8 @@
         $.ajax({
             //type: "GET",
             type: "POST",
-            
-            url: "/DisplayPlanning/NewMethod",
+            url: '@Url.Action("NewMethod", "DisplayPlanning")',
+            //url: "/DisplayPlanning/NewMethod",
             data: JSON.stringify(par),
             contentType: "application/json; charset=utf-8",
             dataType: "json",

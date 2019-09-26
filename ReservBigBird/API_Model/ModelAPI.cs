@@ -307,4 +307,16 @@ namespace ReservBigBird.API_Model
     }
     //end of model datatable
 
+    public class JNB
+    {
+        public string JNBID { get; set; }
+        public string JNBAC { get; set; }
+        public double JNBEJ { get; set; }
+        public double JNBEH { get; set; }
+        public double JNBEK { get; set; }
+        public string JNBKET { get; set; }
+        public string PMKUID { get; set; }
+        public string TS { get; set; }
+        public string rowguid { get; set; }
+    }
 }

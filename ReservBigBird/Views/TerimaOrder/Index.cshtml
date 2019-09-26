@@ -35,7 +35,7 @@
                                         <b>Jenis Bus</b>
                                     </div>
                                     <div class="col-lg-2">
-                                        <select name="JenisBus" class="form-control">
+                                        @*<select name="JenisBus" class="form-control">
                                             <option value="A12">A12</option>
                                             <option value="A37">A37</option>
                                             <option value="A37H">A37H</option>
@@ -52,7 +52,13 @@
                                             <option value="C14">C14</option>
                                             <option value="D">D</option>
                                             <option value="DL">DL</option>
-                                        </select>
+                                        </select>*@
+                                       <select name="JenisBus" class="form-control">
+                                           @for(int i=0; i < ViewBag.dataBus.Count; i++)
+                                           {
+                                                <option value="@ViewBag.dataBus[i]">@ViewBag.dataBus[i]</option>
+                                           }
+                                       </select>
                                     </div>
                                     <div class="col-lg-4">
                                     </div>

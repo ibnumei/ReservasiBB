@@ -22,9 +22,73 @@ namespace ReservBigBird.Controllers
 
     public class TerimaOrderController : Controller
     {
+        
         // GET: TerimaOrder
         public ActionResult Index()
         {
+            List<string> Getbus = new List<string>();
+            int status = 0;
+            //Ambil link url di web config
+            String url = ConfigurationManager.AppSettings["UrlApi"].ToString();
+
+            //Method untuk consume api
+            String response = "";
+            var credentials = new NetworkCredential("ac", "123");
+            var handler = new HttpClientHandler { Credentials = credentials };
+            using (var client = new HttpClient(handler))
+            {
+                // Make your request...
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                try
+                {
+                    HttpResponseMessage message = client.GetAsync(url + "/api/JNBs").Result;
+
+                    if (message.IsSuccessStatusCode)
+                    {
+                        var serializer = new DataContractJsonSerializer(typeof(List<JNB>));
+                        var result = message.Content.ReadAsStringAsync().Result;
+                        byte[] byteArray = Encoding.UTF8.GetBytes(result);
+                        MemoryStream stream = new MemoryStream(byteArray);
+                        List<JNB> resultData = serializer.ReadObject(stream) as List<JNB>;
+                        //var aa = resultData.ToList();
+                        foreach (var aa in resultData.ToList())
+                        {
+                            Getbus.Add(aa.JNBID);
+                        }
+                        
+                        status = 1;
+                        //return Json(resultData.ToList());
+                        //return PartialView("_TableDisplayPlanning", resultData.ToList());
+                        //====================================================================================
+
+                    }
+                    else
+                    {
+                        status = 0;
+                        ViewBag.error = "Tidak Dapat Respon dari Server";
+                        //return PartialView("_TableDisplayPlanning");
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    status = 0;
+                    ViewBag.error = "Tidak Dapat Respon dari Server";
+                    var error = ex.ToString();
+                    //return PartialView("_TableDisplayPlanning");
+                }
+            }
+
+            //=======================================================
+            //if(status == 0)
+            //{
+
+            //}
+            //else
+            //{
+
+            //}
+            ViewBag.dataBus = Getbus;
             ViewBag.Current = "1";
             ViewBag.CekDataVar = "CekDataValue";
             return View();
